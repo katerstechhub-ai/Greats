@@ -45,3 +45,58 @@ function showproduct() {
     }
 }
 showproduct();
+
+
+
+// Product array2
+let products = [
+    {
+        name: "Men's Kingston",
+        price: 199.00,
+        variants: [
+            { color: "Taupe", image: "Home.img/kingstontaupe1.webp" }
+            // only need the first variant now
+        ]
+    },
+    {
+        name: "Men's Reign",
+        price: 199.00,
+        variants: [
+            { color: "Ecru", image: "Home.img/reign-ecru2.jpg" }
+        ]
+    },
+    {
+        name: "Men's Royale Knit 2.0",
+        price: 179.00,
+        variants: [
+            { color: "Sage", image: "Home.img/RoyateKnitSageM3.jpg" }
+        ]
+    }
+];
+
+function displayProducts() {
+    let container = document.getElementById("product-grid");
+    container.innerHTML = ""; // clear existing content
+
+    for (let i = 0; i < products.length; i++) {
+        let product = products[i];
+        let variant = product.variants[0]; // take first color
+
+        // Build card HTML with name and price on same line
+        let card = `
+            <div class="">
+                <img src="${variant.image}" alt="${product.name}" class="w-full h-auto mb-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-semibold text-lg">${product.name}</h3>
+                    <p class="font-bold text-gray-900">$${product.price.toFixed(2)}</p>
+                </div>
+                <!-- Color below -->
+                <p class="text-gray-600 italic">${variant.color}</p>
+            </div>
+        `;
+
+        container.innerHTML += card;
+    }
+}
+
+displayProducts();

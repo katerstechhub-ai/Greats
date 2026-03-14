@@ -51,29 +51,36 @@
 
 
     <!-- Two-column grid section -->
-<div class="grid grid-cols-1 md:grid-cols-2  bg-gray-100 mt-8 mb-6 rounded-[15px] max-w-6xl mx-auto px-18 py-8">
-    <!-- Left column: stars + review count -->
-    <div class=" ml-20">
-        <img src="./Home.img/stars.png" alt="stars" class="w-20  h-20">
-        <p class="text-black font-bold text-[20px]">Over 11k </p>
-        <p class="text-black font-bold text-[20px]"> 5-star reviews </p>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2  bg-gray-100 mt-8 mb-6 rounded-[15px] max-w-6xl mx-auto px-18 py-8">
+        <!-- Left column: stars + review count -->
+        <div class=" ml-20">
+            <img src="./Home.img/stars.png" alt="stars" class="w-20  h-20">
+            <p class="text-black font-bold text-[20px]">Over 11k </p>
+            <p class="text-black font-bold text-[20px]"> 5-star reviews </p>
+        </div>
 
-    <!-- Right column: quote + logos -->
-    <div class="space-y-8 items-center">
-        <p class="text-black text-center items-center italic text-lg leading-relaxed">
-            "If you want a sneaker you can be confident looks good at the office or on a date, these are it."
-        </p>
-        <!-- Logos in a flex row -->
-        <div class="flex flex-wrap items-center gap-6">
-            <img src="Home.img/1.webp" alt="Equipe" class="h-8  w-auto object-contain">
-            <img src="Home.img/2.avif" alt="Word" class="h-8  object-contain">
-            <img src="Home.img/3.avif" alt="BUSINESS INSIDER" class="h-8 w-auto object-contain">
-            <img src="Home.img/4.webp" alt="BuzzFeed" class="h-8 w-auto object-contain">
+        <!-- Right column: quote + logos -->
+        <div class="space-y-8 items-center">
+            <p class="text-black text-center items-center italic text-lg leading-relaxed">
+                "If you want a sneaker you can be confident looks good at the office or on a date, these are it."
+            </p>
+            <!-- Logos in a flex row -->
+            <div class="flex flex-wrap items-center gap-6">
+                <img src="Home.img/1.webp" alt="Equipe" class="h-8  w-auto object-contain">
+                <img src="Home.img/2.avif" alt="Word" class="h-8  object-contain">
+                <img src="Home.img/3.avif" alt="BUSINESS INSIDER" class="h-8 w-auto object-contain">
+                <img src="Home.img/4.webp" alt="BuzzFeed" class="h-8 w-auto object-contain">
+            </div>
         </div>
     </div>
+    <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
+  <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR MEN</h2>
+  <div class="flex gap-3">
+    <img src="./Home.img/222.png" alt="Filter" class="w-6 h-6 cursor-pointer">
+    <img src="./Home.img/right-arrow.png" alt="Grid" class="w-6 h-6 cursor-pointer">
+  </div>
 </div>
-   
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6 max-w-[10px]mx-auto"></div>
 </body>
 <script src="./Home.js"></script>
 
