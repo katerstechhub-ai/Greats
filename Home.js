@@ -88,7 +88,7 @@ function displayProducts() {
                 <img src="${variant.image}" alt="${product.name}" class="w-full h-auto mb-3">
                 <div class="flex justify-between items-center">
                     <h3 class="font-semibold text-lg">${product.name}</h3>
-                    <p class="font-bold text-gray-900">$${product.price.toFixed(2)}</p>
+                    <p class=" text-gray-900">$${product.price.toFixed(2)}</p>
                 </div>
                 <!-- Color below -->
                 <p class="text-gray-600 italic">${variant.color}</p>
@@ -100,3 +100,59 @@ function displayProducts() {
 }
 
 displayProducts();
+
+
+
+// Product array for WOMEN (based on the provided snippet)
+let products2 = [
+    {
+        name: "Women's Charlie Distressed",
+        price: 215.00,
+        variants: [
+            { color: "grey", image: "Home.img/GCHARLI1-EY4-01.webp" }
+        ]
+    },
+    {
+        name: "Women's Royale 2.0",
+        price: 199.00,
+        variants: [
+            { color: "Blanco", image: "Home.img/women2.webp" }
+        ]
+    },
+    {
+        name: "Women's Charlie",
+        price: 215.00,
+        variants: [
+            { color: "Blanco", image: "Home.img/women3.webp" }
+        ]
+    }
+];
+
+// Display products in the grid
+function displayProducts2() {
+    let container = document.getElementById("product-grid2");
+    container.innerHTML = ""; // clear existing content
+
+    for (let i = 0; i < products2.length; i++) {
+        let product = products2[i];
+        let variant = product.variants[0]; 
+
+        // Build card HTML with name and price on same line
+        let card = `
+            <div class="">
+                <img src="${variant.image}" alt="${product.name}" class="w-full h-auto mb-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-semibold text-lg">${product.name}</h3>
+                    <p class=" text-gray-900">$${product.price.toFixed(2)}</p>
+                </div>
+                <!-- Color below (italic) -->
+                <p class="text-gray-600 italic">${variant.color}</p>
+            </div>
+        `;
+
+        container.innerHTML += card;
+    }
+}
+
+// Run the function when the page loads
+displayProducts2();
