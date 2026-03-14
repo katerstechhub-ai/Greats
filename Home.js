@@ -1,12 +1,11 @@
 
-
 const product_arr = [
     {
         image: "Home.img/shopmen1.webp",        // Your image for men's product
         headline: "This Just In—",
         title: "Crafted for Spring",
         buttonText: "SHOP MEN",
-        buttonColor: "",
+        buttonColor: "hover:bg-white hover:text-{black}",
         link: "https://www.greats.com/collections/mens-new-arrivals"
     },
     {
@@ -14,7 +13,7 @@ const product_arr = [
         headline: "A New Essential—",
         title: "The Brooklyn",
         buttonText: "SHOP WOMEN",
-        buttonColor: "",
+        buttonColor: "hover:bg-white  hover:text-{black}",
         link: "https://www.greats.com/collections/womens-new-arrivals"
     }
 ];
@@ -36,7 +35,7 @@ function showproduct() {
             <div class="absolute bottom-0 left-0 right-0  text-white p-4">
                 <p class="text-sm text-center uppercase tracking-wider">${product.headline}</p>
                 <h3 class="text-[40px] text-center mb-3  font-serif  mt-1">${product.title}</h3>
-                <a href="${product.link}" class="border  border-white-800 mt-2 ${product.buttonColor} text-white text-sm font-medium py-2 px-8 rounded transition-colors">
+                <a href="${product.link}" class="border  border-white-800 mt-2 ${product.buttonColor} text-white text-sm font-medium py-2 px-8 rounded hover:text-{black} ">
                     ${product.buttonText}
                 </a>
             </div>
@@ -135,7 +134,7 @@ function displayProducts2() {
 
     for (let i = 0; i < products2.length; i++) {
         let product = products2[i];
-        let variant = product.variants[0]; 
+        let variant = product.variants[0];
 
         // Build card HTML with name and price on same line
         let card = `
@@ -154,5 +153,49 @@ function displayProducts2() {
     }
 }
 
-// Run the function when the page loads
 displayProducts2();
+
+
+// Product array with the restock message and discount offer
+const restockItems = [
+    {
+        image: "Home.img/Group_2458.jpg",
+        headline: "Just Restocked",
+        title: "Missed Them? They're Back",
+        buttonText: "SHOP BACK IN",
+        buttonColor: "bg-white hover:bg-black hover:text-{white} ",
+        link: "https://www.yourstore.com/restocked",
+             
+    }
+
+];
+
+
+function renderRestockOffers() {
+    const container = document.getElementById("restock-offer-container");
+    if (!container) return;
+
+    container.innerHTML = ''; // Clear any existing content
+
+    for (let i = 0; i < restockItems.length; i++) {
+        const item = restockItems[i];
+        const card = document.createElement('div');
+        card.className = 'relative overflow-hidden  ';
+
+        // Build the card HTML – follows the same pattern as the original
+        card.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" class="w-full h-screen mt-3 object-cover">
+            <div class="absolute inset-0  flex flex-col justify-end items-center text-white p-6 text-center">
+                <p class="text-3xl uppercase font-serif tracking-wider">${item.headline}</p>
+                <h3 class="text md:text-sm lg:text-lg  my-2">${item.title}</h3>
+              
+                <a href="${item.link}" class="mt-3 mb-10 border border-white ${item.buttonColor} text-black bg-white text-sm font-medium py-2 px-8 rounded hover:text-{white}">
+                    ${item.buttonText}
+                </a>
+            </div>
+        `;
+        container.appendChild(card);
+    }
+}
+
+renderRestockOffers()
