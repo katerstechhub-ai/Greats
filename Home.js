@@ -53,107 +53,220 @@ let products = [
         name: "Men's Kingston",
         price: 199.00,
         variants: [
-            { color: "Taupe", image: "Home.img/kingstontaupe1.webp" }
-            // only need the first variant now
+            {
+                color: "Taupe",
+                images: [
+                    "Home.img/kingstontaupe1.webp",
+                    "Home.img/m2",
+                    "Home.img/m3"
+                ]
+            }
+            // You can add more colors with their own image arrays
         ]
     },
     {
         name: "Men's Reign",
         price: 199.00,
         variants: [
-            { color: "Ecru", image: "Home.img/reign-ecru2.jpg" }
+            {
+                color: "Ecru",
+                images: [
+                    "Home.img/reign-ecru2.jpg",
+                    "Home.img/mmmm.webp",
+                    "Home.img/mmmm3.webp"
+                ]
+            }
         ]
     },
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
         variants: [
-            { color: "Sage", image: "Home.img/RoyateKnitSageM3.jpg" }
+            {
+                color: "Sage",
+                images: [
+                    "Home.img/RoyateKnitSageM3.jpg",
+                    "Home.img/mmmmm2.webp",
+                    "Home.img/menn2.webp"
+                ]
+            }
         ]
     }
 ];
 
-function displayProducts() {
-    let container = document.getElementById("product-grid");
-    container.innerHTML = ""; // clear existing content
+let currentImageIndices = products.map(() => 0);
+
+// Function to render all products with their current images
+function renderProducts() {
+    const container = document.getElementById("product-grid");
+    if (!container) return;
+
+    container.innerHTML = ""; // Clear grid
 
     for (let i = 0; i < products.length; i++) {
-        let product = products[i];
-        let variant = product.variants[0]; // take first color
+        const product = products[i];
+        const variant = product.variants[0];
+        const images = variant.images;
+        const currentIndex = currentImageIndices[i];
+        const currentImage = images[currentIndex];
 
-        // Build card HTML with name and price on same line
-        let card = `
-            <div class="">
-                <img src="${variant.image}" alt="${product.name}" class="w-full h-auto mb-3">
-                <div class="flex justify-between items-center">
-                    <h3 class="font-semibold text-lg">${product.name}</h3>
-                    <p class=" text-gray-900">$${product.price.toFixed(2)}</p>
-                </div>
-                <!-- Color below -->
-                <p class="text-gray-600 italic">${variant.color}</p>
+        // Create product card
+        const card = document.createElement('div');
+        card.className = '';
+        card.innerHTML = `
+            <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-semibold text-lg">${product.name}</h3>
+                <p class="text-gray-900">$${product.price.toFixed(2)}</p>
             </div>
+            <p class="text-gray-600 italic">${variant.color}</p>
         `;
-
-        container.innerHTML += card;
+        container.appendChild(card);
     }
 }
 
-displayProducts();
+// Initial render
+renderProducts();
+
+// Event listeners for the filter and grid toggle icons
+document.addEventListener('DOMContentLoaded', function () {
+    const filterLink = document.getElementById('filterLink');
+    const gridToggleLink = document.getElementById('gridToggleLink');
+
+    // Filter icon – show previous image for all products
+    if (filterLink) {
+        filterLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            for (let i = 0; i < products.length; i++) {
+                const images = products[i].variants[0].images;
+                currentImageIndices[i] = (currentImageIndices[i] - 1 + images.length) % images.length;
+            }
+            renderProducts();
+        });
+    }
+
+    // Grid toggle icon – show next image for all products
+    if (gridToggleLink) {
+        gridToggleLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            for (let i = 0; i < products.length; i++) {
+                const images = products[i].variants[0].images;
+                currentImageIndices[i] = (currentImageIndices[i] + 1) % images.length;
+            }
+            renderProducts();
+        });
+    }
+});
 
 
 
-// Product array for WOMEN (based on the provided snippet)
 let products2 = [
     {
         name: "Women's Charlie Distressed",
         price: 215.00,
         variants: [
-            { color: "grey", image: "Home.img/GCHARLI1-EY4-01.webp" }
+            {
+                color: "grey",
+                images: [
+                    "Home.img/GCHARLI1-EY4-01.webp",
+                    "Home.img/w1", // add more images as needed
+                    "Home.img/wom1.webp"
+                ]
+            }
         ]
     },
     {
         name: "Women's Royale 2.0",
         price: 199.00,
         variants: [
-            { color: "Blanco", image: "Home.img/women2.webp" }
+            {
+                color: "Blanco",
+                images: [
+                    "Home.img/women2.webp",
+                    "Home.img/w2",
+                    "Home.img/wom.webp"
+                ]
+            }
         ]
     },
     {
         name: "Women's Charlie",
         price: 215.00,
         variants: [
-            { color: "Blanco", image: "Home.img/women3.webp" }
+            {
+                color: "Blanco",
+                images: [
+                    "Home.img/women3.webp",
+                    "Home.img/w3",
+                    "Home.img/wom3.webp"
+                ]
+            }
         ]
     }
 ];
 
-// Display products in the grid
-function displayProducts2() {
-    let container = document.getElementById("product-grid2");
-    container.innerHTML = ""; // clear existing content
+
+let womenIndices = products2.map(() => 0);
+
+// Function to render women's products
+function renderWomenProducts() {
+    const container = document.getElementById("product-grid2");
+    if (!container) return;
+
+    container.innerHTML = "";
 
     for (let i = 0; i < products2.length; i++) {
-        let product = products2[i];
-        let variant = product.variants[0];
+        const product = products2[i];
+        const variant = product.variants[0]; // first color variant
+        const images = variant.images;
+        const currentIndex = womenIndices[i];
+        const currentImage = images[currentIndex];
 
-        // Build card HTML with name and price on same line
-        let card = `
-            <div class="">
-                <img src="${variant.image}" alt="${product.name}" class="w-full h-auto mb-3">
-                <div class="flex justify-between items-center">
-                    <h3 class="font-semibold text-lg">${product.name}</h3>
-                    <p class=" text-gray-900">$${product.price.toFixed(2)}</p>
-                </div>
-                <!-- Color below (italic) -->
-                <p class="text-gray-600 italic">${variant.color}</p>
+        const card = document.createElement('div');
+        card.className = '';
+        card.innerHTML = `
+            <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-semibold text-lg">${product.name}</h3>
+                <p class="text-gray-900">$${product.price.toFixed(2)}</p>
             </div>
+            <p class="text-gray-600 italic">${variant.color}</p>
         `;
-
-        container.innerHTML += card;
+        container.appendChild(card);
     }
 }
 
-displayProducts2();
+// Initial render for women
+renderWomenProducts();
+
+// Event listeners for women's icons
+document.addEventListener('DOMContentLoaded', function () {
+    const filterWomen = document.getElementById('filterLinkWomen');
+    const gridWomen = document.getElementById('gridToggleLinkWomen');
+
+    if (filterWomen) {
+        filterWomen.addEventListener('click', function (event) {
+            event.preventDefault();
+            for (let i = 0; i < products2.length; i++) {
+                const images = products2[i].variants[0].images;
+                womenIndices[i] = (womenIndices[i] - 1 + images.length) % images.length;
+            }
+            renderWomenProducts();
+        });
+    }
+
+    if (gridWomen) {
+        gridWomen.addEventListener('click', function (event) {
+            event.preventDefault();
+            for (let i = 0; i < products2.length; i++) {
+                const images = products2[i].variants[0].images;
+                womenIndices[i] = (womenIndices[i] + 1) % images.length;
+            }
+            renderWomenProducts();
+        });
+    }
+});
+
 
 
 // Product array with the restock message and discount offer
@@ -295,7 +408,7 @@ function showFeaturedSection() {
     const container = document.getElementById("featured-section-container");
     if (!container) return;
 
-   
+
     container.innerHTML = `
         <div id="featuredGrid" class="grid grid-cols-1 md:grid-cols-3 p-0 "></div>
     `;
