@@ -169,7 +169,7 @@ let products2 = [
                 color: "grey",
                 images: [
                     "Home.img/GCHARLI1-EY4-01.webp",
-                    "Home.img/w1", // add more images as needed
+                    "Home.img/w1", 
                     "Home.img/wom1.webp"
                 ]
             }
