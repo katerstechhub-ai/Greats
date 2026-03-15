@@ -5,7 +5,7 @@ const product_arr = [
         headline: "This Just In—",
         title: "Crafted for Spring",
         buttonText: "SHOP MEN",
-        buttonColor: "hover:bg-white hover:text-{black}",
+        buttonColor: "hover:bg-white hover:text-black transition",
         link: "https://www.greats.com/collections/mens-new-arrivals"
     },
     {
@@ -13,7 +13,7 @@ const product_arr = [
         headline: "A New Essential—",
         title: "The Brooklyn",
         buttonText: "SHOP WOMEN",
-        buttonColor: "hover:bg-white  hover:text-{black}",
+        buttonColor: "hover:bg-white hover:text-black transition",
         link: "https://www.greats.com/collections/womens-new-arrivals"
     }
 ];
@@ -163,9 +163,9 @@ const restockItems = [
         headline: "Just Restocked",
         title: "Missed Them? They're Back",
         buttonText: "SHOP BACK IN",
-        buttonColor: "bg-white hover:bg-black hover:text-{white} ",
+        buttonColor: "hover:bg-black hover:text-white transition ",
         link: "https://www.yourstore.com/restocked",
-             
+
     }
 
 ];
@@ -199,3 +199,132 @@ function renderRestockOffers() {
 }
 
 renderRestockOffers()
+
+
+
+const product_arr2 = [
+    {
+        image: "Home.img/new arrivals.webp",
+        headline: "This Just In—",
+        title: "New Arrivals",
+        buttonText: "SHOP NOW",
+        buttonColor: "hover:bg-white hover:text-black transition",
+        link: ""
+    },
+    {
+        image: "Home.img/markdowns.webp",
+        headline: "Now or Never—",
+        title: "Markdowns",
+        buttonText: "SHOP NOW",
+        buttonColor: "hover:bg-white hover:text-black transition",
+        link: ""
+    }
+];
+
+function showproduct2() {
+    const category_container = document.getElementById("category-container");
+    if (!category_container) return;
+
+    category_container.innerHTML = ''; // Clear any existing content
+
+    for (let i = 0; i < product_arr2.length; i++) {
+        const product = product_arr2[i];
+        const card = document.createElement('div');
+        card.className = 'relative overflow-hidden shadow-sm';
+
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.title}" class="w-full  object-cover">
+            
+            <div class="absolute bottom-0 left-0 right-0  text-white p-4">
+                <p class="text-sm text-center uppercase tracking-wider">${product.headline}</p>
+                <h3 class="text-[40px] text-center mb-3  font-serif  mt-1">${product.title}</h3>
+                <a href="${product.link}" class="border  border-white-800 mt-2 ${product.buttonColor} text-white text-sm font-medium py-2 px-8 rounded hover:text-{black} ">
+                    ${product.buttonText}
+                </a>
+            </div>
+        `;
+        category_container.appendChild(card);
+    }
+}
+showproduct2();
+
+
+
+const featured_arr = [
+    // Men's items
+    {
+        image: "Home.img/men1.webp",   // Replace with actual image path
+        name: "Royale 2.0",
+        link: "",
+        gender: "men"
+    },
+    {
+        image: "Home.img/men2.webp",
+        name: "Slip Ons",
+        link: "",
+        gender: "men"
+    },
+    {
+        image: "Home.img/men3.webp",
+        name: "Best-Selling Laces",
+        link: "",
+        gender: "men"
+    },
+    // Women's items
+    {
+        image: "Home.img/womennn1.webp",
+        name: "Royale 2.0",
+        link: "",
+        gender: "women"
+    },
+    {
+        image: "Home.img/womennn2.webp",
+        name: "Slip Ons",
+        link: "",
+        gender: "women"
+    },
+    {
+        image: "Home.img/womennn3.jpg",
+        name: "Best-Selling Laces",
+        link: "",
+        gender: "women"
+    }
+];
+
+function showFeaturedSection() {
+    const container = document.getElementById("featured-section-container");
+    if (!container) return;
+
+   
+    container.innerHTML = `
+        <div id="featuredGrid" class="grid grid-cols-1 md:grid-cols-3 p-0 "></div>
+    `;
+
+    const grid = document.getElementById("featuredGrid");
+    const menBtn = document.getElementById("featuredMenBtn");
+    const womenBtn = document.getElementById("featuredWomenBtn");
+
+    function renderGender(gender) {
+        const filtered = featured_arr.filter(item => item.gender === gender);
+        grid.innerHTML = ''; // Clear grid
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'text-center';
+            card.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="w-full p-5 object-cover h-auto mb-3">
+                <a href="${item.link}" class="inline-block mt-1 text-gray-500 text-sm font-medium hover:text-black">${item.name}</a>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    menBtn.addEventListener('click', () => renderGender('men'));
+    womenBtn.addEventListener('click', () => renderGender('women'));
+
+    // Default to men
+    renderGender('men');
+}
+
+// Call the function
+showFeaturedSection();

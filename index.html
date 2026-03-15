@@ -74,17 +74,17 @@
         </div>
     </div>
     <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
-  <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR MEN</h2>
-  <div class="flex gap-3">
-    <img src="./Home.img/222.png" alt="Filter" class="w-6 h-6 cursor-pointer">
-    <img src="./Home.img/right-arrow.png" alt="Grid" class="w-6 h-6 cursor-pointer">
-  </div>
-</div>
+        <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR MEN</h2>
+        <div class="flex gap-3">
+            <img src="./Home.img/222.png" alt="Filter" class="w-6 h-6 cursor-pointer">
+            <img src="./Home.img/right-arrow.png" alt="Grid" class="w-6 h-6 cursor-pointer">
+        </div>
+    </div>
     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6 "></div>
 
     <!-- Best Sellers for Women section -->
-<div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
-    <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR WOMEN</h2>
+    <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
+        <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR WOMEN</h2>
         <!-- Filter and grid icons -->
         <div class="flex gap-3">
             <img src="./Home.img/222.png" alt="Filter" class="w-6 h-6 cursor-pointer ">
@@ -92,12 +92,23 @@
         </div>
     </div>
 
-<!-- Product grid container -->
-<div id="product-grid2" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6 "></div>
+    <!-- Product grid container -->
+    <div id="product-grid2" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6 "></div>
 
+    <div id="restock-offer-container" class="container mx-auto w-full  grid grid-cols-1 md:grid-cols-1"></div>
 
+    <div id="category-container" class="grid grid-cols-1 text-center md:grid-cols-2 lg:grid-cols-2 "></div>
 
-<div id="restock-offer-container" class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-1"></div>
+ <!-- featured products -->
+  <div class="flex max-w-7xl mx-auto px-4  justify-between items-center mt-18">
+            <h2 class="text-3xl font-serif">Featured Collections</h2>
+            <div class="flex gap-2">
+                <button id="featuredMenBtn" class="px-4 py-2 hover:text-black  text-gray-400 cursor-pointer transition">For Men</button>
+                <button id="featuredWomenBtn" class="px-4 py-2 hover:text-black  text-gray-400 cursor-pointer transition">For Women</button>
+            </div>
+        </div>
+    
+    <div id="featured-section-container"  class="grid grid-cols-1 p-6 md:grid-cols-1 lg:grid-cols-1"></div>
 </body>
 <script src="./Home.js"></script>
 
