@@ -313,7 +313,7 @@ function showFeaturedSection() {
             card.className = 'text-center';
             card.innerHTML = `
                 <img src="${item.image}" alt="${item.name}" class="w-full p-5 object-cover h-auto mb-3">
-                <a href="${item.link}" class="inline-block mt-1 text-gray-500 text-sm font-medium hover:text-black">${item.name}</a>
+                <a href="${item.link}" class="inline-block text-gray-500 text-sm font-medium hover:text-black">${item.name}</a>
             `;
             grid.appendChild(card);
         });
