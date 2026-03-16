@@ -277,7 +277,7 @@ const restockItems = [
         title: "Missed Them? They're Back",
         buttonText: "SHOP BACK IN",
         buttonColor: "hover:bg-black hover:text-white transition ",
-        link: "https://www.yourstore.com/restocked",
+        link: "",
 
     }
 
@@ -297,7 +297,7 @@ function renderRestockOffers() {
 
         // Build the card HTML – follows the same pattern as the original
         card.innerHTML = `
-            <img src="${item.image}" alt="${item.title}" class="w-full h-screen mt-3 object-cover">
+            <img src="${item.image}" alt="${item.title}" class="w-full  h-screen mt-3 object-cover">
             <div class="absolute inset-0  flex flex-col justify-end items-center text-white p-6 text-center">
                 <p class="text-3xl uppercase font-serif tracking-wider">${item.headline}</p>
                 <h3 class="text md:text-sm lg:text-lg  my-2">${item.title}</h3>
