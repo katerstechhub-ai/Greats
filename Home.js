@@ -6,7 +6,7 @@ const product_arr = [
         title: "Crafted for Spring",
         buttonText: "SHOP MEN",
         buttonColor: "hover:bg-white hover:text-black transition",
-        link: "https://www.greats.com/collections/mens-new-arrivals"
+        link: ""
     },
     {
         image: "Home.img/shopwomen1.jpg",    // Your image for women's product
@@ -14,7 +14,7 @@ const product_arr = [
         title: "The Brooklyn",
         buttonText: "SHOP WOMEN",
         buttonColor: "hover:bg-white hover:text-black transition",
-        link: "https://www.greats.com/collections/womens-new-arrivals"
+        link: ""
     }
 ];
 
@@ -169,7 +169,7 @@ let products2 = [
                 color: "grey",
                 images: [
                     "Home.img/GCHARLI1-EY4-01.webp",
-                    "Home.img/w1", 
+                    "Home.img/w1",
                     "Home.img/wom1.webp"
                 ]
             }
@@ -441,3 +441,144 @@ function showFeaturedSection() {
 
 // Call the function
 showFeaturedSection();
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const products = [
+        {
+
+            variants: [{
+                images: [
+                    'Home.img/beg1.webp',
+                    'Home.img/beg2.webp'
+                ]
+            }]
+        },
+        {
+
+            variants: [{
+                images: [
+                    'Home.img/beg3.webp',
+                    'Home.img/beg4.webp'
+                ]
+            }]
+        },
+        {
+
+            variants: [{
+                images: [
+                    'Home.img/beg5.webp',
+                    'Home.img/beg6.webp'
+                ]
+            }]
+        },
+        {
+
+            variants: [{
+                images: [
+                    'Home.img/beg7.webp',
+                    'Home.img/beg8.jpg'
+                ]
+            }]
+        },
+        {
+
+            variants: [{
+                images: [
+                    'Home.img/beg9.webp',
+                    'Home.img/beg10.webp'
+                ]
+            }]
+        },
+        {
+
+            variants: [{
+                images: [
+                    'Home.img/beg11.webp',
+                    'Home.img/beg12.webp'
+                ]
+            }]
+        }
+    ]
+    let currentIndices = new Array(products.length).fill(0);
+    const grid = document.getElementById('productGrid');
+
+    function renderProducts() {
+        grid.innerHTML = products.map((product, idx) => {
+            const imgUrl = product.variants[0].images[currentIndices[idx]];
+            const productUrl = product.url || '#';
+
+            return `
+                <div class="overflow-hidden border border-gray-100 hover:shadow-md transition rounded-lg"> <!-- added rounded-lg -->
+        <a href="${productUrl}" class="block relative">
+            <img src="${imgUrl}" alt="${product.name}" class="w-full  aspect-square object-cover bg-gray-100">
+            <div class="absolute inset-0 bg-gray-500/30 opacity-0 hover:opacity-100 transition-opacity duration-200"></div>
+        </a>
+    </div>
+    `;
+        }).join('');
+    }
+
+    renderProducts();
+
+    const prevBtn = document.getElementById('prevArrow');
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            for (let i = 0; i < products.length; i++) {
+                const images = products[i].variants[0].images;
+                currentIndices[i] = (currentIndices[i] - 1 + images.length) % images.length;
+            }
+            renderProducts();
+        });
+    }
+
+    const nextBtn = document.getElementById('nextArrow');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            for (let i = 0; i < products.length; i++) {
+                const images = products[i].variants[0].images;
+                currentIndices[i] = (currentIndices[i] + 1) % images.length;
+            }
+            renderProducts();
+        });
+    }
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const emailInput = document.getElementById('emailInput');
+    const signupBtn = document.getElementById('signupBtn');
+    const newsletterForm = document.getElementById('newsletterForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Regular expression for basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    signupBtn.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent any default action
+
+        const email = emailInput.value.trim();
+
+        // Hide previous messages
+        errorMessage.classList.add('hidden');
+        successMessage.classList.add('hidden');
+
+        // Validation
+        if (email === '') {
+            errorMessage.textContent = 'Email cannot be empty.';
+            errorMessage.classList.remove('hidden');
+        } else if (!emailRegex.test(email)) {
+            errorMessage.textContent = 'Please enter a valid email address.';
+            errorMessage.classList.remove('hidden');
+        } else {
+            // Valid email: hide form, show success message
+            successMessage.classList.remove('hidden');
+        }
+    });
+});
