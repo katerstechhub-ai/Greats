@@ -366,7 +366,7 @@ showproduct2();
 const featured_arr = [
     // Men's items
     {
-        image: "Home.img/men1.webp",   // Replace with actual image path
+        image: "Home.img/men1.webp",   
         name: "Royale 2.0",
         link: "",
         gender: "men"
@@ -425,7 +425,7 @@ function showFeaturedSection() {
             const card = document.createElement('div');
             card.className = 'text-center';
             card.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="w-full p-5 object-cover h-auto mb-3">
+                <img src="${item.image}" alt="${item.name}" class="w-full h-120 p-5 object-cover">
                 <a href="${item.link}" class="inline-block text-gray-500 text-sm font-medium hover:text-black">${item.name}</a>
             `;
             grid.appendChild(card);
