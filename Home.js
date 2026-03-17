@@ -208,7 +208,6 @@ let products2 = [
     }
 ];
 
-
 let womenIndices = products2.map(() => 0);
 
 // Function to render women's products
