@@ -47,6 +47,7 @@ showproduct();
 
 
 
+//best sellers men
 // Product array2
 let products = [
     {
@@ -160,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+
 let products2 = [
     {
         name: "Women's Charlie Distressed",
@@ -269,6 +272,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+
+
 // Product array with the restock message and discount offer
 const restockItems = [
     {
@@ -312,6 +318,9 @@ function renderRestockOffers() {
 }
 
 renderRestockOffers()
+
+
+
 
 
 
@@ -366,7 +375,7 @@ showproduct2();
 const featured_arr = [
     // Men's items
     {
-        image: "Home.img/men1.webp",   
+        image: "Home.img/men1.webp",
         name: "Royale 2.0",
         link: "",
         gender: "men"
@@ -546,6 +555,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+
+
 
 
 
