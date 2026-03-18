@@ -110,12 +110,15 @@ function renderProducts() {
         const images = variant.images;
         const currentIndex = currentImageIndices[i];
         const currentImage = images[currentIndex];
+        const Url = product.url || './shop.html';
 
         // Create product card
         const card = document.createElement('div');
         card.className = '';
         card.innerHTML = `
+        <a href="${Url}" class="block relative">
             <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+            </a>
             <div class="flex justify-between items-center">
                 <h3 class="font-semibold text-lg">${product.name}</h3>
                 <p class="text-gray-900">$${product.price.toFixed(2)}</p>
@@ -226,11 +229,14 @@ function renderWomenProducts() {
         const images = variant.images;
         const currentIndex = womenIndices[i];
         const currentImage = images[currentIndex];
+        const WUrl = product.url || './shop.html';
 
         const card = document.createElement('div');
         card.className = '';
         card.innerHTML = `
+         <a href="${WUrl}" class="block relative">
             <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+            </a>
             <div class="flex justify-between items-center">
                 <h3 class="font-semibold text-lg">${product.name}</h3>
                 <p class="text-gray-900">$${product.price.toFixed(2)}</p>
