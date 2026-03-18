@@ -58,23 +58,23 @@ let products = [
                 color: "Taupe",
                 images: [
                     "Home.img/kingstontaupe1.webp",
-                    "Home.img/m2",
-                    "Home.img/m3"
+                    "Home.img/KING01SG-GLB_1.webp",
+                    "Home.img/KING01SG-GLB_7.webp"
                 ]
             }
             // You can add more colors with their own image arrays
         ]
     },
     {
-        name: "Men's Reign",
-        price: 199.00,
+        name: "Men's Slip On's",
+        price: 189.00,
         variants: [
             {
-                color: "Ecru",
+                color: "Navy",
                 images: [
-                    "Home.img/reign-ecru2.jpg",
-                    "Home.img/mmmm.webp",
-                    "Home.img/mmmm3.webp"
+                    "Home.img/REIS01SG-9UU_1.webp",
+                    "Home.img/reignslipnnavy.jpg",
+                    "Home.img/REIS01SG-9UU_7.webp"
                 ]
             }
         ]
@@ -84,10 +84,10 @@ let products = [
         price: 179.00,
         variants: [
             {
-                color: "Sage",
+                color: "Navy",
                 images: [
-                    "Home.img/RoyateKnitSageM3.jpg",
-                    "Home.img/mmmmm2.webp",
+                    "Home.img/RoyaleKnitM-02.jpg",
+                    "Home.img/rrrr.webp",
                     "Home.img/menn2.webp"
                 ]
             }
