@@ -32,8 +32,10 @@ const products = [
         price: 199.00,
         variants: [
             {
-                color: "Taupe", images: ["Home.img/kingstontaupe1.webp",
-                    "Home.img/p15.webp"
+                color: "Taupe", images: [
+                    "Home.img/kingstontaupe1.webp",
+                    "Home.img/KING01SG-GLB_1.webp",
+                    "Home.img/KING01SG-GLB_7.webp"
                 ]
             }
         ]
@@ -180,9 +182,6 @@ const products = [
         ]
     }
 ];
-
-
-
 
 // Key for localStorage
 const STORAGE_KEY = 'recentlyViewed';
