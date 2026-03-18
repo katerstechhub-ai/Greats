@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderProducts() {
         grid.innerHTML = products.map((product, idx) => {
             const imgUrl = product.variants[0].images[currentIndices[idx]];
-            const productUrl = product.url || '#';
+            const productUrl = product.url || './shop.html';
 
             return `
                 <div class="overflow-hidden border border-gray-100 hover:shadow-md transition rounded-lg"> <!-- added rounded-lg -->
