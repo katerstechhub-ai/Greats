@@ -25,7 +25,7 @@ function showproduct() {
 showproduct();
 
 
-
+//Products
 const products = [
     {
         name: "Men's Kingston",

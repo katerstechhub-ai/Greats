@@ -172,8 +172,8 @@ let products2 = [
                 color: "grey",
                 images: [
                     "Home.img/GCHARLI1-EY4-01.webp",
-                    "Home.img/w1",
-                    "Home.img/wom1.webp"
+                    "Home.img/GCHARLI1-EY4-05.webp",
+                    "Home.img/GCHARLI1-EY4-06.webp"
                 ]
             }
         ]
@@ -186,8 +186,8 @@ let products2 = [
                 color: "Blanco",
                 images: [
                     "Home.img/women2.webp",
-                    "Home.img/w2",
-                    "Home.img/wom.webp"
+                    "Home.img/wchar2.webp",
+                    "Home.img/wchar3.webp"
                 ]
             }
         ]
@@ -199,9 +199,12 @@ let products2 = [
             {
                 color: "Blanco",
                 images: [
+                    "Home.img/CharlieBlancoW-02.webp",
+
                     "Home.img/women3.webp",
-                    "Home.img/w3",
-                    "Home.img/wom3.webp"
+                    "Home.img/GCHARLI1-84D-01.webp",
+                    "Home.img/women3.webp"
+
                 ]
             }
         ]
