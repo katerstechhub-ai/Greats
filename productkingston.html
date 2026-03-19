@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+    <style>
+        .swiper-button-prev,
+        .swiper-button-next {
+            color: white;
+            background: black;
+            width: 30px;
+            height: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+            background: black;
+            transform: scale(1.05);
+        }
+
+        .swiper-pagination-bullet {
+            background: white;
+            opacity: 0.7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #222;
+            opacity: 1;
+        }
+
+        .swiper-scrollbar {
+            display: none;
+            /* hide unused scrollbar */
+        }
+    </style>
 </head>
+
 <body>
-       <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-8 py-4">
                 <!-- Logo -->
@@ -43,7 +84,141 @@
             </div>
         </div>
     </header>
+
+
+
+
+    <div class="max-w-7xl w-full bg-white shadow-2xl ">
+        <!-- 2‑column grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+            <!-- LEFT COLUMN: Swiper slider -->
+            <div class="relative overflow-hidden bg-gray-100 h-[450px] md:h-[600px]">
+                <div class="swiper h-full w-full">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide flex items-center justify-center gap-3 bg-gray-100">
+                            <img src="Home.img/KING01SG-GLB_1.webp" alt="Kingston " class="w-full h-full object-cover">
+                        </div>
+                        <div class="swiper-slide flex items-center justify-center bg-gray-100">
+                            <img src="Home.img/kingstontaupe1.webp" alt="Kingston " class="w-full h-full object-cover">
+                        </div>
+                        <div class="swiper-slide flex items-center justify-center bg-gray-100">
+                            <img src="Home.img/KING01SG-GLB_7.webp" alt="Kingston taupe detail"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <!-- Pagination, navigation, scrollbar (scrollbar hidden via CSS) -->
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: product details -->
+            <div class="flex flex-col gap-5 p-2 md:p-4">
+
+                <!-- NEW badge -->
+                <span
+                    class="inline-block border text-gray-800 font-semibold text-xs tracking-wide p-6 px-2 py-1 uppercase w-fit">
+                    NEW
+                </span>
+
+                <!-- Title & price -->
+                <h1 class="text-xl md:text-xl font-semibold  leading-tight tracking-tight text-gray-900 ">
+                    THE KINGSTON
+                </h1>
+                <div class="text-xl font-semibold text-gray-800  pb-3">
+                    $199.00
+                </div>
+
+                <!-- Men / Women -->
+                <div class="inline-flex  items-center">
+                    <button
+                        class="text-base p-1 w-60 font-medium text-white bg-black  rounded-2xl cursor-poiter">Men</button>
+                    <button
+                        class="text-base p-1 w-60 font-medium bg-gray-100 rounded-2xl text-black cursor-pointer">Women</button>
+                </div>
+
+                <!-- Color row: Taupe + swatch + Limited Edition -->
+                <div class="gap-4">
+                    <p class="text-lg font-medium text-gray-700">Color: Taupe</p>
+                    <p class=" text-[15px] mt-3">
+                        Limited Edition
+                    </p>
+                    <div class="flex gap-2 mt-4">
+                        <a href="">
+                        <img src="./Home.img/shoe1.webp" alt="Image 1"
+                            class=" h-12 w-12">
+                            </a>
+                            <a href="">
+                        <img src="./Home.img/shoe2.webp" alt="Image 2"
+                            class="h-12 w-12">
+                            </a>
+                            <a href="">
+                        <img src="./Home.img/shoe3.webp" alt="Image 3"
+                            class=" h-12 w-12">
+                            </a>
+                            <a href="./productkingston.html">
+                        <img src="./Home.img/shoe4.webp" alt="Image 4"
+                            class="r h-12 w-12">
+                            </a>
+                            <a href="">
+                        <img src="./Home.img/shoe5.webp" alt="Image 5"
+                            class=" h-12 w-12">
+                            </a>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Size section -->
+                <div class="mt-3">
+                    <div class="flex items-baseline gap-3 flex-wrap mb-3">
+                        <p class="text-base text-gray-800 font-medium">Select size:</p>
+                        <span class="text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full">This style runs true to
+                            size.</span>
+                    </div>
+
+                    <!-- Size buttons -->
+                    <div class="flex flex-wrap gap-2 my-4">
+                        <div
+                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            7</div>
+                        <div
+                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            8</div>
+                        <div
+                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            9</div>
+                        <div
+                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            10</div>
+                        <div
+                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            11</div>
+                    </div>
+
+                    <!-- Size guide -->
+                    <a href="#"
+                        class="text-gray-700 font-medium underline-offset-4 underline text-base inline-flex items-center gap-1 hover:text-black">
+                        📏 Size Guide
+                    </a>
+                </div>
+
+                <!-- Divider & extra info -->
+                <hr class="border-t border-gray-200 my-4">
+                <div class="text-sm text-gray-400 flex gap-4">
+                    <span>✔️ Free shipping</span>
+                    <span>✔️ 30-day returns</span>
+                </div>
+
+            </div> <!-- end right col -->
+        </div> <!-- end grid -->
+    </div> <!-- end card -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-<script src="./Home.js"></script>
+<script src="./productkingston.js"></script>
+
 </html>

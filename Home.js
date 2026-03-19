@@ -47,12 +47,151 @@ showproduct();
 
 
 
-//best sellers men
+// images best sellers men
 // Product array2
-let products = [
+// let products = [
+//     {
+//         name: "Men's Kingston",
+//         price: 199.00,
+//         variants: [
+//             {
+//                 color: "Taupe",
+//                 images: [
+//                     "Home.img/kingstontaupe1.webp",
+//                     "Home.img/KING01SG-GLB_1.webp",
+//                     "Home.img/KING01SG-GLB_7.webp"
+//                 ]
+//             }
+//             // You can add more colors with their own image arrays
+//         ]
+//     },
+//     {
+//         name: "Men's Slip On's",
+//         price: 189.00,
+//         variants: [
+//             {
+//                 color: "Navy",
+//                 images: [
+//                     "Home.img/REIS01SG-9UU_1.webp",
+//                     "Home.img/reignslipnnavy.jpg",
+//                     "Home.img/REIS01SG-9UU_7.webp"
+//                 ]
+//             }
+//         ]
+//     },
+//     {
+//         name: "Men's Royale Knit 2.0",
+//         price: 179.00,
+//         variants: [
+//             {
+//                 color: "Navy",
+//                 images: [
+//                     "Home.img/RoyaleKnitM-02.jpg",
+//                     "Home.img/rrrr.webp",
+//                     "Home.img/menn2.webp"
+//                 ]
+//             }
+//         ]
+//     }
+// ];
+
+// let currentImageIndices = products.map(() => 0);
+
+// // Function to render all products with their current images
+// function renderProducts() {
+//     const container = document.getElementById("product-grid");
+//     if (!container) return;
+
+//     container.innerHTML = ""; // Clear grid
+
+//     for (let i = 0; i < products.length; i++) {
+//         const product = products[i];
+//         const variant = product.variants[0];
+//         const images = variant.images;
+//         const currentIndex = currentImageIndices[i];
+//         const currentImage = images[currentIndex];
+//         const Url = product.url || './shop.html';
+
+//         // Create product card
+//         const card = document.createElement('div');
+//         card.className = '';
+//         card.innerHTML = `
+//         <a href="${Url}" class="block relative">
+//             <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+//             </a>
+//             <div class="flex justify-between items-center">
+//                 <h3 class="font-semibold text-lg">${product.name}</h3>
+//                 <p class="text-gray-900">$${product.price.toFixed(2)}</p>
+//             </div>
+//             <p class="text-gray-600 italic">${variant.color}</p>
+//              <div class="flex gap-2 mt-4">
+//                         <a href="">
+//                         <img src="./Home.img/shoe1.webp" alt="Image 1"
+//                             class=" h-8 w-8">
+//                             </a>
+//                             <a href="">
+//                         <img src="./Home.img/shoe3.webp" alt="Image 3"
+//                             class=" h-8 w-8">
+//                             </a>
+//                             <a href="./productkingston.html">
+//                         <img src="./Home.img/shoe4.webp" alt="Image 4"
+//                             class="r h-8 w-8">
+//                             </a>
+//                             <a href="">
+//                         <img src="./Home.img/shoe5.webp" alt="Image 5"
+//                             class=" h-8 w-8">
+//                             </a>
+//                     </div>
+//         `;
+//         container.appendChild(card);
+//     }
+// }
+
+// // Initial render
+// renderProducts();
+
+// // Event listeners for the filter and grid toggle icons
+// document.addEventListener('DOMContentLoaded', function () {
+//     const filterLink = document.getElementById('filterLink');
+//     const gridToggleLink = document.getElementById('gridToggleLink');
+
+//     // Filter icon – show previous image for all products
+//     if (filterLink) {
+//         filterLink.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             for (let i = 0; i < products.length; i++) {
+//                 const images = products[i].variants[0].images;
+//                 currentImageIndices[i] = (currentImageIndices[i] - 1 + images.length) % images.length;
+//             }
+//             renderProducts();
+//         });
+//     }
+
+//     // Grid toggle icon – show next image for all products
+//     if (gridToggleLink) {
+//         gridToggleLink.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             for (let i = 0; i < products.length; i++) {
+//                 const images = products[i].variants[0].images;
+//                 currentImageIndices[i] = (currentImageIndices[i] + 1) % images.length;
+//             }
+//             renderProducts();
+//         });
+//     }
+// });
+
+
+
+
+
+
+// Full list of men's products (combined from your existing three + all other men's products)
+let allMenProducts = [
+    // --- Original three products (preserved exactly) ---
     {
         name: "Men's Kingston",
         price: 199.00,
+        url: "./productkingston.html",
         variants: [
             {
                 color: "Taupe",
@@ -62,7 +201,6 @@ let products = [
                     "Home.img/KING01SG-GLB_7.webp"
                 ]
             }
-            // You can add more colors with their own image arrays
         ]
     },
     {
@@ -92,38 +230,140 @@ let products = [
                 ]
             }
         ]
+    },
+    // --- Additional men's products from your full list ---
+    {
+        name: "Men's Reign",
+        price: 199.00,
+        variants: [
+            { color: "Ecru", images: ["Home.img/reign-ecru2.jpg"] }
+        ]
+    },
+    {
+        name: "Men's Royale Knit 2.0",
+        price: 179.00,
+        variants: [
+            { color: "Sage", images: ["Home.img/RoyateKnitSageM3.jpg"] }
+        ]
+    },
+    {
+        name: "Men's Charlie",
+        price: 215.00,
+        variants: [
+            { color: "Mineral Sage", images: ["Home.img/p1.webp"] }
+        ]
+    },
+    {
+        name: "Men's Charlie",
+        price: 169.00,
+        variants: [
+            { color: "Mineral grey", images: ["Home.img/p2.webp"] }
+        ]
+    },
+    {
+        name: "Men's Reign Slip On",
+        price: 189.00,
+        variants: [
+            { color: "Tan", images: ["Home.img/p9.webp"] }
+        ]
+    },
+    {
+        name: "Men's Kingston",
+        price: 199.00,
+        url: "#",
+        variants: [
+            { color: "White", images: ["Home.img/p10.webp"] }
+        ]
+    },
+    {
+        name: "Men's Royale 2.0",
+        price: 199.00,
+        variants: [
+            { color: "Blanco", images: ["Home.img/p11.webp"] }
+        ]
+    },
+    {
+        name: "Men's Royale Knit 2.0",
+        price: 179.00,
+        variants: [
+            { color: "Grey White", images: ["Home.img/p12.webp"] }
+        ]
+    },
+    {
+        name: "Men's Reign",
+        price: 199.00,
+        variants: [
+            { color: "Blanco", images: ["Home.img/p13.webp"] }
+        ]
+    },
+    {
+        name: "Men's Charlie Distressed",
+        price: 215.00,
+        variants: [
+            { color: "Grey", images: ["Home.img/p14.webp"] }
+        ]
+    },
+    {
+        name: "Men's Royale Knit 2.0",
+        price: 179.00,
+        variants: [
+            { color: "White", images: ["Home.img/p15.webp"] }
+        ]
+    },
+    {
+        name: "Men's Reign",
+        price: 199.00,
+        variants: [
+            { color: "Navy", images: ["Home.img/p16.webp"] }
+        ]
     }
 ];
 
-let currentImageIndices = products.map(() => 0);
+// Index of the first product to show (we display 3 products at a time)
+let startIndex = 0;
+const productsPerPage = 3;
 
-// Function to render all products with their current images
+// Function to render the current set of 3 products
 function renderProducts() {
     const container = document.getElementById("product-grid");
     if (!container) return;
 
     container.innerHTML = ""; // Clear grid
 
-    for (let i = 0; i < products.length; i++) {
-        const product = products[i];
-        const variant = product.variants[0];
-        const images = variant.images;
-        const currentIndex = currentImageIndices[i];
-        const currentImage = images[currentIndex];
+    // Get the three products to display (wrap around if needed)
+    for (let i = 0; i < productsPerPage; i++) {
+        const productIndex = (startIndex + i) % allMenProducts.length;
+        const product = allMenProducts[productIndex];
+        const variant = product.variants[0]; // always first variant
+        const image = variant.images[0];      // always first image (no cycling)
         const Url = product.url || './shop.html';
 
         // Create product card
         const card = document.createElement('div');
         card.className = '';
         card.innerHTML = `
-        <a href="${Url}" class="block relative">
-            <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+            <a href="${Url}" class="block relative">
+                <img src="${image}" alt="${product.name}" class="w-full h-auto mb-3">
             </a>
             <div class="flex justify-between items-center">
                 <h3 class="font-semibold text-lg">${product.name}</h3>
                 <p class="text-gray-900">$${product.price.toFixed(2)}</p>
             </div>
             <p class="text-gray-600 italic">${variant.color}</p>
+            <div class="flex gap-2 mt-4">
+                <a href="">
+                    <img src="./Home.img/shoe1.webp" alt="Image 1" class="h-8 w-8">
+                </a>
+                <a href="">
+                    <img src="./Home.img/shoe3.webp" alt="Image 3" class="h-8 w-8">
+                </a>
+                <a href="./productkingston.html">
+                    <img src="./Home.img/shoe4.webp" alt="Image 4" class="h-8 w-8">
+                </a>
+                <a href="">
+                    <img src="./Home.img/shoe5.webp" alt="Image 5" class="h-8 w-8">
+                </a>
+            </div>
         `;
         container.appendChild(card);
     }
@@ -137,26 +377,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterLink = document.getElementById('filterLink');
     const gridToggleLink = document.getElementById('gridToggleLink');
 
-    // Filter icon – show previous image for all products
+    // Filter icon – show previous set of 3 products
     if (filterLink) {
         filterLink.addEventListener('click', function (event) {
             event.preventDefault();
-            for (let i = 0; i < products.length; i++) {
-                const images = products[i].variants[0].images;
-                currentImageIndices[i] = (currentImageIndices[i] - 1 + images.length) % images.length;
-            }
+            // Move startIndex backward by 1 (wrap around)
+            startIndex = (startIndex - 1 + allMenProducts.length) % allMenProducts.length;
             renderProducts();
         });
     }
 
-    // Grid toggle icon – show next image for all products
+    // Grid toggle icon – show next set of 3 products
     if (gridToggleLink) {
         gridToggleLink.addEventListener('click', function (event) {
             event.preventDefault();
-            for (let i = 0; i < products.length; i++) {
-                const images = products[i].variants[0].images;
-                currentImageIndices[i] = (currentImageIndices[i] + 1) % images.length;
-            }
+            // Move startIndex forward by 1 (wrap around)
+            startIndex = (startIndex + 1) % allMenProducts.length;
             renderProducts();
         });
     }
@@ -166,7 +402,151 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-let products2 = [
+
+// images best sellers women
+// let products2 = [
+//     {
+//         name: "Women's Charlie Distressed",
+//         price: 215.00,
+//         variants: [
+//             {
+//                 color: "grey",
+//                 images: [
+//                     "Home.img/GCHARLI1-EY4-01.webp",
+//                     "Home.img/GCHARLI1-EY4-05.webp",
+//                     "Home.img/GCHARLI1-EY4-06.webp"
+//                 ]
+//             }
+//         ]
+//     },
+//     {
+//         name: "Women's Royale 2.0",
+//         price: 199.00,
+//         variants: [
+//             {
+//                 color: "Blanco",
+//                 images: [
+//                     "Home.img/women2.webp",
+//                     "Home.img/wchar2.webp",
+//                     "Home.img/wchar3.webp"
+//                 ]
+//             }
+//         ]
+//     },
+//     {
+//         name: "Women's Charlie",
+//         price: 215.00,
+//         variants: [
+//             {
+//                 color: "Blanco",
+//                 images: [
+//                     "Home.img/CharlieBlancoW-02.webp",
+
+//                     "Home.img/women3.webp",
+//                     "Home.img/GCHARLI1-84D-01.webp",
+//                     "Home.img/women3.webp"
+
+//                 ]
+//             }
+//         ]
+//     }
+// ];
+
+// let womenIndices = products2.map(() => 0);
+
+// // Function to render women's products
+// function renderWomenProducts() {
+//     const container = document.getElementById("product-grid2");
+//     if (!container) return;
+
+//     container.innerHTML = "";
+
+//     for (let i = 0; i < products2.length; i++) {
+//         const product = products2[i];
+//         const variant = product.variants[0]; // first color variant
+//         const images = variant.images;
+//         const currentIndex = womenIndices[i];
+//         const currentImage = images[currentIndex];
+//         const WUrl = product.url || './shop.html';
+
+//         const card = document.createElement('div');
+//         card.className = '';
+//         card.innerHTML = `
+//          <a href="${WUrl}" class="block relative">
+//             <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+//             </a>
+//             <div class="flex justify-between items-center">
+//                 <h3 class="font-semibold text-lg">${product.name}</h3>
+//                 <p class="text-gray-900">$${product.price.toFixed(2)}</p>
+//             </div>
+//             <p class="text-gray-600 italic">${variant.color}</p>
+//              <div class="flex gap-2 mt-4">
+//                         <a href="">
+//                         <img src="./Home.img/shoe1.webp" alt="Image 1"
+//                             class=" h-8 w-8">
+//                             </a>
+//                             <a href="">
+//                         <img src="./Home.img/shoe2.webp" alt="Image 2"
+//                             class="h-8 w-8">
+//                             </a>
+//                             <a href="./productkingston.html">
+//                         <img src="./Home.img/shoe4.webp" alt="Image 4"
+//                             class="r h-8 w-8">
+//                             </a>
+//                             <a href="">
+//                         <img src="./Home.img/shoe5.webp" alt="Image 5"
+//                             class=" h-8 w-8">
+//                             </a>
+//                     </div>
+//         `;
+//         container.appendChild(card);
+//     }
+// }
+
+// // Initial render for women
+// renderWomenProducts();
+
+// // Event listeners for women's icons
+// document.addEventListener('DOMContentLoaded', function () {
+//     const filterWomen = document.getElementById('filterLinkWomen');
+//     const gridWomen = document.getElementById('gridToggleLinkWomen');
+
+//     if (filterWomen) {
+//         filterWomen.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             for (let i = 0; i < products2.length; i++) {
+//                 const images = products2[i].variants[0].images;
+//                 womenIndices[i] = (womenIndices[i] - 1 + images.length) % images.length;
+//             }
+//             renderWomenProducts();
+//         });
+//     }
+
+//     if (gridWomen) {
+//         gridWomen.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             for (let i = 0; i < products2.length; i++) {
+//                 const images = products2[i].variants[0].images;
+//                 womenIndices[i] = (womenIndices[i] + 1) % images.length;
+//             }
+//             renderWomenProducts();
+//         });
+//     }
+// });
+
+
+
+
+
+
+// Product array with the restock message and discount offer
+
+
+
+
+// ----- FULL WOMEN'S PRODUCT LIST (merged from original three + all other women's products) -----
+let allWomenProducts = [
+    // --- Original three women's products (preserved exactly as given) ---
     {
         name: "Women's Charlie Distressed",
         price: 215.00,
@@ -203,51 +583,114 @@ let products2 = [
                 color: "Blanco",
                 images: [
                     "Home.img/CharlieBlancoW-02.webp",
-
                     "Home.img/women3.webp",
                     "Home.img/GCHARLI1-84D-01.webp",
                     "Home.img/women3.webp"
-
                 ]
             }
         ]
+    },
+    // --- Additional women's products from the full list (avoiding duplicates) ---
+    {
+        name: "Women's Brooklyn",
+        price: 189.00,
+        url: "#",
+        variants: [
+            { color: "Baby Blue", images: ["Home.img/p3.webp"] }
+        ]
+    },
+    {
+        name: "Women's Brooklyn",
+        price: 189.00,
+        url: "#",
+        variants: [
+            { color: "Taupe", images: ["Home.img/p4.webp"] }
+        ]
+    },
+    {
+        name: "Women's Charlie",
+        price: 215.00,
+        url: "#",
+        variants: [
+            { color: "Green", images: ["Home.img/p7.webp"] }
+        ]
+    },
+    {
+        name: "Women's Charlie",
+        price: 215.00,
+        url: "#",
+        variants: [
+            { color: "Light Pink", images: ["Home.img/p17.webp"] }
+        ]
+    },
+    {
+        name: "Women's Charlie",
+        price: 215.00,
+        url: "#",
+        variants: [
+            { color: "Nero", images: ["Home.img/p18.webp"] }
+        ]
     }
+    // (Women's Royale 2.0 Blanco from main list is omitted – already present)
 ];
 
-let womenIndices = products2.map(() => 0);
+// Ensure every product has a .url property
+allWomenProducts = allWomenProducts.map(prod => {
+    if (!prod.url) prod.url = '#';
+    return prod;
+});
 
-// Function to render women's products
+// Index of the first product to show (we display 3 products at a time)
+let womenStartIndex = 0;
+const womenProductsPerPage = 3;
+
+// Function to render the current set of 3 women's products
 function renderWomenProducts() {
     const container = document.getElementById("product-grid2");
     if (!container) return;
 
-    container.innerHTML = "";
+    container.innerHTML = ""; // Clear grid
 
-    for (let i = 0; i < products2.length; i++) {
-        const product = products2[i];
-        const variant = product.variants[0]; // first color variant
-        const images = variant.images;
-        const currentIndex = womenIndices[i];
-        const currentImage = images[currentIndex];
+    // Get the three products to display (wrap around if needed)
+    for (let i = 0; i < womenProductsPerPage; i++) {
+        const productIndex = (womenStartIndex + i) % allWomenProducts.length;
+        const product = allWomenProducts[productIndex];
+        const variant = product.variants[0]; // first variant
+        const image = variant.images[0];      // always first image
         const WUrl = product.url || './shop.html';
 
+        // Create product card
         const card = document.createElement('div');
         card.className = '';
         card.innerHTML = `
-         <a href="${WUrl}" class="block relative">
-            <img src="${currentImage}" alt="${product.name}" class="w-full h-auto mb-3">
+            <a href="${WUrl}" class="block relative">
+                <img src="${image}" alt="${product.name}" class="w-full h-auto mb-3">
             </a>
             <div class="flex justify-between items-center">
                 <h3 class="font-semibold text-lg">${product.name}</h3>
                 <p class="text-gray-900">$${product.price.toFixed(2)}</p>
             </div>
             <p class="text-gray-600 italic">${variant.color}</p>
+            <div class="flex gap-2 mt-4">
+                <a href="">
+                    <img src="./Home.img/shoe1.webp" alt="Image 1" class="h-8 w-8">
+                </a>
+                <a href="">
+                    <img src="./Home.img/shoe2.webp" alt="Image 2" class="h-8 w-8">
+                </a>
+                <a href="./productkingston.html">
+                    <img src="./Home.img/shoe4.webp" alt="Image 4" class="h-8 w-8">
+                </a>
+                <a href="">
+                    <img src="./Home.img/shoe5.webp" alt="Image 5" class="h-8 w-8">
+                </a>
+            </div>
         `;
         container.appendChild(card);
     }
 }
 
-// Initial render for women
+// Initial render
 renderWomenProducts();
 
 // Event listeners for women's icons
@@ -255,24 +698,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterWomen = document.getElementById('filterLinkWomen');
     const gridWomen = document.getElementById('gridToggleLinkWomen');
 
+    // Filter icon – show previous set of 3 products
     if (filterWomen) {
         filterWomen.addEventListener('click', function (event) {
             event.preventDefault();
-            for (let i = 0; i < products2.length; i++) {
-                const images = products2[i].variants[0].images;
-                womenIndices[i] = (womenIndices[i] - 1 + images.length) % images.length;
-            }
+            womenStartIndex = (womenStartIndex - 1 + allWomenProducts.length) % allWomenProducts.length;
             renderWomenProducts();
         });
     }
 
+    // Grid toggle icon – show next set of 3 products
     if (gridWomen) {
         gridWomen.addEventListener('click', function (event) {
             event.preventDefault();
-            for (let i = 0; i < products2.length; i++) {
-                const images = products2[i].variants[0].images;
-                womenIndices[i] = (womenIndices[i] + 1) % images.length;
-            }
+            womenStartIndex = (womenStartIndex + 1) % allWomenProducts.length;
             renderWomenProducts();
         });
     }
@@ -283,7 +722,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// Product array with the restock message and discount offer
+
+
+
+
+
 const restockItems = [
     {
         image: "Home.img/Group_2458.jpg",
