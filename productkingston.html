@@ -90,7 +90,7 @@
 
     <div class="max-w-7xl w-full bg-white shadow-2xl ">
         <!-- 2‑column grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 ">
 
             <!-- LEFT COLUMN: Swiper slider -->
             <div class="relative overflow-hidden bg-gray-100 h-[450px] md:h-[600px]">
@@ -148,25 +148,20 @@
                     </p>
                     <div class="flex gap-2 mt-4">
                         <a href="">
-                        <img src="./Home.img/shoe1.webp" alt="Image 1"
-                            class=" h-12 w-12">
-                            </a>
-                            <a href="">
-                        <img src="./Home.img/shoe2.webp" alt="Image 2"
-                            class="h-12 w-12">
-                            </a>
-                            <a href="">
-                        <img src="./Home.img/shoe3.webp" alt="Image 3"
-                            class=" h-12 w-12">
-                            </a>
-                            <a href="./productkingston.html">
-                        <img src="./Home.img/shoe4.webp" alt="Image 4"
-                            class="r h-12 w-12">
-                            </a>
-                            <a href="">
-                        <img src="./Home.img/shoe5.webp" alt="Image 5"
-                            class=" h-12 w-12">
-                            </a>
+                            <img src="./Home.img/shoe1.webp" alt="Image 1" class=" h-12 w-12">
+                        </a>
+                        <a href="">
+                            <img src="./Home.img/shoe2.webp" alt="Image 2" class="h-12 w-12">
+                        </a>
+                        <a href="">
+                            <img src="./Home.img/shoe3.webp" alt="Image 3" class=" h-12 w-12">
+                        </a>
+                        <a href="./productkingston.html">
+                            <img src="./Home.img/shoe4.webp" alt="Image 4" class="r h-12 w-12">
+                        </a>
+                        <a href="">
+                            <img src="./Home.img/shoe5.webp" alt="Image 5" class=" h-12 w-12">
+                        </a>
                     </div>
                 </div>
 
@@ -174,48 +169,165 @@
 
 
                 <!-- Size section -->
-                <div class="mt-3">
-                    <div class="flex items-baseline gap-3 flex-wrap mb-3">
-                        <p class="text-base text-gray-800 font-medium">Select size:</p>
-                        <span class="text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full">This style runs true to
-                            size.</span>
-                    </div>
 
-                    <!-- Size buttons -->
-                    <div class="flex flex-wrap gap-2 my-4">
+                <div class=" bg-white  ">
+
+                    <!-- Quick Scan Button -->
+                    <button
+                        class=" flex items-center justify-center cursor-pointer gap-2 bg-black text-white font-semibold py-1 px-3 w-60   mb-6">
+                        <span class="text-xl "><img src="./Home.img/foot.png" alt=""></span> Find Your Shoe Size With A
+                        Quick Scan <img src="./Home.img/right.png" alt="">
+                    </button>
+
+                    <!-- Size Selection Header -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center  flex-wrap">
+                            <span class="font-medium text-gray-900">Select size:</span>
+                            <span class="text-sm italic  px-3 py-1 ">This style runs true
+                                to size.</span>
+                        </div>
+                        <a href="#" class="text-sm font-medium text-gray-700 underline hover:text-black">Size Guide</a>
+                    </div>
+                </div>
+
+
+                <!-- Radio + Gray Div Grid (9 columns) -->
+                <div class="grid grid-cols-9 gap-3 justify-items-center">
+                    <!-- Size 7 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size7" name="size" value="7"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
                         <div
-                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
                             7</div>
+                    </div>
+                    <!-- Size 8 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size8" name="size" value="8"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
                         <div
-                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
                             8</div>
+                    </div>
+                    <!-- Size 8.5 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size8.5" name="size" value="8.5"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
                         <div
-                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
+                            8.5</div>
+                    </div>
+                    <!-- Size 9 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size9" name="size" value="9"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
                             9</div>
+                    </div>
+                    <!-- Size 9.5 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size9.5" name="size" value="9.5"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
                         <div
-                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            9.5</div>
+                    </div>
+                    <!-- Size 10 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size10" name="size" value="10"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
                             10</div>
+                    </div>
+                    <!-- Size 10.5 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size10.5" name="size" value="10.5"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
                         <div
-                            class="w-14 h-14 rounded-full border border-gray-300 bg-white text-lg font-semibold text-gray-700 hover:border-gray-500 hover:bg-gray-50 flex items-center justify-center cursor-default transition">
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            10.5</div>
+                    </div>
+                    <!-- Size 11 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size11" name="size" value="11"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
                             11</div>
                     </div>
-
-                    <!-- Size guide -->
-                    <a href="#"
-                        class="text-gray-700 font-medium underline-offset-4 underline text-base inline-flex items-center gap-1 hover:text-black">
-                        📏 Size Guide
-                    </a>
+                    <!-- Size 11.5 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size11.5" name="size" value="11.5"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            11.5</div>
+                    </div>
+                    <!-- Size 12 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size12" name="size" value="12"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            12</div>
+                    </div>
+                    <!-- Size 13 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size13" name="size" value="13"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            13</div>
+                    </div>
+                    <!-- Size 14 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size14" name="size" value="14"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            14</div>
+                    </div>
+                    <!-- Size 15 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size15" name="size" value="15"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            15</div>
+                    </div>
+                    <!-- Size 16 -->
+                    <div class="flex flex-col items-center">
+                        <input type="radio" id="size16" name="size" value="16"
+                            class="w-4 h-4 text-black focus:ring-black mb-1">
+                        <div
+                            class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center ">
+                            16</div>
+                    </div>
                 </div>
 
-                <!-- Divider & extra info -->
-                <hr class="border-t border-gray-200 my-4">
-                <div class="text-sm text-gray-400 flex gap-4">
-                    <span>✔️ Free shipping</span>
-                    <span>✔️ 30-day returns</span>
-                </div>
+                <!-- ADD TO CART Button -->
+                <button class="w-120 mx-auto  cursor-pointer bg-black text-white font-semibold py-3 ">
+                    ADD TO CART
+                </button>
 
-            </div> <!-- end right col -->
-        </div> <!-- end grid -->
+                <!-- Financing Info -->
+                <div class="text-sm text-gray-600 text-center space-y-1">
+                    <p>4 interest-free installments, or from $17.96/mo with <span class="font-medium">shop Pay</span>
+                    </p>
+                    <a href="#" class="text-gray-800 underline underline-offset-2 hover:text-black inline-block">Check
+                        your purchasing power</a>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div> <!-- end right col -->
+    </div> <!-- end grid -->
     </div> <!-- end card -->
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
