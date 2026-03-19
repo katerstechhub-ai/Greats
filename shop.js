@@ -349,7 +349,7 @@ const products = [
     {
         name: "Men's Kingston",
         price: 199.00,
-        productUrl: "./men-s-kingston-taupe.html", // unique URL added
+        productUrl: "./productkingston.html", // unique URL added
         variants: [
             {
                 color: "Taupe", images: [
@@ -363,7 +363,7 @@ const products = [
     {
         name: "Men's Reign",
         price: 199.00,
-        productUrl: "./men-s-reign-ecru.html",
+        productUrl: "#",
         variants: [
             { color: "Ecru", images: ["Home.img/reign-ecru2.jpg"] }
         ]
@@ -371,7 +371,7 @@ const products = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
-        productUrl: "./men-s-royale-knit-2-0-sage.html",
+        productUrl: "#",
         variants: [
             { color: "Sage", images: ["Home.img/RoyateKnitSageM3.jpg"] }
         ]
@@ -379,7 +379,7 @@ const products = [
     {
         name: "Men's Charlie",
         price: 215.00,
-        productUrl: "./men-s-charlie-mineral-sage.html",
+        productUrl: "#",
         variants: [
             { color: "Mineral Sage", images: ["Home.img/p1.webp"] }
         ]
@@ -387,7 +387,7 @@ const products = [
     {
         name: "Men's Charlie",
         price: 169.00,
-        productUrl: "./men-s-charlie-mineral-grey.html",
+        productUrl: "#",
         variants: [
             { color: "Mineral grey", images: ["Home.img/p2.webp"] }
         ]
@@ -395,7 +395,7 @@ const products = [
     {
         name: "Women's Brooklyn",
         price: 189.00,
-        productUrl: "./women-s-brooklyn-baby-blue.html",
+        productUrl: "#",
         variants: [
             { color: "Baby Blue", images: ["Home.img/p3.webp"] }
         ]
@@ -403,7 +403,7 @@ const products = [
     {
         name: "Women's Brooklyn",
         price: 189.00,
-        productUrl: "./women-s-brooklyn-taupe.html",
+        productUrl: "#",
         variants: [
             { color: "Taupe", images: ["Home.img/p4.webp"] }
         ]
@@ -411,7 +411,7 @@ const products = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
-        productUrl: "./men-s-royale-knit-2-0-navy.html",
+        productUrl: "#",
         variants: [
             { color: "Navy", images: ["Home.img/p5.webp"] }
         ]
@@ -419,7 +419,7 @@ const products = [
     {
         name: "Men's Reign Slip On",
         price: 189.00,
-        productUrl: "./men-s-reign-slip-on-navy.html",
+        productUrl: "#",
         variants: [
             { color: "Navy", images: ["Home.img/p6.jpg"] }
         ]
@@ -427,7 +427,7 @@ const products = [
     {
         name: "Women's Charlie",
         price: 215.00,
-        productUrl: "./women-s-charlie-green.html",
+        productUrl: "#",
         variants: [
             { color: "Green", images: ["Home.img/p7.webp"] }
         ]
@@ -435,7 +435,7 @@ const products = [
     {
         name: "Women's Royale 2.0",
         price: 199.00,
-        productUrl: "./women-s-royale-2-0-blanco.html",
+        productUrl: "#",
         variants: [
             { color: "Blanco", images: ["Home.img/p8.webp"] }
         ]
@@ -443,7 +443,7 @@ const products = [
     {
         name: "Men's Reign Slip On",
         price: 189.00,
-        productUrl: "./men-s-reign-slip-on-tan.html",
+        productUrl: "#",
         variants: [
             { color: "Tan", images: ["Home.img/p9.webp"] }
         ]
@@ -451,7 +451,7 @@ const products = [
     {
         name: "Men's Kingston",
         price: 199.00,
-        productUrl: "./productkingston.html", // already had one, kept
+        productUrl: "#", // already had one, kept
         variants: [
             { color: "White", images: ["Home.img/p10.webp"] }
         ]
@@ -459,7 +459,7 @@ const products = [
     {
         name: "Men's Royale 2.0",
         price: 199.00,
-        productUrl: "./men-s-royale-2-0-blanco.html",
+        productUrl: "#",
         variants: [
             { color: "Blanco", images: ["Home.img/p11.webp"] }
         ]
@@ -467,7 +467,7 @@ const products = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
-        productUrl: "./men-s-royale-knit-2-0-grey-white.html",
+        productUrl: "#",
         variants: [
             { color: "Grey White", images: ["Home.img/p12.webp"] }
         ]
@@ -475,7 +475,7 @@ const products = [
     {
         name: "Men's Reign",
         price: 199.00,
-        productUrl: "./men-s-reign-blanco.html",
+        productUrl: "#",
         variants: [
             { color: "Blanco", images: ["Home.img/p13.webp"] }
         ]
@@ -483,7 +483,7 @@ const products = [
     {
         name: "Men's Charlie Distressed",
         price: 215.00,
-        productUrl: "./men-s-charlie-distressed-grey.html",
+        productUrl: "#",
         variants: [
             { color: "Grey", images: ["Home.img/p14.webp"] }
         ]
@@ -491,7 +491,7 @@ const products = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
-        productUrl: "./men-s-royale-knit-2-0-white.html",
+        productUrl: "#",
         variants: [
             { color: "White", images: ["Home.img/p15.webp"] }
         ]
@@ -499,7 +499,7 @@ const products = [
     {
         name: "Men's Reign",
         price: 199.00,
-        productUrl: "./men-s-reign-navy.html",
+        productUrl: "#",
         variants: [
             { color: "Navy", images: ["Home.img/p16.webp"] }
         ]
@@ -507,7 +507,7 @@ const products = [
     {
         name: "Women's Charlie",
         price: 215.00,
-        productUrl: "./women-s-charlie-light-pink.html", // was empty, now filled
+        productUrl: "#", // was empty, now filled
         variants: [
             { color: "Light Pink", images: ["Home.img/p17.webp"] }
         ]
@@ -515,7 +515,7 @@ const products = [
     {
         name: "Women's Charlie",
         price: 215.00,
-        productUrl: "./women-s-charlie-nero.html",
+        productUrl: "#",
         variants: [
             { color: "Nero", images: ["Home.img/p18.webp"] }
         ]
