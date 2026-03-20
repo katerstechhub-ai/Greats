@@ -6,7 +6,7 @@ const product_arr = [
         title: "Crafted for Spring",
         buttonText: "SHOP MEN",
         buttonColor: "hover:bg-white hover:text-black transition",
-        link: ""
+        link: "./shop.html"
     },
     {
         image: "Home.img/shopwomen1.jpg",    // Your image for women's product
@@ -14,7 +14,7 @@ const product_arr = [
         title: "The Brooklyn",
         buttonText: "SHOP WOMEN",
         buttonColor: "hover:bg-white hover:text-black transition",
-        link: ""
+        link: "./shop.html"
     }
 ];
 
@@ -206,6 +206,7 @@ let allMenProducts = [
     {
         name: "Men's Slip On's",
         price: 189.00,
+        url: "./productkingston.html",
         variants: [
             {
                 color: "Navy",
@@ -220,6 +221,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./productkingston.html",
         variants: [
             {
                 color: "Navy",
@@ -235,6 +237,7 @@ let allMenProducts = [
     {
         name: "Men's Reign",
         price: 199.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Ecru", images: ["Home.img/reign-ecru2.jpg"] }
         ]
@@ -242,6 +245,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Sage", images: ["Home.img/RoyateKnitSageM3.jpg"] }
         ]
@@ -249,6 +253,7 @@ let allMenProducts = [
     {
         name: "Men's Charlie",
         price: 215.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Mineral Sage", images: ["Home.img/p1.webp"] }
         ]
@@ -256,6 +261,7 @@ let allMenProducts = [
     {
         name: "Men's Charlie",
         price: 169.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Mineral grey", images: ["Home.img/p2.webp"] }
         ]
@@ -263,6 +269,7 @@ let allMenProducts = [
     {
         name: "Men's Reign Slip On",
         price: 189.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Tan", images: ["Home.img/p9.webp"] }
         ]
@@ -270,7 +277,7 @@ let allMenProducts = [
     {
         name: "Men's Kingston",
         price: 199.00,
-        url: "#",
+        url: "./productkingston.html",
         variants: [
             { color: "White", images: ["Home.img/p10.webp"] }
         ]
@@ -278,6 +285,7 @@ let allMenProducts = [
     {
         name: "Men's Royale 2.0",
         price: 199.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Blanco", images: ["Home.img/p11.webp"] }
         ]
@@ -285,6 +293,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Grey White", images: ["Home.img/p12.webp"] }
         ]
@@ -292,6 +301,7 @@ let allMenProducts = [
     {
         name: "Men's Reign",
         price: 199.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Blanco", images: ["Home.img/p13.webp"] }
         ]
@@ -299,6 +309,7 @@ let allMenProducts = [
     {
         name: "Men's Charlie Distressed",
         price: 215.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Grey", images: ["Home.img/p14.webp"] }
         ]
@@ -306,6 +317,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./productkingston.html",
         variants: [
             { color: "White", images: ["Home.img/p15.webp"] }
         ]
@@ -313,6 +325,7 @@ let allMenProducts = [
     {
         name: "Men's Reign",
         price: 199.00,
+        url: "./productkingston.html",
         variants: [
             { color: "Navy", images: ["Home.img/p16.webp"] }
         ]
@@ -720,13 +733,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
-
-
 const restockItems = [
     {
         image: "Home.img/Group_2458.jpg",
@@ -734,7 +740,7 @@ const restockItems = [
         title: "Missed Them? They're Back",
         buttonText: "SHOP BACK IN",
         buttonColor: "hover:bg-black hover:text-white transition ",
-        link: "",
+        link: "./shop.html",
 
     }
 
@@ -782,7 +788,7 @@ const product_arr2 = [
         title: "New Arrivals",
         buttonText: "SHOP NOW",
         buttonColor: "hover:bg-white hover:text-black transition",
-        link: ""
+        link: "./shop.html"
     },
     {
         image: "Home.img/markdowns.webp",
@@ -790,7 +796,7 @@ const product_arr2 = [
         title: "Markdowns",
         buttonText: "SHOP NOW",
         buttonColor: "hover:bg-white hover:text-black transition",
-        link: ""
+        link: "./shop.html"
     }
 ];
 

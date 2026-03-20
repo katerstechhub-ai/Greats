@@ -97,8 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
 let allMenProducts = [
     // --- 1. Original first product ---
     {
-          name: "Men's Royale Knit 2.0",
+        name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./index.html",
         variants: [
             {
                 color: "Navy",
@@ -114,6 +115,7 @@ let allMenProducts = [
     {
         name: "Men's Slip On's",
         price: 189.00,
+        url: "./index.html",
         variants: [
             {
                 color: "Navy",
@@ -129,7 +131,8 @@ let allMenProducts = [
     {
         name: "Men's Charlie",
         price: 128.97,
-        originalPrice: 215.00,           // only here
+        originalPrice: 215.00,
+        url: "./index.html",          // only here
         variants: [
             {
                 color: "Blanco", images: ["Home.img/blanco2.webp",
@@ -138,12 +141,13 @@ let allMenProducts = [
             }
         ]
     },
-   
-   
+
+
     // --- 5. Men's Reign (Ecru) ---
     {
         name: "Men's Reign",
         price: 199.00,
+        url: "./index.html",
         variants: [
             { color: "Ecru", images: ["Home.img/reign-ecru2.jpg"] }
         ]
@@ -152,6 +156,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./index.html",
         variants: [
             { color: "Sage", images: ["Home.img/RoyateKnitSageM3.jpg"] }
         ]
@@ -160,6 +165,7 @@ let allMenProducts = [
     {
         name: "Men's Charlie",
         price: 215.00,
+        url: "./index.html",
         variants: [
             { color: "Mineral Sage", images: ["Home.img/p1.webp"] }
         ]
@@ -168,6 +174,7 @@ let allMenProducts = [
     {
         name: "Men's Charlie",
         price: 169.00,
+        url: "./index.html",
         variants: [
             { color: "Mineral grey", images: ["Home.img/p2.webp"] }
         ]
@@ -176,6 +183,7 @@ let allMenProducts = [
     {
         name: "Men's Reign Slip On",
         price: 189.00,
+        url: "./index.html",
         variants: [
             { color: "Tan", images: ["Home.img/p9.webp"] }
         ]
@@ -184,7 +192,7 @@ let allMenProducts = [
     {
         name: "Men's Kingston",
         price: 199.00,
-        url: "#",
+        url: "./index.html",
         variants: [
             { color: "White", images: ["Home.img/p10.webp"] }
         ]
@@ -193,6 +201,7 @@ let allMenProducts = [
     {
         name: "Men's Royale 2.0",
         price: 199.00,
+        url: "./index.html",
         variants: [
             { color: "Blanco", images: ["Home.img/p11.webp"] }
         ]
@@ -201,6 +210,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./index.html",
         variants: [
             { color: "Grey White", images: ["Home.img/p12.webp"] }
         ]
@@ -209,6 +219,7 @@ let allMenProducts = [
     {
         name: "Men's Reign",
         price: 199.00,
+        url: "./index.html",
         variants: [
             { color: "Blanco", images: ["Home.img/p13.webp"] }
         ]
@@ -217,6 +228,7 @@ let allMenProducts = [
     {
         name: "Men's Charlie Distressed",
         price: 215.00,
+        url: "./index.html",
         variants: [
             { color: "Grey", images: ["Home.img/p14.webp"] }
         ]
@@ -225,6 +237,7 @@ let allMenProducts = [
     {
         name: "Men's Royale Knit 2.0",
         price: 179.00,
+        url: "./index.html",
         variants: [
             { color: "White", images: ["Home.img/p15.webp"] }
         ]
@@ -233,6 +246,7 @@ let allMenProducts = [
     {
         name: "Men's Reign",
         price: 199.00,
+        url: "./index.html",
         variants: [
             { color: "Navy", images: ["Home.img/p16.webp"] }
         ]
@@ -252,7 +266,7 @@ function renderProducts() {
         const product = allMenProducts[productIndex];
         const variant = product.variants[0];
         const image = variant.images[0];
-        const Url = product.url || './shop.html';
+        const Url = product.url;
 
         let priceHtml = '';
         if (product.originalPrice) {
@@ -269,7 +283,7 @@ function renderProducts() {
         const card = document.createElement('div');
 
         card.innerHTML = `
-            <a href="${Url}" class="block relative">
+            <a href="${product.url}" class="block relative">
                 <img src="${image}" alt="${product.name}" class="w-full h-auto mb-3">
             </a>
             <div class="flex justify-between items-start">
@@ -341,3 +355,171 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+
+let currentStartIndex = 0;
+const itemsPerPage = 3;
+
+function renderProducts() {
+    const container = document.getElementById("product-grid");
+    if (!container) return;
+    container.innerHTML = "";
+
+    for (let i = 0; i < itemsPerPage; i++) {
+        const productIndex = (currentStartIndex + i) % allMenProducts.length;
+        const product = allMenProducts[productIndex];
+        const variant = product.variants[0];
+        const image = variant.images[0];
+
+        let priceHtml = '';
+        if (product.originalPrice) {
+            priceHtml = `
+                <div class="flex items-center gap-2">
+                    <span class="text-gray-500 line-through text-sm">$${product.originalPrice.toFixed(2)}</span>
+                    <span class="text-red-600 font-semibold">$${product.price.toFixed(2)}</span>
+                </div>
+            `;
+        } else {
+            priceHtml = `<span class="text-gray-900 font-semibold">$${product.price.toFixed(2)}</span>`;
+        }
+
+        const card = document.createElement('div');
+        card.innerHTML = `
+            <a href="${product.url}" class="block relative product-link" data-product-index="${productIndex}">
+                <img src="${image}" alt="${product.name}" class="w-full h-auto mb-3">
+            </a>
+            <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-lg">${product.name}</h3>
+                ${priceHtml}
+            </div>
+            <p class="text-gray-600 italic">${variant.color}</p>
+            <div class="flex gap-2 mt-4">
+                <a href=""><img src="./Home.img/shoe1.webp" class="h-8 w-8"></a>
+                <a href=""><img src="./Home.img/shoe3.webp" class="h-8 w-8"></a>
+                <a href="./productkingston.html"><img src="./Home.img/shoe4.webp" class="h-8 w-8"></a>
+                <a href=""><img src="./Home.img/shoe5.webp" class="h-8 w-8"></a>
+            </div>
+        `;
+        container.appendChild(card);
+    }
+
+    attachProductClickListeners();
+}
+
+function attachProductClickListeners() {
+    const productLinks = document.querySelectorAll('.product-link');
+    productLinks.forEach(link => {
+        link.removeEventListener('click', productClickHandler);
+        link.addEventListener('click', productClickHandler);
+    });
+}
+
+function productClickHandler(event) {
+    const productIndex = parseInt(event.currentTarget.getAttribute('data-product-index'));
+    const product = allMenProducts[productIndex];
+    addToRecentlyViewed(product);
+    // link navigation proceeds normally
+}
+
+// ==================== RECENTLY VIEWED LOGIC ====================
+const RECENT_STORAGE_KEY = 'recentlyViewedProducts';
+
+function getStoredRecentlyViewed() {
+    const stored = localStorage.getItem(RECENT_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+}
+
+function saveRecentlyViewed(items) {
+    localStorage.setItem(RECENT_STORAGE_KEY, JSON.stringify(items));
+}
+
+function addToRecentlyViewed(product) {
+    let recent = getStoredRecentlyViewed();
+    const variant = product.variants[0];
+    const viewedItem = {
+        name: product.name,
+        price: product.price,
+        color: variant.color,
+        images: variant.images,
+        currentIndex: 0,
+        productUrl: product.url || "#"
+    };
+    recent = recent.filter(item => !(item.name === viewedItem.name && item.color === viewedItem.color));
+    recent.unshift(viewedItem);
+    recent = recent.slice(0, 3);
+    saveRecentlyViewed(recent);
+    renderRecentlyViewed();
+}
+
+function renderRecentlyViewed() {
+    const grid = document.getElementById('recently-viewed-grid');
+    if (!grid) return;
+    const recent = getStoredRecentlyViewed();
+
+    if (recent.length === 0) {
+        grid.innerHTML = '<p class="text-gray-500 col-span-3">No recently viewed items.</p>';
+        return;
+    }
+
+    grid.innerHTML = '';
+    recent.forEach(item => {
+        const currentImage = item.images[item.currentIndex];
+        const card = document.createElement('div');
+        card.className = 'bg-white overflow-hidden transition ';
+        card.innerHTML = `
+            <a href="${item.productUrl}">
+                <img src="${currentImage}" alt="${item.name} - ${item.color}" class="w-full h-auto object-cover">
+            </a>
+            <div class="p-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-semibold text-gray-800">${item.name}</h3>
+                    <p class="text-[15px] text-gray-900">$${item.price.toFixed(2)}</p>
+                </div>
+                <p class="text-sm text-gray-600 italic">${item.color}</p>
+            </div>
+             <div class="flex gap-2 ">
+                <a href="">
+                    <img src="./Home.img/shoe1.webp" alt="Image 1" class="h-8 w-8">
+                </a>
+                <a href="">
+                    <img src="./Home.img/shoe3.webp" alt="Image 3" class="h-8 w-8">
+                </a>
+                <a href="./productkingston.html">
+                    <img src="./Home.img/shoe4.webp" alt="Image 4" class="h-8 w-8">
+                </a>
+                <a href="">
+                    <img src="./Home.img/shoe5.webp" alt="Image 5" class="h-8 w-8">
+                </a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// ==================== PAGINATION & INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', function () {
+    renderProducts();
+
+    const filterLink = document.getElementById('filterLink');
+    const gridToggleLink = document.getElementById('gridToggleLink');
+
+    if (filterLink) {
+        filterLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            currentStartIndex = (currentStartIndex - 1 + allMenProducts.length) % allMenProducts.length;
+            renderProducts();
+        });
+    }
+
+    if (gridToggleLink) {
+        gridToggleLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            currentStartIndex = (currentStartIndex + 1) % allMenProducts.length;
+            renderProducts();
+        });
+    }
+
+    renderRecentlyViewed();
+});
+
