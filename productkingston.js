@@ -525,33 +525,253 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// ========== CART MODAL LOGIC ==========
-const modal = document.getElementById('cartModal');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const continueShoppingBtn = document.getElementById('continueShoppingBtn');
-const checkoutBtn = document.getElementById('checkoutBtn');
+// // ========== CART MODAL LOGIC ==========
+// const modal = document.getElementById('cartModal');
+// const closeModalBtn = document.getElementById('closeModalBtn');
+// const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+// const checkoutBtn = document.getElementById('checkoutBtn');
 
-const decrementBtn = document.getElementById('decrementQty');
-const incrementBtn = document.getElementById('incrementQty');
-const quantitySpan = document.getElementById('modalQuantity');
+// const decrementBtn = document.getElementById('decrementQty');
+// const incrementBtn = document.getElementById('incrementQty');
+// const quantitySpan = document.getElementById('modalQuantity');
+// const subtotalSpan = document.getElementById('modalSubtotal');
+// const installmentSpan = document.getElementById('installmentAmount');
+// const itemPriceSpan = document.getElementById('modalItemPrice');
+
+// let currentQuantity = 1;
+// let currentProductPrice = 199.00; // from the product page
+
+// // Open modal (slide in)
+// function openModal() {
+//     modal.classList.remove('hidden');
+//     // Small delay to allow CSS transition
+//     setTimeout(() => {
+//         modal.classList.remove('translate-x-full');
+//         modal.classList.add('translate-x-0');
+//     }, 10);
+// }
+
+// // Close modal (slide out)
+// function closeModal() {
+//     modal.classList.remove('translate-x-0');
+//     modal.classList.add('translate-x-full');
+//     setTimeout(() => {
+//         modal.classList.add('hidden');
+//     }, 300);
+// }
+
+// // Update subtotal and installment amounts
+// function updateSubtotal() {
+//     const subtotal = currentQuantity * currentProductPrice;
+//     subtotalSpan.innerText = `$${subtotal.toFixed(2)}`;
+//     const installment = subtotal / 4;
+//     installmentSpan.innerText = `$${installment.toFixed(2)}`;
+// }
+
+// // Update quantity display and recalc
+// function updateQuantity(delta) {
+//     const newQty = currentQuantity + delta;
+//     if (newQty >= 1 && newQty <= 99) {
+//         currentQuantity = newQty;
+//         quantitySpan.innerText = currentQuantity;
+//         updateSubtotal();
+//     }
+// }
+
+// // Populate modal with product data and selected size
+// function populateModal(size) {
+//     // Product details (you can fetch these dynamically if needed)
+//     document.getElementById('modalProductName').innerText = 'THE KINGSTON';
+//     document.getElementById('modalProductColor').innerText = 'Taupe';
+//     document.getElementById('modalSelectedSize').innerText = size;
+//     document.getElementById('modalProductImage').src = 'Home.img/KING01SG-GLB_1.webp'; // main image
+//     itemPriceSpan.innerText = `$${currentProductPrice.toFixed(2)}`;
+
+//     // Reset quantity
+//     currentQuantity = 1;
+//     quantitySpan.innerText = currentQuantity;
+//     updateSubtotal();
+// }
+
+// // Get selected size from radio buttons
+// function getSelectedSize() {
+//     const selected = document.querySelector('input[name="size"]:checked');
+//     return selected ? selected.value : null;
+// }
+
+// // Add-to-cart button click handler
+// const addToCartBtn = document.getElementById('add-to-cart-btn');
+// if (addToCartBtn) {
+//     addToCartBtn.addEventListener('click', function () {
+//         const selectedSize = getSelectedSize();
+//         if (!selectedSize) {
+
+//             return;
+//         }
+//         populateModal(selectedSize);
+//         openModal();
+//     });
+// }
+// // Quantity controls
+// if (decrementBtn) decrementBtn.addEventListener('click', () => updateQuantity(-1));
+// if (incrementBtn) incrementBtn.addEventListener('click', () => updateQuantity(1));
+
+// // Close modal events
+// if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+// if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeModal);
+
+// const cancelBtn = document.getElementById('cancel');
+// if (cancelBtn) {
+//     cancelBtn.addEventListener('click', closeModal);
+// }
+
+// // Checkout button – redirect to your checkout page
+// if (checkoutBtn) {
+//     checkoutBtn.addEventListener('click', () => {
+//         window.location.href = './index.html'; // Change to your actual checkout URL
+//     });
+// };
+// // Open modal when the cart icon is clicked
+// const cartIcon = document.getElementById('cart');
+// if (cartIcon) {
+//     cartIcon.addEventListener('click', function (e) {
+//         e.preventDefault();   // Prevent default anchor behavior
+//         openModal();          // Assumes you already have openModal() defined
+//     });
+// }
+
+
+
+
+// ========== CART MODAL LOGIC (with localStorage) ==========
+
+// ----- DOM elements -----
+const modal = document.getElementById('cartModal');
+const cartItemsContainer = document.getElementById('cartItemsContainer');
 const subtotalSpan = document.getElementById('modalSubtotal');
 const installmentSpan = document.getElementById('installmentAmount');
-const itemPriceSpan = document.getElementById('modalItemPrice');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+const cancelBtn = document.getElementById('cancel');
+const cartIcon = document.getElementById('cart');
 
-let currentQuantity = 1;
-let currentProductPrice = 199.00; // from the product page
+// ----- Cart data -----
+let cart = [];
 
-// Open modal (slide in)
+// Load cart from localStorage on page load
+function loadCart() {
+    const saved = localStorage.getItem('shoppingCart');
+    if (saved) {
+        cart = JSON.parse(saved);
+    } else {
+        cart = [];
+    }
+    renderCart();
+}
+
+// Save cart to localStorage
+function saveCart() {
+    localStorage.setItem('shoppingCart', JSON.stringify(cart));
+    renderCart();       // re‑render after any change
+}
+
+// Add a product to the cart
+function addToCart(product) {
+    // Check if the same product (by id + size) already exists
+    const existingIndex = cart.findIndex(item =>
+        item.id === product.id && item.size === product.size
+    );
+
+    if (existingIndex !== -1) {
+        // If exists, increase quantity
+        cart[existingIndex].quantity += product.quantity;
+    } else {
+        // Otherwise add new item
+        cart.push(product);
+    }
+    saveCart();
+}
+
+// Remove an item from the cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+}
+
+// Update quantity of an item
+function updateQuantity(index, newQty) {
+    if (newQty < 1) return;
+    cart[index].quantity = newQty;
+    saveCart();
+}
+
+// Calculate subtotal from cart
+function calculateSubtotal() {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+// Update the footer subtotal and installment amounts
+function updateTotals() {
+    const subtotal = calculateSubtotal();
+    subtotalSpan.innerText = `$${ subtotal.toFixed(2) }`;
+    const installment = subtotal / 4;
+    installmentSpan.innerText = `$${ installment.toFixed(2) }`;
+}
+
+// Render all cart items inside #cartItemsContainer
+function renderCart() {
+    if (!cartItemsContainer) return;
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+                Your cart is empty.
+            </div>
+        `;
+        updateTotals();
+        return;
+    }
+
+    let html = '';
+    cart.forEach((item, idx) => {
+        html += `
+            <div class="flex gap-4 mb-6 p-3 border-b" data-cart-index="${idx}">
+                <img src="${item.image}" alt="${item.name}" class="w-25 h-25 object-cover">
+                <div class="flex-1">
+                <div class="flex justify-between">
+                    <h3 class="font-semibold text-gray- 900">${item.name}</h3>
+                    <button class="remove-item text-black rounded-full bg-gray-200 w-5 h-5 text-sm ml-4">X</button>
+                    </div>
+                    <p class="text-sm text-gray-600">${item.color}</p>
+                    <p class="text-sm text-gray-600 mt-1">
+                        <span class="font-medium">Size:</span> ${item.size}
+                    </p>
+                    <div class="flex items-center justify-between mt-2">
+                        <div class="flex items-center border">
+                            <button class="qty-decrement px-3 py-1 border-r text-gray-600 hover:bg-gray-100">-</button>
+                            <span class="qty-value px-3 py-1 text-gray-900">${item.quantity}</span>
+                            <button class="qty-increment px-3 py-1 border-l text-gray-600 hover:bg-gray-100">+</button>
+                        </div>
+                        <span class="font-semibold text-gray-900">$${item.price.toFixed(2)}</span>
+                        
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    cartItemsContainer.innerHTML = html;
+    updateTotals();
+}
+
+// ----- Modal open / close -----
 function openModal() {
     modal.classList.remove('hidden');
-    // Small delay to allow CSS transition
     setTimeout(() => {
         modal.classList.remove('translate-x-full');
         modal.classList.add('translate-x-0');
     }, 10);
 }
 
-// Close modal (slide out)
 function closeModal() {
     modal.classList.remove('translate-x-0');
     modal.classList.add('translate-x-full');
@@ -560,82 +780,74 @@ function closeModal() {
     }, 300);
 }
 
-// Update subtotal and installment amounts
-function updateSubtotal() {
-    const subtotal = currentQuantity * currentProductPrice;
-    subtotalSpan.innerText = `$${subtotal.toFixed(2)}`;
-    const installment = subtotal / 4;
-    installmentSpan.innerText = `$${installment.toFixed(2)}`;
-}
-
-// Update quantity display and recalc
-function updateQuantity(delta) {
-    const newQty = currentQuantity + delta;
-    if (newQty >= 1 && newQty <= 99) {
-        currentQuantity = newQty;
-        quantitySpan.innerText = currentQuantity;
-        updateSubtotal();
-    }
-}
-
-// Populate modal with product data and selected size
-function populateModal(size) {
-    // Product details (you can fetch these dynamically if needed)
-    document.getElementById('modalProductName').innerText = 'THE KINGSTON';
-    document.getElementById('modalProductColor').innerText = 'Taupe';
-    document.getElementById('modalSelectedSize').innerText = size;
-    document.getElementById('modalProductImage').src = 'Home.img/KING01SG-GLB_1.webp'; // main image
-    itemPriceSpan.innerText = `$${currentProductPrice.toFixed(2)}`;
-
-    // Reset quantity
-    currentQuantity = 1;
-    quantitySpan.innerText = currentQuantity;
-    updateSubtotal();
-}
-
-// Get selected size from radio buttons
+// ----- Helper: get selected size from radio buttons -----
 function getSelectedSize() {
     const selected = document.querySelector('input[name="size"]:checked');
     return selected ? selected.value : null;
 }
 
-// Add-to-cart button click handler
+// ----- Add‑to‑cart button handler -----
 const addToCartBtn = document.getElementById('add-to-cart-btn');
 if (addToCartBtn) {
-    addToCartBtn.addEventListener('click', function () {
+    addToCartBtn.addEventListener('click', () => {
         const selectedSize = getSelectedSize();
         if (!selectedSize) {
-
             return;
         }
-        populateModal(selectedSize);
+
+        // --- Collect product details (customize these for your product page) ---
+        const product = {
+            id: 'kingston',                 // unique identifier for this product
+            name: 'THE KINGSTON',
+            color: 'Taupe',
+            size: selectedSize,
+            price: 199.00,                  // hardcoded as in your original code
+            image: 'Home.img/KING01SG-GLB_1.webp',
+            quantity: 1
+        };
+        // --- End of product details ---
+
+        addToCart(product);
         openModal();
     });
 }
-// Quantity controls
-if (decrementBtn) decrementBtn.addEventListener('click', () => updateQuantity(-1));
-if (incrementBtn) incrementBtn.addEventListener('click', () => updateQuantity(1));
 
-// Close modal events
-if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+// ----- Event delegation for cart item actions (quantity, remove) -----
+cartItemsContainer.addEventListener('click', (e) => {
+    const target = e.target;
+    const itemDiv = target.closest('[data-cart-index]');
+    if (!itemDiv) return;
+
+    const index = parseInt(itemDiv.dataset.cartIndex, 10);
+
+    if (target.classList.contains('qty-decrement')) {
+        const newQty = cart[index].quantity - 1;
+        if (newQty >= 1) updateQuantity(index, newQty);
+    } else if (target.classList.contains('qty-increment')) {
+        updateQuantity(index, cart[index].quantity + 1);
+    } else if (target.classList.contains('remove-item')) {
+        removeFromCart(index);
+    }
+});
+
+// ----- Close modal events -----
+if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeModal);
 
-const cancelBtn = document.getElementById('cancel');
-if (cancelBtn) {
-    cancelBtn.addEventListener('click', closeModal);
-}
-
-// Checkout button – redirect to your checkout page
+// ----- Checkout redirect -----
 if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
-        window.location.href = './index.html'; // Change to your actual checkout URL
-    });
-};
-// Open modal when the cart icon is clicked
-const cartIcon = document.getElementById('cart');
-if (cartIcon) {
-    cartIcon.addEventListener('click', function (e) {
-        e.preventDefault();   // Prevent default anchor behavior
-        openModal();          // Assumes you already have openModal() defined
+        window.location.href = './index.html';  // change to your actual checkout page
     });
 }
+
+// ----- Open modal when cart icon is clicked -----
+if (cartIcon) {
+    cartIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+    });
+}
+
+// ----- Initialise cart on page load -----
+loadCart();

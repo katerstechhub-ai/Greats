@@ -718,9 +718,9 @@
                 <p class="text-sm mb-3 mt-3 ml-10">You have unlocked free shipping!</p>
                 <div class="w-100 mx-auto h-2 bg-black mb-6 rounded-full"></div>
             </div>
-            <!-- Scrollable Content Area -->
+
             <div class="flex-1  overflow-y-auto ">
-                <!-- Product item -->
+<!-- 
                 <div class="flex gap-4 mb-6">
                     <img id="modalProductImage" src="" alt="Product" class="w-25 h-25 p-3 object-cover ">
                     <div class="flex-1">
@@ -741,10 +741,14 @@
                             <span id="modalItemPrice" class="font-semibold text-gray-900"></span>
                         </div>
                     </div>
+                </div> -->
+
+                <div class="flex-1 overflow-y-auto">
+                    <div id="cartItemsContainer"></div>
                 </div>
 
                 <!-- Build Your Bundle Section -->
-                <div class="border-t p-3 pt-4 mb-4">
+                <div class=" p-3 pt-4 mb-4">
                     <p class="text-xl font-medium text-gray-900 mb-3">BUILD YOUR BUNDLE</p>
                     <div class="space-y-3">
                         <!-- Bundle Item 1 -->
@@ -754,7 +758,8 @@
                                 <p class="text-sm font-medium text-gray-900">No Show Sock - Blanco</p>
                                 <p class="text-sm text-black">$12.00</p>
                             </div>
-                            <button class="px-3 py-1 text-xs font-medium text-black cursor-pointer border border-gray-300 ">
+                            <button
+                                class="px-3 py-1 text-xs font-medium text-black cursor-pointer border border-gray-300 ">
                                 ADD
                             </button>
                         </div>
@@ -777,32 +782,34 @@
                                 <p class="text-sm font-medium text-gray-900">GREATS Premium Waxed Laces - Blanco</p>
                                 <p class="text-sm text-black">$10.00</p>
                             </div>
-                            <button class="px-3 py-1 text-xs font-medium cursor-pointer text-black border border-gray-300 ">
+                            <button
+                                class="px-3 py-1 text-xs font-medium cursor-pointer text-black border border-gray-300 ">
                                 ADD
                             </button>
                         </div>
                     </div>
                 </div>
 
-            <!-- Fixed Footer -->
-            <div class="border-t p-4 sticky bottom-0   bg-gray-100">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-xl font-semibold">SUBTOTAL</span>
-                    <span id="modalSubtotal" class="text-lg font-bold">$199.00</span>
+                <!-- Fixed Footer -->
+                <div class="border-t p-4 sticky bottom-0   bg-gray-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xl font-semibold">SUBTOTAL</span>
+                        <span id="modalSubtotal" class="text-lg font-bold">$199.00</span>
+                    </div>
+                    <p class="text-xs text-black ml-25 mb-3">
+                        or 4 interest-free installments of <span id="installmentAmount">$49.75</span> with Shop Pay
+                    </p>
+                    <button id="checkoutBtn"
+                        class="w-full bg-black text-white py-3 rounded font-medium hover:bg-gray-800 transition">
+                        CHECKOUT
+                    </button>
+                    <button id="continueShoppingBtn"
+                        class="w-full mt-3 text-center text-sm text-gray-600 hover:text-black">
+                        Continue Shopping
+                    </button>
                 </div>
-                <p class="text-xs text-black ml-25 mb-3">
-                    or 4 interest-free installments of <span id="installmentAmount">$49.75</span> with Shop Pay
-                </p>
-                <button id="checkoutBtn"
-                    class="w-full bg-black text-white py-3 rounded font-medium hover:bg-gray-800 transition">
-                    CHECKOUT
-                </button>
-                <button id="continueShoppingBtn" class="w-full mt-3 text-center text-sm text-gray-600 hover:text-black">
-                    Continue Shopping
-                </button>
             </div>
         </div>
-    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 <script src="./productkingston.js"></script>
