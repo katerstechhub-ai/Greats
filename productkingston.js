@@ -253,108 +253,108 @@ let allMenProducts = [
     }
 ];
 
-let startIndex = 0;
-const productsPerPage = 3;
+// let startIndex = 0;
+// const productsPerPage = 3;
 
-function renderProducts() {
-    const container = document.getElementById("product-grid");
-    if (!container) return;
-    container.innerHTML = "";
+// function renderProducts() {
+//     const container = document.getElementById("product-grid");
+//     if (!container) return;
+//     container.innerHTML = "";
 
-    for (let i = 0; i < productsPerPage; i++) {
-        const productIndex = (startIndex + i) % allMenProducts.length;
-        const product = allMenProducts[productIndex];
-        const variant = product.variants[0];
-        const image = variant.images[0];
-        const Url = product.url;
+//     for (let i = 0; i < productsPerPage; i++) {
+//         const productIndex = (startIndex + i) % allMenProducts.length;
+//         const product = allMenProducts[productIndex];
+//         const variant = product.variants[0];
+//         const image = variant.images[0];
+//         const Url = product.url;
 
-        let priceHtml = '';
-        if (product.originalPrice) {
-            priceHtml = `
-                <div class="flex items-center gap-2">
-                    <span class="text-gray-500 line-through text-sm">$${product.originalPrice.toFixed(2)}</span>
-                    <span class="text-red-600 font-semibold">$${product.price.toFixed(2)}</span>
-                </div>
-            `;
-        } else {
-            priceHtml = `<span class="text-gray-900 font-semibold">$${product.price.toFixed(2)}</span>`;
-        }
+//         let priceHtml = '';
+//         if (product.originalPrice) {
+//             priceHtml = `
+//                 <div class="flex items-center gap-2">
+//                     <span class="text-gray-500 line-through text-sm">$${product.originalPrice.toFixed(2)}</span>
+//                     <span class="text-red-600 font-semibold">$${product.price.toFixed(2)}</span>
+//                 </div>
+//             `;
+//         } else {
+//             priceHtml = `<span class="text-gray-900 font-semibold">$${product.price.toFixed(2)}</span>`;
+//         }
 
-        const card = document.createElement('div');
+//         const card = document.createElement('div');
 
-        card.innerHTML = `
-            <a href="${product.url}" class="block relative">
-                <img src="${image}" alt="${product.name}" class="w-full h-auto mb-3">
-            </a>
-            <div class="flex justify-between items-start">
-                <h3 class="font-semibold text-lg">${product.name}</h3>
-                ${priceHtml}
-            </div>
-            <p class="text-gray-600 italic">${variant.color}</p>
-            <div class="flex gap-2 mt-4">
-                <a href=""><img src="./Home.img/shoe1.webp" class="h-8 w-8"></a>
-                <a href=""><img src="./Home.img/shoe3.webp" class="h-8 w-8"></a>
-                <a href="./productkingston.html"><img src="./Home.img/shoe4.webp" class="h-8 w-8"></a>
-                <a href=""><img src="./Home.img/shoe5.webp" class="h-8 w-8"></a>
-            </div>
-        `;
-        container.appendChild(card);
-    }
-}
+//         card.innerHTML = `
+//             <a href="${product.url}" class="block relative">
+//                 <img src="${image}" alt="${product.name}" class="w-full h-auto mb-3">
+//             </a>
+//             <div class="flex justify-between items-start">
+//                 <h3 class="font-semibold text-lg">${product.name}</h3>
+//                 ${priceHtml}
+//             </div>
+//             <p class="text-gray-600 italic">${variant.color}</p>
+//             <div class="flex gap-2 mt-4">
+//                 <a href=""><img src="./Home.img/shoe1.webp" class="h-8 w-8"></a>
+//                 <a href=""><img src="./Home.img/shoe3.webp" class="h-8 w-8"></a>
+//                 <a href="./productkingston.html"><img src="./Home.img/shoe4.webp" class="h-8 w-8"></a>
+//                 <a href=""><img src="./Home.img/shoe5.webp" class="h-8 w-8"></a>
+//             </div>
+//         `;
+//         container.appendChild(card);
+//     }
+// }
 
-document.addEventListener('DOMContentLoaded', function () {
-    renderProducts();
+// document.addEventListener('DOMContentLoaded', function () {
+//     renderProducts();
 
-    const filterLink = document.getElementById('filterLink');
-    const gridToggleLink = document.getElementById('gridToggleLink');
+//     const filterLink = document.getElementById('filterLink');
+//     const gridToggleLink = document.getElementById('gridToggleLink');
 
-    if (filterLink) {
-        filterLink.addEventListener('click', function (event) {
-            event.preventDefault();
-            startIndex = (startIndex - 1 + allMenProducts.length) % allMenProducts.length;
-            renderProducts();
-        });
-    }
+//     if (filterLink) {
+//         filterLink.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             startIndex = (startIndex - 1 + allMenProducts.length) % allMenProducts.length;
+//             renderProducts();
+//         });
+//     }
 
-    if (gridToggleLink) {
-        gridToggleLink.addEventListener('click', function (event) {
-            event.preventDefault();
-            startIndex = (startIndex + 1) % allMenProducts.length;
-            renderProducts();
-        });
-    }
-});
+//     if (gridToggleLink) {
+//         gridToggleLink.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             startIndex = (startIndex + 1) % allMenProducts.length;
+//             renderProducts();
+//         });
+//     }
+// });
 
 
 
-// Wait for DOM to be ready before attaching event listeners
-document.addEventListener('DOMContentLoaded', function () {
-    // Initial render
-    renderProducts();
+// // Wait for DOM to be ready before attaching event listeners
+// document.addEventListener('DOMContentLoaded', function () {
+//     // Initial render
+//     renderProducts();
 
-    const filterLink = document.getElementById('filterLink');
-    const gridToggleLink = document.getElementById('gridToggleLink');
+//     const filterLink = document.getElementById('filterLink');
+//     const gridToggleLink = document.getElementById('gridToggleLink');
 
-    // Filter icon – show previous set of 3 products
-    if (filterLink) {
-        filterLink.addEventListener('click', function (event) {
-            event.preventDefault();
-            // Move startIndex backward by 1 (wrap around)
-            startIndex = (startIndex - 1 + allMenProducts.length) % allMenProducts.length;
-            renderProducts();
-        });
-    }
+//     // Filter icon – show previous set of 3 products
+//     if (filterLink) {
+//         filterLink.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             // Move startIndex backward by 1 (wrap around)
+//             startIndex = (startIndex - 1 + allMenProducts.length) % allMenProducts.length;
+//             renderProducts();
+//         });
+//     }
 
-    // Grid toggle icon – show next set of 3 products
-    if (gridToggleLink) {
-        gridToggleLink.addEventListener('click', function (event) {
-            event.preventDefault();
-            // Move startIndex forward by 1 (wrap around)
-            startIndex = (startIndex + 1) % allMenProducts.length;
-            renderProducts();
-        });
-    }
-});
+//     // Grid toggle icon – show next set of 3 products
+//     if (gridToggleLink) {
+//         gridToggleLink.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             // Move startIndex forward by 1 (wrap around)
+//             startIndex = (startIndex + 1) % allMenProducts.length;
+//             renderProducts();
+//         });
+//     }
+// });
 
 
 
@@ -523,3 +523,119 @@ document.addEventListener('DOMContentLoaded', function () {
     renderRecentlyViewed();
 });
 
+
+
+// ========== CART MODAL LOGIC ==========
+const modal = document.getElementById('cartModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+const checkoutBtn = document.getElementById('checkoutBtn');
+
+const decrementBtn = document.getElementById('decrementQty');
+const incrementBtn = document.getElementById('incrementQty');
+const quantitySpan = document.getElementById('modalQuantity');
+const subtotalSpan = document.getElementById('modalSubtotal');
+const installmentSpan = document.getElementById('installmentAmount');
+const itemPriceSpan = document.getElementById('modalItemPrice');
+
+let currentQuantity = 1;
+let currentProductPrice = 199.00; // from the product page
+
+// Open modal (slide in)
+function openModal() {
+    modal.classList.remove('hidden');
+    // Small delay to allow CSS transition
+    setTimeout(() => {
+        modal.classList.remove('translate-x-full');
+        modal.classList.add('translate-x-0');
+    }, 10);
+}
+
+// Close modal (slide out)
+function closeModal() {
+    modal.classList.remove('translate-x-0');
+    modal.classList.add('translate-x-full');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
+}
+
+// Update subtotal and installment amounts
+function updateSubtotal() {
+    const subtotal = currentQuantity * currentProductPrice;
+    subtotalSpan.innerText = `$${subtotal.toFixed(2)}`;
+    const installment = subtotal / 4;
+    installmentSpan.innerText = `$${installment.toFixed(2)}`;
+}
+
+// Update quantity display and recalc
+function updateQuantity(delta) {
+    const newQty = currentQuantity + delta;
+    if (newQty >= 1 && newQty <= 99) {
+        currentQuantity = newQty;
+        quantitySpan.innerText = currentQuantity;
+        updateSubtotal();
+    }
+}
+
+// Populate modal with product data and selected size
+function populateModal(size) {
+    // Product details (you can fetch these dynamically if needed)
+    document.getElementById('modalProductName').innerText = 'THE KINGSTON';
+    document.getElementById('modalProductColor').innerText = 'Taupe';
+    document.getElementById('modalSelectedSize').innerText = size;
+    document.getElementById('modalProductImage').src = 'Home.img/KING01SG-GLB_1.webp'; // main image
+    itemPriceSpan.innerText = `$${currentProductPrice.toFixed(2)}`;
+
+    // Reset quantity
+    currentQuantity = 1;
+    quantitySpan.innerText = currentQuantity;
+    updateSubtotal();
+}
+
+// Get selected size from radio buttons
+function getSelectedSize() {
+    const selected = document.querySelector('input[name="size"]:checked');
+    return selected ? selected.value : null;
+}
+
+// Add-to-cart button click handler
+const addToCartBtn = document.getElementById('add-to-cart-btn');
+if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', function () {
+        const selectedSize = getSelectedSize();
+        if (!selectedSize) {
+
+            return;
+        }
+        populateModal(selectedSize);
+        openModal();
+    });
+}
+// Quantity controls
+if (decrementBtn) decrementBtn.addEventListener('click', () => updateQuantity(-1));
+if (incrementBtn) incrementBtn.addEventListener('click', () => updateQuantity(1));
+
+// Close modal events
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+if (continueShoppingBtn) continueShoppingBtn.addEventListener('click', closeModal);
+
+const cancelBtn = document.getElementById('cancel');
+if (cancelBtn) {
+    cancelBtn.addEventListener('click', closeModal);
+}
+
+// Checkout button – redirect to your checkout page
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+        window.location.href = './index.html'; // Change to your actual checkout URL
+    });
+};
+// Open modal when the cart icon is clicked
+const cartIcon = document.getElementById('cart');
+if (cartIcon) {
+    cartIcon.addEventListener('click', function (e) {
+        e.preventDefault();   // Prevent default anchor behavior
+        openModal();          // Assumes you already have openModal() defined
+    });
+}

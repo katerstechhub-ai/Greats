@@ -52,7 +52,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-8 py-4">
                 <a href="./index.html">
-                <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
+                    <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
                 </a>
                 <nav>
                     <ul class="flex items-center space-x-8">
@@ -70,7 +70,7 @@
                     <a href="#" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/user.png" alt="User" class="w-5 h-5">
                     </a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900">
+                    <a href="#" id="cart" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/market.png" alt="Shopping bag" class="w-5 h-5">
                     </a>
                 </div>
@@ -703,6 +703,106 @@
             </div>
         </div>
     </footer>
+
+
+    <!-- Right Side Drawer (No Overlay) -->
+    <div id="cartModal"
+        class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 ease-in-out translate-x-full z-50 hidden">
+        <div class="flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-center justify-between bg-black p-4 border-b">
+                <h2 class="text-[22px] font-serif text-white">CART</h2>
+                <button id="cancel" class="text-black rounded-full bg-white cursor-pointer w-6">X</button>
+            </div>
+            <div class="border-b border-gray-400">
+                <p class="text-sm mb-3 mt-3 ml-10">You have unlocked free shipping!</p>
+                <div class="w-100 mx-auto h-2 bg-black mb-6 rounded-full"></div>
+            </div>
+            <!-- Scrollable Content Area -->
+            <div class="flex-1  overflow-y-auto ">
+                <!-- Product item -->
+                <div class="flex gap-4 mb-6">
+                    <img id="modalProductImage" src="" alt="Product" class="w-25 h-25 p-3 object-cover ">
+                    <div class="flex-1">
+                        <h3 id="modalProductName" class="font-semibold text-gray-900"></h3>
+                        <p id="modalProductColor" class="text-sm text-gray-600"></p>
+                        <p class="text-sm text-gray-600 mt-1">
+                            <span class="font-medium">Taupe | Size:</span> <span id="modalSelectedSize"
+                                class="text-sm"></span>
+                        </p>
+                        <div class="flex items-center justify-between mt-2">
+                            <div class="flex items-center border ">
+                                <button id="decrementQty"
+                                    class="px-3 py-1 border-r text-gray-600 hover:bg-gray-100">-</button>
+                                <span id="modalQuantity" class="px-3 py-1 text-gray-900">1</span>
+                                <button id="incrementQty"
+                                    class="px-3 py-1 border-l text-gray-600 hover:bg-gray-100">+</button>
+                            </div>
+                            <span id="modalItemPrice" class="font-semibold text-gray-900"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Build Your Bundle Section -->
+                <div class="border-t p-3 pt-4 mb-4">
+                    <p class="text-xl font-medium text-gray-900 mb-3">BUILD YOUR BUNDLE</p>
+                    <div class="space-y-3">
+                        <!-- Bundle Item 1 -->
+                        <div class="flex items-center p-3 gap-3">
+                            <img src="./Home.img/cart1.webp" alt="No Show Sock" class="w-18 h-18 object-cover rounded">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">No Show Sock - Blanco</p>
+                                <p class="text-sm text-black">$12.00</p>
+                            </div>
+                            <button class="px-3 py-1 text-xs font-medium text-black cursor-pointer border border-gray-300 ">
+                                ADD
+                            </button>
+                        </div>
+                        <!-- Bundle Item 2 -->
+                        <div class="flex items-center p-3 gap-3">
+                            <img src="./Home.img/cart2.webp" alt="Suede Eraser" class="w-18 h-18 object-cover rounded">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">Suede Eraser</p>
+                                <p class="text-sm text-black">$9.00</p>
+                            </div>
+                            <button class="px-3 py-1 text-xs font-medium cursor-pointer border border-gray-300  ">
+                                ADD
+                            </button>
+                        </div>
+                        <!-- Bundle Item 3 -->
+                        <div class="flex items-center p-3 gap-3">
+                            <img src="./Home.img/cart3.webp" alt="GREATS Premium Waxed Laces"
+                                class="w-18 h-18 object-cover rounded">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">GREATS Premium Waxed Laces - Blanco</p>
+                                <p class="text-sm text-black">$10.00</p>
+                            </div>
+                            <button class="px-3 py-1 text-xs font-medium cursor-pointer text-black border border-gray-300 ">
+                                ADD
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Fixed Footer -->
+            <div class="border-t p-4 sticky bottom-0   bg-gray-100">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-semibold">SUBTOTAL</span>
+                    <span id="modalSubtotal" class="text-lg font-bold">$199.00</span>
+                </div>
+                <p class="text-xs text-black ml-25 mb-3">
+                    or 4 interest-free installments of <span id="installmentAmount">$49.75</span> with Shop Pay
+                </p>
+                <button id="checkoutBtn"
+                    class="w-full bg-black text-white py-3 rounded font-medium hover:bg-gray-800 transition">
+                    CHECKOUT
+                </button>
+                <button id="continueShoppingBtn" class="w-full mt-3 text-center text-sm text-gray-600 hover:text-black">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
 <script src="./productkingston.js"></script>
