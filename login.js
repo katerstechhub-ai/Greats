@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const signupBtn = document.getElementById('signupBtn');
     const newsletterForm = document.getElementById('newsletterForm');
     const successMessage = document.getElementById('successMessage');
-    const errorMessage = document.getElementById('errorMessage');
+    const errorMessage = document.getElementById('errorMessage2');
 
     // Regular expression for basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
