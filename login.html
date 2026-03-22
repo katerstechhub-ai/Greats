@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-8 py-4">
+                <!-- Logo -->
+                <a href="./index.html">
+                    <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
+                </a>
+
+                <!-- Navigation -->
+                <nav>
+                    <ul class="flex  items-center space-x-8">
+                        <li><a href="./shop.html" class="text-black text-sm ">NEW</a></li>
+                        <li><a href="./productkingston.html" class="text-black text-sm ">MEN</a></li>
+                        <li><a href="#" class="text-black text-sm ">WOMEN</a></li>
+                        <li><a href="#" class="text-black text-sm ">OUR STORY</a></li>
+                        <li><a href="" class="text-red-500 text-sm ">SALE</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Icons -->
+                <div class="flex items-center space-x-4 ml-auto">
+                    <!-- Search icon -->
+                    <a href="#" class="text-gray-600 hidden sm:block hover:text-gray-900">
+                        <img src="./Home.img/search-interface-symbol.png" alt="Search" class="w-5 h-5">
+                    </a>
+                    <!-- User icon -->
+                    <a href="#" class="text-gray-600 hover:text-gray-900">
+                        <img src="./Home.img/user.png" alt="User" class="w-5 h-5">
+                    </a>
+
+                    <a href="#" class="text-gray-600 hover:text-gray-900">
+                        <img src="./Home.img/market.png" alt="Shopping bag" class="w-5 h-5">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="max-w-md w-full bg-white   p-8 md:p-10">
+            <h1 class="text-xl text-center text-gray-800 mb-2">WELCOME BACK</h1>
+
+            <!-- Error div (hidden by default, shown on validation failure) -->
+            <div id="errorMessage"
+                class="hidden mt-4 mb-4 bg-red-800 text-center text-white text-sm font-medium w-[400px] px-2 p-2.5 ">
+                Incorrect email or password.
+            </div>
+
+            <div class="mb-5">
+                <label for="email" class="block text-gray-700 text-sm font-semibold mb-1.5">Email</label>
+                <input type="email" id="email"
+                    class="w-[400px] px-2 p-2.5 border border-gray-300  bg-gray-50 bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
+                    placeholder="email">
+            </div>
+
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700 text-sm font-semibold mb-1.5">Password</label>
+                <input type="password" id="password"
+                    class="w-[400px] px-2  p-2.5 border border-gray-300  focus:bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
+                    placeholder="password">
+            </div>
+
+            <div class="text-center text-xs text-gray-500 mb-6">
+                By logging in, you agree to our
+                <a href="#" class="text-black hover:underline">Terms & Conditions</a>
+                and
+                <a href="#" class="text-black hover:underline">Privacy Policy</a>.
+            </div>
+
+
+            <button id="loginBtn"
+                class="w-[400px] bg-black hover:bg-gray-900 cursor-pointer text-white font-semibold p-2.5 shadow-md transition">LOG
+                IN</button>
+            <div class="border-b ml-4 w-full border-gray-400 mt-8 ">
+            </div>
+
+            <div class=" mt-6 text-center text-[15px]">
+                <a href="#" class="text-black  hover:underline">Forgot your password?</a>
+            </div>
+            <div class="text-center mt-4">
+                <span class="text-black text-[15px]">Don't have an account?</span>
+                <a href="#" class="text-black text-[15px] hover:underline ml-1">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 pt-12 pb-6 px-4 mt-6 md:px-8 lg:px-16">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Main grid: left (newsletter) + right (link columns) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">
+
+                <!-- LEFT COLUMN: Stay in the Know -->
+                <div>
+                    <h2 class="text-[50px] font-serif mb-3">Stay in the Know</h2>
+                    <p class="text-gray-600 mb-5">Be the first to know about new drops and get access to exclusive
+                        offers.</p>
+
+                    <!-- Email signup form -->
+                    <div id="newsletterForm" class="flex flex-col sm:flex-row gap-3">
+                        <input type="email" id="emailInput" placeholder="Enter Email"
+                            class="flex-grow px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                        <button id="signupBtn"
+                            class="bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition">
+                            SIGN UP
+                        </button>
+                    </div>
+
+                    <!-- Success message (hidden initially) -->
+                    <div id="successMessage" class="hidden text-green-600 font-medium mt-4">
+                        <i class="fas fa-check-circle mr-2"></i>You are subscribed successfully!!
+                    </div>
+
+                    <!-- Error message (hidden initially) -->
+                    <div id="errorMessage" class="hidden text-red-500 text-sm mt-2"></div>
+                </div>
+
+                <!-- RIGHT COLUMN: Link lists (4 columns) -->
+                <div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- About Us -->
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-3">About Us</h3>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><a href="#" class="hover:text-black">Our Story</a></li>
+                                <li><a href="#" class="hover:text-black">Reviews</a></li>
+                            </ul>
+                        </div>
+                        <!-- Customer Service -->
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-3">Customer Service</h3>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><a href="#" class="hover:text-black">FAQ</a></li>
+                                <li><a href="#" class="hover:text-black">Gift Cards</a></li>
+                                <li><a href="#" class="hover:text-black">Accessibility</a></li>
+                            </ul>
+                        </div>
+                        <!-- Popular (with extended list from image) -->
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-3">Popular</h3>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><a href="#" class="hover:text-black">Minimalist Sneakers</a></li>
+                                <li><a href="#" class="hover:text-black">Travel Sneakers</a></li>
+                                <li><a href="#" class="hover:text-black">Wedding Sneakers</a></li>
+                                <li><a href="#" class="hover:text-black">Low Top Sneakers</a></li>
+                                <li><a href="#" class="hover:text-black">Dress Sneakers</a></li>
+                                <li><a href="#" class="hover:text-black">Casual Sneakers</a></li>
+                            </ul>
+                        </div>
+                        <!-- Returns -->
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-3">Returns</h3>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><a href="#" class="hover:text-black">Refer A Friend</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Icons (left aligned) -->
+            <!-- Social Icons (left aligned) -->
+            <div class="flex space-x-3 ">
+                <a href="#" class="block">
+                    <img src="./Home.img/instagram.png" alt="Instagram"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
+                </a>
+                <a href="#" class="block">
+                    <img src="./Home.img/facebook-app-symbol.png" alt="Facebook"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
+                </a>
+                <a href="#" class="block">
+                    <img src="./Home.img/twitter.png" alt="Twitter"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
+                </a>
+                <a href="#" class="block">
+                    <img src="./Home.img/youtube.png" alt="YouTube"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
+                </a>
+            </div>
+
+            <!-- Bottom: Logo + copyright + legal links -->
+            <div class=" pt-6 flex flex-col md:flex-row  items-start md:items-center text-sm text-gray-600">
+                <img src="./Home.img/GREATS_LOGO_RIBBON_1_resize.png" alt="GREATS" class="h-6 w-auto mb-4 md:mb-0">
+                <div class="flex flex-col md:flex-row md:space-x-6  md:space-y-0">
+                    <span>© 2026 All Rights Reserved.</span>
+                    <a href="#" class="hover:text-black">Privacy Policy</a>
+                    <a href="#" class="hover:text-black">Terms & Conditions</a>
+                    <a href="#" class="hover:text-black">Do not sell my data</a>
+                    <a href="#" class="hover:text-black">Customer data requests</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="./login.js"></script>
+
+</html>
