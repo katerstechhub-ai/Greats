@@ -47,45 +47,56 @@
         </div>
     </header>
 
+
     <div class=" flex items-center justify-center min-h-screen p-4">
         <div class="max-w-md w-full bg-white p-8 md:p-10">
-            <h1 class="text-xl text-center text-gray-800 mb-6">FORGOT PASSWORD</h1>
+            <h1 class="text-xl  text-center text-black mb-6">CREATE AN ACCOUNT</h1>
 
-            <p class="text-sm text-black text-center mb-6">
-                Enter the email address for your account and we'll send you an
-                email with instructions for resetting your password.
-            </p>
-
-            <!-- Error div (hidden by default, shown when email is empty) -->
-            <div id="errorMessage"
-                class="hidden mt-4 mb-4 bg-red-800 text-white text-sm text-center font-medium w-full px-2 py-2.5 ">
-                No account found with that email.
+            <!-- Error divs (hidden by default) -->
+            <div id="fullNameError" class="hidden text-center mb-3 bg-red-800 text-white text-sm font-medium px-4 py-2 ">
+                Full name can't be blank.
+            </div>
+            <div id="emailError" class="hidden text-center mb-3 bg-red-800 text-white text-sm font-medium px-4 py-2 ">
+                Email can't be blank.
+            </div>
+            <div id="passwordError" class="hidden text-center mb-3 bg-red-800 text-white text-sm font-medium px-4 py-2 ">
+                Password can't be blank.
             </div>
 
-            <div class="mb-5">
+            <div class="mb-4">
+
+                <input type="text" id="fullName"
+                    class="w-full px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                    placeholder="fullname">
+            </div>
+
+            <div class="mb-4">
+
                 <input type="email" id="email"
-                    class="w-full px-2 py-2.5 border border-gray-300 bg-gray-50 focus:bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
+                    class="w-full px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                     placeholder="email">
             </div>
 
-            <button id="forgotBtn"
-                class="w-full bg-black hover:bg-gray-900 cursor-pointer text-white font-semibold py-2.5 shadow-md transition">
-                FORGOT PASSWORD
+            <div class="mb-6">
+
+                <input type="password" id="password"
+                    class="w-full px-3 py-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                    placeholder="password">
+            </div>
+
+            <div class="text-xs text-gray-500 mb-6">
+                By creating an account, you agree to our
+                <a href="#" class="text-black hover:underline">Terms & Conditions</a>
+                and
+                <a href="#" class="text-black hover:underline">Privacy Policy</a>.
+            </div>
+
+            <button id="signupBtn"
+                class="w-full bg-black cursor-pointer hover:bg-gray-900 text-white font-semibold py-2  shadow-md transition">
+                SIGN UP
             </button>
-
-            <div class="border-b border-gray-300 mt-8"></div>
-
-            <div class="mt-6 text-center text-sm">
-                <span class="text-gray-700">Don't have an account?</span>
-                <a href="#" class="text-black hover:underline ml-1">Sign up</a>
-            </div>
-
-            <div class="text-center mt-4 text-sm">
-                <a href="./login.html" class="text-black hover:underline">Login</a>
-            </div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="bg-gray-100 border-t border-gray-200 pt-12 pb-6 px-4 mt-6 md:px-8 lg:px-16">
         <div class="max-w-7xl mx-auto">
@@ -196,6 +207,6 @@
         </div>
     </footer>
 </body>
-<script src="./passwordreset.js"></script>
+<script src="./signup.js"></script>
 
 </html>
