@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Product | MoniTrack</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+        <!-- Sidebar -->
+        <div class="col-span-1 bg-white border-r border-gray-200">
+            <div class="p-4 md:p-6 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800">Gre@ts</h2>
+                <p class="text-sm text-gray-500">Admin Dashboard</p>
+            </div>
+            <ul class="py-2 md:py-4">
+                <li>
+                    <a href="./Dashboard.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="./productadmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        <i class="fas fa-box mr-2"></i>Products
+                    </a>
+                </li>
+                <li>
+                    <a href="./createproduct.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 bg-gray-100 text-blue-600 transition text-sm md:text-base">
+                        <i class="fas fa-plus-circle mr-2"></i>Create product
+                    </a>
+                </li>
+                <li>
+                    <a href="./createcategory.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        <i class="fas fa-tags mr-2"></i>Create category
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        <i class="fas fa-users mr-2"></i>Users
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        <i class="fas fa-shopping-cart mr-2"></i>Cart
+                    </a>
+                </li>
+            </ul>
+            <div class="absolute bottom-0 w-full p-4 md:p-6 border-t border-gray-200">
+                <a href="#" id="signOutBtn" class="block text-gray-600 hover:text-red-500 transition text-sm md:text-base">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-span-1 md:col-span-4 p-4 md:p-6">
+            <div class="mb-6">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Create New Product</h1>
+                <p class="text-sm md:text-base text-gray-500">Add a product to your catalog</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
+                <form id="createProductForm" class="space-y-4">
+                    <!-- Product Title -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+                        <input type="text" id="title" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="e.g., Men's Running Shoes">
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea id="description" rows="3"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="Detailed description of the product"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Price -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Price (₦) *</label>
+                            <input type="number" id="price" step="0.01" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="25930.67">
+                        </div>
+                        <!-- Quantity -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Quantity *</label>
+                            <input type="number" id="quantity" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="100">
+                        </div>
+                    </div>
+
+                    <!-- Images -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Images (URLs, one per line)</label>
+                        <textarea id="images" rows="2"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">Maximum 5 images. One URL per line.</p>
+                    </div>
+
+                    <!-- Category Selection with Delete Button -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <select id="categorySelect"
+                                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Loading categories...</option>
+                            </select>
+                            <div class="flex gap-2">
+                                <a href="./createcategory.html" 
+                                    class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition text-center whitespace-nowrap">
+                                    <i class="fas fa-plus"></i> New
+                                </a>
+                                <button type="button" id="deleteCategoryBtn"
+                                    class="bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Select a category for this product. Click "New" to create categories, "Delete" to manage existing ones.</p>
+                    </div>
+
+                    <!-- Optional fields -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Brand (optional)</label>
+                            <input type="text" id="brand"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="e.g., Nike">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Min. Order Qty (optional)</label>
+                            <input type="number" id="minQty"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="2">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Max. Order Qty (optional)</label>
+                            <input type="number" id="maxQty"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="5">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount (%) (optional)</label>
+                            <input type="number" id="discount" step="0.01"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="0">
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
+                        <button type="button" id="cancelBtn"
+                            class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">Cancel</button>
+                        <button type="submit"
+                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Create Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Management Modal (for deleting categories) -->
+    <div id="categoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-lg font-semibold text-gray-800">
+                    <i class="fas fa-tags text-red-500 mr-2"></i>Delete Categories
+                </h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <p class="text-sm text-gray-600 mb-4">
+                    Select a category to delete. Products in this category will remain but show as "Uncategorized".
+                </p>
+                <div id="categoryList" class="space-y-2 max-h-80 overflow-y-auto">
+                    <p class="text-gray-500 text-center">Loading categories...</p>
+                </div>
+            </div>
+            <div class="p-4 border-t flex justify-end">
+                <button id="modalCloseBtn" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+    <script src="./createproduct.js"></script>
+</body>
+
+</html>
