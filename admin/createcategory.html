@@ -7,84 +7,190 @@
     <title>Create Category | MoniTrack</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .sidebar-mobile {
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-collapsed {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50">
-    <div class="grid grid-cols-5 min-h-screen">
-        <!-- Sidebar (consistent with other admin pages) -->
-        <div class="col-span-1 bg-white border-r border-gray-200">
-            <div class="p-6 border-b border-gray-200">
-                <h2 class="text-xl font-bold text-gray-800">Gre@ts</h2>
-                <p class="text-sm text-gray-500">Admin Dashboard</p>
+    <div class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+        <!-- Sidebar - Responsive with Green Theme -->
+        <div class="col-span-1 bg-green-800 border-r border-gray-200 md:relative fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-30 w-64 md:w-auto sidebar-mobile"
+            id="sidebar">
+            <div class="p-4 md:p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-bold text-white">Gre@ts</h2>
+                    <button id="closeSidebarBtn" class="md:hidden text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-white">Admin Dashboard</p>
             </div>
-            <ul class="py-4">
+            <ul class="py-2 md:py-4">
                 <li>
                     <a href="./Dashboard.html"
-                        class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white transition text-sm md:text-base">
                         <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="./productadmin.html"
-                        class="block px-6 py-3 text-gray-700 hover:bg-gray-100 text-blue-600 transition">
+                        class="block px-4 md:px-6 py-2 md:py-3 text-white  hover:bg-gray-800 hover:text-blue-600 transition text-sm md:text-base">
                         <i class="fas fa-box mr-2"></i>Products
                     </a>
                 </li>
                 <li>
                     <a href="./createproduct.html"
-                        class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white transition text-sm md:text-base">
                         <i class="fas fa-plus-circle mr-2"></i>Create product
                     </a>
                 </li>
                 <li>
                     <a href="./createcategory.html"
-                        class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white transition text-sm md:text-base">
                         <i class="fas fa-tags mr-2"></i>Create category
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
+                    <a href="./useradmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white transition text-sm md:text-base">
                         <i class="fas fa-users mr-2"></i>Users
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition">
+                    <a href="./createuseradmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white transition text-sm md:text-base">
+                        <i class="fas fa-user-plus mr-2"></i>Create user
+                    </a>
+                </li>
+                <li>
+                    <a href="./cartadmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white transition text-sm md:text-base">
                         <i class="fas fa-shopping-cart mr-2"></i>Cart
                     </a>
                 </li>
             </ul>
-            <div class="absolute bottom-0 w-full p-6 border-t border-gray-200">
-                <a href="#" id="signOutBtn" class="block text-gray-600 hover:text-red-500 transition">
+        </div>
+
+        <!-- Main Content - Responsive -->
+        <div class="col-span-1 md:col-span-4 p-4 md:p-6 min-h-screen">
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden mb-4 flex justify-between items-center">
+                <button id="menuToggleBtn" class="text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <h2 class="text-lg font-bold text-green-800 italic">Gre@ts</h2>
+                <div class="w-8"></div>
+            </div>
+
+            <div class="mb-6">
+                <h1 class="text-xl md:text-2xl font-bold text-green-800 italic">Create New Category</h1>
+                <p class="text-sm md:text-base text-gray-500">Add a new category to organize your products</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-4 md:p-6 max-w-full md:max-w-2xl mx-auto">
+                <form id="createCategoryForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Category Name *</label>
+                        <input type="text" id="categoryName" required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            placeholder="e.g., Electronics, Clothing, Shoes">
+                        <p class="text-xs text-gray-500 mt-1">This name will appear in product category dropdowns</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4">
+                        <button type="button" id="cancelBtn"
+                            class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm md:text-base">Cancel</button>
+                        <button type="submit"
+                            class="px-6 py-2 bg-green-800 text-white rounded-lg hover:bg-green-700 transition text-sm md:text-base">
+                            <i class="fas fa-plus-circle mr-2"></i>Create Category
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sign Out Button - Below Form -->
+            <div class="mt-6 text-center">
+                <a href="#" id="signOutBtn"
+                    class="inline-block text-gray-600 hover:text-red-500 transition text-sm md:text-base">
                     <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
                 </a>
             </div>
         </div>
-
-
-        <!-- Main Content -->
-        <div class="col-span-4 p-6">
-            <div class="bg-white rounded-lg shadow-md p-6 max-w-3xl">
-                <h1 class="text-2xl font-bold mb-6">Create New Category</h1>
-                <form id="createCategoryForm">
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Category Name *</label>
-                        <input type="text" id="categoryName" required
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="e.g., Electronics, Clothing, Unique_12345">
-                    </div>
-                    <div class="flex justify-end gap-3">
-                        <button type="button" id="cancelBtn"
-                            class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
-                        <button type="submit"
-                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Create
-                            Category</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-20 md:hidden"></div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
     <script src="createcategory.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        const menuToggle = document.getElementById('menuToggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebarBtn');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebar.classList.add('translate-x-0');
+            overlay.classList.remove('hidden');
+        }
+
+        function closeSidebarFunc() {
+            sidebar.classList.add('-translate-x-full');
+            sidebar.classList.remove('translate-x-0');
+            overlay.classList.add('hidden');
+        }
+
+        if (menuToggle) menuToggle.addEventListener('click', openSidebar);
+        if (closeSidebar) closeSidebar.addEventListener('click', closeSidebarFunc);
+        if (overlay) overlay.addEventListener('click', closeSidebarFunc);
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                if (overlay) overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+            }
+        });
+    </script>
 </body>
 
 </html>

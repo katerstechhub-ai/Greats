@@ -1,7 +1,7 @@
 // ========== DOM Elements ==========
 const totalProductsEl = document.getElementById('totalProducts');
-const totalSalesEl = document.getElementById('totalUsers');       // repurposed as "Total Sales"
-const totalItemsSoldEl = document.getElementById('totalCartItems'); // repurposed as "Total Items Sold"
+const totalUsersEl = document.getElementById('totalUsers');
+const totalCartItemsEl = document.getElementById('totalCartItems');
 const productTableBody = document.getElementById('productTableBody');
 
 // ========== API Configuration ==========
@@ -11,8 +11,55 @@ const merchantId = localStorage.getItem('merchantId');
 const authToken = localStorage.getItem('authToken');
 
 if (!merchantId || !authToken) {
-    alert('Please log in first');
-    window.location.href = 'login.html';
+    showToast('Please log in first', 'error');
+    setTimeout(() => {
+        window.location.href = 'login.html';
+    }, 1500);
+
+}
+
+// ========== Toast Notification ==========
+function showToast(message, type = 'info') {
+    let toastContainer = document.getElementById('toastContainer');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toastContainer';
+        toastContainer.className = 'fixed bottom-4 right-4 z-50 space-y-2';
+        document.body.appendChild(toastContainer);
+    }
+
+    const toast = document.createElement('div');
+    const colors = {
+        success: 'bg-green-500',
+        error: 'bg-red-500',
+        info: 'bg-blue-500',
+        warning: 'bg-yellow-500'
+    };
+
+    toast.className = `${colors[type]} text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3`;
+    toast.style.animation = 'slideInRight 0.3s ease-out';
+    toast.innerHTML = `
+<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+<span class="flex-1 text-sm">${message}</span>
+<button class="toast-close hover:text-gray-200 ml-2">
+<i class="fas fa-times"></i>
+</button>
+`;
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        if (toast && toast.remove) {
+            toast.style.animation = 'slideOutRight 0.3s ease-in';
+            setTimeout(() => toast.remove(), 300);
+        }
+    }, 4000);
+
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => {
+        toast.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => toast.remove(), 300);
+    });
 }
 
 // ========== Helper: fetch with auth ==========
@@ -42,6 +89,7 @@ function extractDataArray(response, defaultValue = []) {
     if (response.data && Array.isArray(response.data)) return response.data;
     if (response.products && Array.isArray(response.products)) return response.products;
     if (response.sales && Array.isArray(response.sales)) return response.sales;
+    if (response.users && Array.isArray(response.users)) return response.users;
     return defaultValue;
 }
 
@@ -67,91 +115,93 @@ async function loadStats() {
         if (totalProductsEl) totalProductsEl.textContent = totalProducts;
         console.log('Total products:', totalProducts);
 
-        // 2. Sales data – adjust endpoint as needed
-        let salesArray = [];
-        let salesResponse = await fetchAPI(`${API_BASE}/sales?merchant_id=${merchantId}`, 'sales');
-        if (!salesResponse) {
-            salesResponse = await fetchAPI(`${API_BASE}/orders?merchant_id=${merchantId}`, 'orders');
+        // 2. Total users - FIXED: Fetch actual users count
+        const usersResponse = await fetchAPI(`${API_BASE}/users?merchant_id=${merchantId}`, 'users');
+        const usersArray = extractDataArray(usersResponse);
+        const totalUsers = usersArray.length;
+        if (totalUsersEl) totalUsersEl.textContent = totalUsers;
+        console.log('Total users:', totalUsers);
+
+        // 3. Total cart items (if endpoint exists)
+        let totalCartItems = 0;
+        const cartResponse = await fetchAPI(`${API_BASE}/carts?merchant_id=${merchantId}`, 'carts');
+        if (cartResponse) {
+            const cartArray = extractDataArray(cartResponse);
+            totalCartItems = cartArray.reduce((sum, item) => sum + (item.quantity || 0), 0);
         }
-        salesArray = extractDataArray(salesResponse);
-        
-        const totalSales = salesArray.length;
-        const totalItemsSold = salesArray.reduce((sum, item) => sum + (item.quantity || 0), 0);
-        
-        if (totalSalesEl) totalSalesEl.textContent = totalSales;
-        if (totalItemsSoldEl) totalItemsSoldEl.textContent = totalItemsSold;
-        console.log('Total sales:', totalSales, 'Items sold:', totalItemsSold);
+        if (totalCartItemsEl) totalCartItemsEl.textContent = totalCartItems;
+        console.log('Total cart items:', totalCartItems);
+
     } catch (error) {
         console.error('Error loading stats:', error);
         if (totalProductsEl) totalProductsEl.textContent = 'Error';
-        if (totalSalesEl) totalSalesEl.textContent = 'Error';
-        if (totalItemsSoldEl) totalItemsSoldEl.textContent = 'Error';
+        if (totalUsersEl) totalUsersEl.textContent = 'Error';
+        if (totalCartItemsEl) totalCartItemsEl.textContent = 'Error';
+        showToast('Error loading dashboard data', 'error');
     }
 }
 
 // ========== Load product table with category names ==========
 async function loadProducts() {
     try {
-        // Fetch both categories and products in parallel
         const [categoryMap, productsResponse] = await Promise.all([
             fetchCategoryMap(),
             fetchAPI(`${API_BASE}/products?merchant_id=${merchantId}`, 'products list')
         ]);
-        
+
         const productList = extractDataArray(productsResponse).slice(0, 10);
 
         if (!productTableBody) return;
 
         if (productList.length === 0) {
             productTableBody.innerHTML = `
-                 <tr>
-                    <td colspan="6" class="px-6 py-4 text-center text-gray-500">
-                        No products available.
-                     </td>
-                 </tr>
-            `;
+<tr>
+<td colspan="6" class="px-3 md:px-6 py-8 text-center text-gray-500">
+<i class="fas fa-box-open text-3xl mb-2"></i>
+<p>No products available</p>
+<a href="./createproduct.html" class="inline-block mt-2 text-blue-600 hover:text-blue-700">Create your first product</a>
+</td>
+</tr>
+`;
             return;
         }
 
-      // Build table rows with category names
         productTableBody.innerHTML = productList.map((product, index) => {
             const status = product.quantity > 0 ? 'In Stock' : 'Out of Stock';
-            // Convert product.category_id to string for lookup
             const catId = product.category_id !== undefined ? String(product.category_id) : null;
-            const categoryName = catId && categoryMap[catId] 
-                ? categoryMap[catId] 
-                : (product.category_name || 'N/A');
-            
-            // Debug log for each product
-            console.log(`Product: ${product.title}, category_id: ${product.category_id} (type: ${typeof product.category_id}), categoryName: ${categoryName}`);
-            
+            const categoryName = catId && categoryMap[catId]
+                ? categoryMap[catId]
+                : (product.category_name || 'Uncategorized');
+
             return `
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${index + 1}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${escapeHtml(product.title)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formatPrice(product.price)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${escapeHtml(categoryName)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${product.quantity || 0}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                            ${status === 'In Stock' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                            ${status}
-                        </span>
-                    </td>
-                </tr>
-            `;
+<tr class="hover:bg-gray-50 transition">
+<td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-sm text-gray-500">${index + 1}</td>
+<td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-sm font-medium text-gray-900">${escapeHtml(product.title)}</td>
+<td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-sm text-gray-500">${formatPrice(product.price)}</td>
+<td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-sm text-gray-500">${escapeHtml(categoryName)}</td>
+<td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-sm text-gray-500">${product.quantity || 0}</td>
+<td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap">
+<span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
+${status === 'In Stock' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+${status}
+</span>
+</td>
+</tr>
+`;
         }).join('');
     } catch (error) {
         console.error('Error loading products:', error);
         if (productTableBody) {
             productTableBody.innerHTML = `
-                 <tr>
-                    <td colspan="6" class="px-6 py-4 text-center text-red-500">
-                        Failed to load products. Check console.
-                     </td>
-                 </tr>
-            `;
+<tr>
+<td colspan="6" class="px-3 md:px-6 py-8 text-center text-red-500">
+<i class="fas fa-exclamation-circle text-2xl mb-2"></i>
+<p>Failed to load products</p>
+</td>
+</tr>
+`;
         }
+        showToast('Error loading products', 'error');
     }
 }
 
@@ -173,6 +223,61 @@ function escapeHtml(str) {
     });
 }
 
+// ========== Sign Out ==========
+const signOutBtn = document.getElementById('signOutBtn');
+if (signOutBtn) {
+    signOutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('merchantId');
+        localStorage.removeItem('authToken');
+        showToast('Signed out successfully', 'success');
+        setTimeout(() => {
+            window.location.href = 'loginadmin.html';
+        }, 500);
+    });
+}
+
+// ========== CSS Animations ==========
+const style = document.createElement('style');
+style.textContent = `
+@keyframes slideInRight {
+from { transform: translateX(100%); opacity: 0; }
+to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOutRight {
+from { transform: translateX(0); opacity: 1; }
+to { transform: translateX(100%); opacity: 0; }
+}
+`;
+document.head.appendChild(style);
+
 // ========== Initialize ==========
 loadStats();
 loadProducts();
+
+
+
+
+
+// Check common endpoints
+const endpoints = [
+    '/products',
+    '/categories',
+    '/users',
+    '/orders',
+    '/order',
+    '/transactions',
+    '/carts',
+    '/cart',
+    '/checkout',
+    '/sales'
+];
+
+for (const endpoint of endpoints) {
+    fetch(`http://ecommerce.reworkstaging.name.ng/v2${endpoint}?merchant_id=${merchantId}`, {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+    })
+        .then(r => ({ endpoint, status: r.status, ok: r.ok }))
+        .then(data => console.log(`${data.endpoint}: ${data.status} - ${data.ok ? '✅' : '❌'}`))
+        .catch(e => console.log(`${endpoint}: error`));
+}

@@ -17,23 +17,22 @@ const categoryNameInput = document.getElementById('categoryName');
 const cancelBtn = document.getElementById('cancelBtn');
 const signOutBtn = document.getElementById('signOutBtn');
 
-// ========== Helper: fetch with auth ==========
 async function fetchAPI(url, options = {}) {
     const defaultHeaders = {
-        'Authorization': `Bearer ${ authToken }`,
-    'Content-Type': 'application/json'
-};
-try {
-    const response = await fetch(url, {
-        ...options,
-        headers: { ...defaultHeaders, ...options.headers }
-    });
-    if (!response.ok) throw new Error`(HTTP ${ response.status })`;
-    return await response.json();
-} catch (error) {
-    console.error(Error `fetching ${url}:, error`);
-    return null;
-}
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+    };
+    try {
+        const response = await fetch(url, {
+            ...options,
+            headers: { ...defaultHeaders, ...options.headers }
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error(`Error fetching ${url}:`, error);
+        return null;
+    }
 }
 
 // ========== Pre‑fill category name from URL parameter ==========
@@ -52,7 +51,7 @@ async function createCategory(categoryName) {
         merchant_id: merchantId
     };
 
-    const response = await fetchAPI(`${ API_BASE }/categories`, {
+    const response = await fetchAPI(`${API_BASE}/categories`, {
         method: 'POST',
         body: JSON.stringify(payload)
     });

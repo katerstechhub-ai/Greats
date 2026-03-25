@@ -28,70 +28,106 @@
                 opacity: 0;
             }
         }
+
+        .sidebar-mobile {
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar-hidden {
+                transform: translateX(-100%);
+            }
+            .sidebar-visible {
+                transform: translateX(0);
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .sidebar-mobile {
+                transform: translateX(0) !important;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-gray-50">
     <div class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
-        <!-- Sidebar -->
-        <div class="col-span-1 bg-white border-r border-gray-200">
+        <!-- Sidebar - Responsive with Green Theme -->
+        <div class="col-span-1 bg-green-800 border-r border-gray-200 md:relative fixed inset-y-0 left-0 transform transition-transform duration-300 z-30 w-64 md:w-auto sidebar-mobile sidebar-hidden md:translate-x-0" id="sidebar">
             <div class="p-4 md:p-6 border-b border-gray-200">
-                <h2 class="text-xl font-bold text-gray-800">Gre@ts</h2>
-                <p class="text-sm text-gray-500">Admin Dashboard</p>
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl font-bold text-white">Gre@ts</h2>
+                    <button id="closeSidebarBtn" class="md:hidden text-white hover:text-gray-300">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-white">Admin Dashboard</p>
             </div>
             <ul class="py-2 md:py-4">
                 <li>
                     <a href="./Dashboard.html"
-                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
                         <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="./productadmin.html"
-                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 bg-gray-100 text-blue-600 transition text-sm md:text-base">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
                         <i class="fas fa-box mr-2"></i>Products
                     </a>
                 </li>
                 <li>
                     <a href="./createproduct.html"
-                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
                         <i class="fas fa-plus-circle mr-2"></i>Create product
                     </a>
                 </li>
                 <li>
                     <a href="./createcategory.html"
-                        class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
                         <i class="fas fa-tags mr-2"></i>Create category
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                    <a href="./useradmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
                         <i class="fas fa-users mr-2"></i>Users
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="block px-4 md:px-6 py-2 md:py-3 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition text-sm md:text-base">
+                    <a href="./createuseradmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
+                        <i class="fas fa-user-plus mr-2"></i>Create user
+                    </a>
+                </li>
+                <li>
+                    <a href="./cartadmin.html"
+                        class="block px-4 md:px-6 py-2 md:py-3 hover:bg-gray-800 hover:text-blue-600 transition text-white text-sm md:text-base">
                         <i class="fas fa-shopping-cart mr-2"></i>Cart
                     </a>
                 </li>
             </ul>
-            <div class="absolute bottom-0 w-full p-4 md:p-6 border-t border-gray-200">
-                <a href="#" id="signOutBtn" class="block text-gray-600 hover:text-red-500 transition text-sm md:text-base">
-                    <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
-                </a>
-            </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="col-span-1 md:col-span-4 p-4 md:p-6">
+        <!-- Main Content - Responsive -->
+        <div class="col-span-1 md:col-span-4 p-4 md:p-6 min-h-screen">
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden mb-4 flex justify-between items-center">
+                <button id="menuToggleBtn" class="text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <h2 class="text-lg font-bold text-green-800 italic">Gre@ts</h2>
+                <div class="w-8"></div>
+            </div>
+
             <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold text-gray-800">Products</h1>
+                    <h1 class="text-xl md:text-2xl font-bold text-green-800 italic">Products</h1>
                     <p class="text-sm text-gray-500">Manage your product catalog</p>
                 </div>
                 <div class="flex gap-3">
                     <button id="filterMyProductsBtn"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm">
+                        class="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-sm">
                         <i class="fas fa-filter mr-2"></i>My Products
                     </button>
                     <button id="showAllBtn"
@@ -121,8 +157,18 @@
                     <p class="text-gray-500 mt-2">Loading products...</p>
                 </div>
             </div>
+
+            <!-- Sign Out Button - Below Product Grid -->
+            <div class="mt-6 text-center">
+                <a href="#" id="signOutBtn" class="inline-block text-gray-600 hover:text-red-500 transition text-sm md:text-base">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
+                </a>
+            </div>
         </div>
     </div>
+
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-20 md:hidden" style="display: none;"></div>
 
     <!-- Edit Product Modal -->
     <div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 p-4">
@@ -192,7 +238,66 @@
     <!-- Toast Container -->
     <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
 
-    <script src="./productadmin.js"></script>
+    <script src="productadmin.js"></script>
+    <script>
+        // Mobile sidebar toggle - FIXED
+        (function() {
+            const menuToggle = document.getElementById('menuToggleBtn');
+            const sidebar = document.getElementById('sidebar');
+            const closeSidebar = document.getElementById('closeSidebarBtn');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar) return;
+            
+            function openSidebar() {
+                sidebar.classList.remove('sidebar-hidden');
+                sidebar.classList.add('sidebar-visible');
+                if (overlay) overlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeSidebarFunc() {
+                sidebar.classList.remove('sidebar-visible');
+                sidebar.classList.add('sidebar-hidden');
+                if (overlay) overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', openSidebar);
+            }
+            
+            if (closeSidebar) {
+                closeSidebar.addEventListener('click', closeSidebarFunc);
+            }
+            
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebarFunc);
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    // On desktop, ensure sidebar is visible
+                    sidebar.classList.remove('sidebar-hidden', 'sidebar-visible');
+                    if (overlay) overlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                } else {
+                    // On mobile, hide sidebar by default
+                    if (!sidebar.classList.contains('sidebar-visible')) {
+                        sidebar.classList.add('sidebar-hidden');
+                    }
+                }
+            });
+            
+            // Initialize on page load
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('sidebar-hidden');
+            } else {
+                sidebar.classList.remove('sidebar-hidden', 'sidebar-visible');
+            }
+        })();
+    </script>
 </body>
 
 </html>
