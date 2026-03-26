@@ -983,7 +983,6 @@ if (page > 50) break;
 
 if (fetched.length === 0) {
 console.log('API returned no products, checking local data');
-// If API returns nothing, check if we have products in local allProducts
 const localFiltered = allProducts.filter(p => String(p.category_id) === String(categoryId));
 if (localFiltered.length > 0) {
 fetched = localFiltered;
@@ -999,7 +998,7 @@ showToast(`Showing ${fetched.length} products in "${categoryName}"`, 'success');
 } catch (error) {
 console.error('Error loading category products:', error);
 
-// Fallback to local filtering
+
 const localFiltered = allProducts.filter(p => String(p.category_id) === String(categoryId));
 if (localFiltered.length > 0) {
 currentCategoryFilter = { id: categoryId, name: categoryName };
@@ -1038,7 +1037,7 @@ return `
 <img src="${imageUrl}" alt="${escapeHtml(product.title)}" class="w-full h-48 object-cover">
 <div class="p-4">
 <h3 class="text-lg font-semibold">${escapeHtml(product.title)}</h3>
-<p class="text-green-800 font-bold mt-1">₦${Number(product.price).toLocaleString()}</p>
+<p class="text-green-800 font-bold mt-1">$${Number(product.price).toLocaleString()}</p>
 ${category ? `<p class="text-sm text-gray-500 mt-1"><i class="fas fa-tag mr-1"></i>${escapeHtml(category.name)}</p>` : ''}
 <p class="text-sm text-gray-500"><i class="fas fa-boxes mr-1"></i>Stock: ${product.quantity || 0}</p>
 <div class="mt-4 flex gap-2">
@@ -1129,9 +1128,9 @@ return;
 
 if (categoryListModal) {
 categoryListModal.innerHTML = allCategories.map(cat => `
-<button class="select-cat-btn w-full text-left p-3 border rounded-lg hover:bg-blue-50 hover:border-blue-500 transition"
+<button class="select-cat-btn w-full text-left p-3 border rounded-lg hover:bg-green-800 hover:border-green-700 transition"
 data-id="${cat.id}" data-name="${escapeHtml(cat.name)}">
-<i class="fas fa-folder text-blue-500 mr-2"></i>${escapeHtml(cat.name)}
+<i class="fas fa-folder text-green-500 mr-2"></i>${escapeHtml(cat.name)}
 </button>
 `).join('');
 
