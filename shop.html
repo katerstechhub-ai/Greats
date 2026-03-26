@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shop | Gre@ts</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
@@ -12,33 +12,25 @@
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-8 py-4">
-                <!-- Logo -->
-                 <a href="./index.html">
-                <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
+                <a href="./index.html">
+                    <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
                 </a>
-
-                <!-- Navigation -->
                 <nav>
-                    <ul class="flex  items-center space-x-8">
-                        <li><a href="./shop.html" class="text-black text-sm ">NEW</a></li>
-                        <li><a href="./productkingston.html" class="text-black text-sm ">MEN</a></li>
-                        <li><a href="#" class="text-black text-sm ">WOMEN</a></li>
-                        <li><a href="#" class="text-black text-sm ">OUR STORY</a></li>
-                        <li><a href="./shop.html" class="text-red-500 text-sm ">SALE</a></li>
+                    <ul class="flex items-center space-x-8">
+                        <li><a href="./shop.html" class="text-black text-sm">NEW</a></li>
+                        <li><a href="./productkingston.html" class="text-black text-sm">MEN</a></li>
+                        <li><a href="#" class="text-black text-sm">WOMEN</a></li>
+                        <li><a href="#" class="text-black text-sm">OUR STORY</a></li>
+                        <li><a href="./shop.html" class="text-red-500 text-sm">SALE</a></li>
                     </ul>
                 </nav>
-
-                <!-- Icons -->
                 <div class="flex items-center space-x-4 ml-auto">
-                    <!-- Search icon -->
                     <a href="#" class="text-gray-600 hidden sm:block hover:text-gray-900">
                         <img src="./Home.img/search-interface-symbol.png" alt="Search" class="w-5 h-5">
                     </a>
-                    <!-- User icon -->
                     <a href="./login.html" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/user.png" alt="User" class="w-5 h-5">
                     </a>
-
                     <a href="./shop.html" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/market.png" alt="Shopping bag" class="w-5 h-5">
                     </a>
@@ -46,20 +38,17 @@
             </div>
         </div>
     </header>
-    <div class="bg-gray-100 p-10 text-bold text-2xl ">ALL NEW ARRIVALS</div>
+
+    <div class="bg-gray-100 p-10 text-bold text-2xl">ALL NEW ARRIVALS</div>
 
     <div id="products" class="flex p-6"></div>
 
-
     <div class="flex items-center p-10 justify-between">
-        <!-- Left: icon + "Filters" text -->
-        <div class="flex border p-3  items-center space-x-4">
+        <div class="flex border p-3 items-center space-x-4">
             <img src="./Home.img/filter.png" alt="Filter" class="h-5 w-5">
             <span class="text-sm font-medium">Filters</span>
         </div>
-
-        <!-- Right: select dropdown -->
-        <select class="border  px-2 py-3 bg-blue text-sm">
+        <select class="border px-2 py-3 bg-white text-sm">
             <option>Best Match</option>
             <option>Price: Low to High</option>
             <option>Price: High to Low</option>
@@ -67,8 +56,6 @@
     </div>
 
     <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-4 mb-15"></div>
-
-
 
     <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
         <h2 class="text-2xl font-serif text-gray-900">RECENTLY VIEWED</h2>
@@ -82,28 +69,18 @@
         </div>
     </div>
 
-
-    <!-- Recently Viewed Section -->
-    <div class=" p-6">
+    <div class="p-6">
         <div id="recently-viewed-grid" class="grid grid-cols-1 mb-8 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
     </div>
-
-
 
     <!-- Footer -->
     <footer class="bg-gray-100 border-t border-gray-200 pt-12 pb-6 px-4 md:px-8 lg:px-16">
         <div class="max-w-7xl mx-auto">
-
-            <!-- Main grid: left (newsletter) + right (link columns) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">
-
-                <!-- LEFT COLUMN: Stay in the Know -->
                 <div>
                     <h2 class="text-[50px] font-serif mb-3">Stay in the Know</h2>
                     <p class="text-gray-600 mb-5">Be the first to know about new drops and get access to exclusive
                         offers.</p>
-
-                    <!-- Email signup form -->
                     <div id="newsletterForm" class="flex flex-col sm:flex-row gap-3">
                         <input type="email" id="emailInput" placeholder="Enter Email"
                             class="flex-grow px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
@@ -112,20 +89,13 @@
                             SIGN UP
                         </button>
                     </div>
-
-                    <!-- Success message (hidden initially) -->
                     <div id="successMessage" class="hidden text-green-600 font-medium mt-4">
-                        <i class="fas fa-check-circle mr-2"></i>You are subscribed successfully!!
+                        You are subscribed successfully!!
                     </div>
-
-                    <!-- Error message (hidden initially) -->
                     <div id="errorMessage" class="hidden text-red-500 text-sm mt-2"></div>
                 </div>
-
-                <!-- RIGHT COLUMN: Link lists (4 columns) -->
                 <div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <!-- About Us -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">About Us</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -133,7 +103,6 @@
                                 <li><a href="#" class="hover:text-black">Reviews</a></li>
                             </ul>
                         </div>
-                        <!-- Customer Service -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Customer Service</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -142,7 +111,6 @@
                                 <li><a href="#" class="hover:text-black">Accessibility</a></li>
                             </ul>
                         </div>
-                        <!-- Popular (with extended list from image) -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Popular</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -154,7 +122,6 @@
                                 <li><a href="#" class="hover:text-black">Casual Sneakers</a></li>
                             </ul>
                         </div>
-                        <!-- Returns -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Returns</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -164,32 +131,19 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Social Icons (left aligned) -->
-            <!-- Social Icons (left aligned) -->
-            <div class="flex space-x-3 ">
-                <a href="#" class="block">
-                    <img src="./Home.img/instagram.png" alt="Instagram"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
-                <a href="#" class="block">
-                    <img src="./Home.img/facebook-app-symbol.png" alt="Facebook"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
-                <a href="#" class="block">
-                    <img src="./Home.img/twitter.png" alt="Twitter"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
-                <a href="#" class="block">
-                    <img src="./Home.img/youtube.png" alt="YouTube"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
+            <div class="flex space-x-3">
+                <a href="#" class="block"><img src="./Home.img/instagram.png" alt="Instagram"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/facebook-app-symbol.png" alt="Facebook"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/twitter.png" alt="Twitter"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/youtube.png" alt="YouTube"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
             </div>
-
-            <!-- Bottom: Logo + copyright + legal links -->
-            <div class=" pt-6 flex flex-col md:flex-row  items-start md:items-center text-sm text-gray-600">
+            <div class="pt-6 flex flex-col md:flex-row items-start md:items-center text-sm text-gray-600">
                 <img src="./Home.img/GREATS_LOGO_RIBBON_1_resize.png" alt="GREATS" class="h-6 w-auto mb-4 md:mb-0">
-                <div class="flex flex-col md:flex-row md:space-x-6  md:space-y-0">
+                <div class="flex flex-col md:flex-row md:space-x-6 md:space-y-0">
                     <span>© 2026 All Rights Reserved.</span>
                     <a href="#" class="hover:text-black">Privacy Policy</a>
                     <a href="#" class="hover:text-black">Terms & Conditions</a>
@@ -200,7 +154,7 @@
         </div>
     </footer>
 
+    <script src="./shop.js"></script>
 </body>
-<script src="./shop.js"></script>
 
-</html
+</html>

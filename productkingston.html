@@ -4,50 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product | Gre@ts</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .swiper-button-prev,
-        .swiper-button-next {
-            color: white;
-            background: black;
-            width: 30px;
-            height: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s;
-        }
-
-        .swiper-button-prev:after,
-        .swiper-button-next:after {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .swiper-button-prev:hover,
-        .swiper-button-next:hover {
-            background: black;
-            transform: scale(1.05);
-        }
-
-        .swiper-pagination-bullet {
-            background: white;
-            opacity: 0.7;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .swiper-pagination-bullet-active {
-            background: #222;
-            opacity: 1;
-        }
-
-        .swiper-scrollbar {
-            display: none;
+        #mainProductImage {
+            transition: opacity 0.2s ease;
         }
     </style>
 </head>
 
 <body>
+
+    <!-- ===== HEADER ===== -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-8 py-4">
@@ -57,7 +26,7 @@
                 <nav>
                     <ul class="flex items-center space-x-8">
                         <li><a href="./shop.html" class="text-black text-sm">NEW</a></li>
-                        <li><a href="./productkingston.html" class="text-black text-sm">MEN</a></li>
+                        <li><a href="./product-detail.html" class="text-black text-sm">MEN</a></li>
                         <li><a href="#" class="text-black text-sm">WOMEN</a></li>
                         <li><a href="#" class="text-black text-sm">OUR STORY</a></li>
                         <li><a href="./shop.html" class="text-red-500 text-sm">SALE</a></li>
@@ -78,77 +47,48 @@
         </div>
     </header>
 
+    <!-- ===== PRODUCT SECTION ===== -->
     <div class="grid grid-cols-1 w-full md:grid-cols-2 gap-2">
+
+        <!-- LEFT: Image Slider -->
         <div class="max-w-20xl w-full bg-white">
-            <div class="bg-gray-100 h-full md:h-[600px]">
-                <div class="swiper h-full w-full">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide flex items-center justify-center gap-3 bg-gray-100">
-                            <img src="Home.img/KING01SG-GLB_1.webp" alt="Kingston" class="w-full h-full object-cover">
-                        </div>
-                        <div class="swiper-slide flex items-center justify-center bg-gray-100">
-                            <img src="Home.img/kingstontaupe1.webp" alt="Kingston" class="w-full h-full object-cover">
-                        </div>
-                        <div class="swiper-slide flex items-center justify-center bg-gray-100">
-                            <img src="Home.img/KING01SG-GLB_7.webp" alt="Kingston taupe detail"
-                                class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-scrollbar"></div>
+            <div class="bg-gray-100 relative" style="min-height: 400px;">
+
+                <!-- Main image -->
+                <div class="relative h-full md:h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
+                    <img id="mainProductImage"
+                        src="https://via.placeholder.com/600x600?text=Loading..."
+                        alt="Product"
+                        class="w-full h-full object-cover">
+
+                    <!-- Prev / Next arrows -->
+                    <button id="sliderPrev"
+                        class="absolute left-2 top-1/2 -translate-y-1/2 bg-black text-white w-8 h-8 flex items-center justify-center text-sm hover:bg-gray-800 transition z-10">
+                        &#8249;
+                    </button>
+                    <button id="sliderNext"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 bg-black text-white w-8 h-8 flex items-center justify-center text-sm hover:bg-gray-800 transition z-10">
+                        &#8250;
+                    </button>
                 </div>
+
+                <!-- Dots -->
+                <div id="sliderDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10"></div>
             </div>
 
+            <!-- Thumbnails strip -->
+            <div id="sliderWrapper" class="flex gap-2 p-3 overflow-x-auto bg-white border-t border-gray-200"></div>
+
+            <!-- Description -->
             <div class="p-6 md:p-8 border-t border-gray-200">
                 <hr class="border-t border-gray-300 mt-6 mb-4">
                 <h2 class="text-xl mb-2">DESCRIPTION</h2>
-                <p class="mb-6 text-sm leading-relaxed">
-                    Introducing The Kingston. A modern take on old-school style. Handcrafted in Portugal from premium
-                    suede, the upper delivers a soft, velvety texture with natural flexibility—creating a broken-in feel
-                    from the
-                    very first wear. Don't settle for less and see for yourself why these sneakers are ahead of the
-                    game.
+                <p id="productDescription" class="mb-6 text-sm leading-relaxed text-gray-700">
+                    Loading product description...
                 </p>
-                <h3 class="text-sm font-semibold mb-4">What makes them Great</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 flex-shrink-0 mt-0.5">
-                            <span class="text-sm">Handcrafted in Portugal</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 flex-shrink-0 mt-0.5">
-                            <span class="text-sm">Lined with a combination of soft sheep leather and TENCEL, a
-                                sustainable alternative to cotton made from wood pulp</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 flex-shrink-0 mt-0.5">
-                            <span class="text-sm">Custom GREATS flex sole design</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 flex-shrink-0 mt-0.5">
-                            <span class="text-sm">Comes with a second set of cotton laces</span>
-                        </div>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 flex-shrink-0 mt-0.5">
-                            <span class="text-sm">Suede</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 flex-shrink-0 mt-0.5">
-                            <span class="text-sm">Ergonomic cut on tongue for the best fit</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <img src="./Home.img/full-stop.png" alt="" class="w-5 h-5 mt-6 flex-shrink-0 mt-0.5">
-                            <span class="text-sm mt-6">Strobel construction for flexibility and lighter weight</span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
+            <!-- Accordion -->
             <div class="p-8">
                 <div class="divide-y divide-gray-200 border-t border-b border-gray-200">
                     <div class="flex items-center p-6 justify-between py-4">
@@ -158,7 +98,7 @@
                         </a>
                     </div>
                     <div class="flex p-6 items-center justify-between py-4">
-                        <span class="text-[17px] ftext-gray-900">SHIPPING & RETURNS</span>
+                        <span class="text-[17px] text-gray-900">SHIPPING & RETURNS</span>
                         <a href="#" class="cursor-pointer">
                             <img src="./Home.img/plus.png" alt="Expand" class="w-5 h-5 text-gray-500">
                         </a>
@@ -173,44 +113,33 @@
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: product details -->
-        <div class="flex flex-col gap-5 p-2 md:p-4">
-            <span
-                class="inline-block border text-gray-800 font-semibold text-xs tracking-wide p-6 px-2 py-1 uppercase w-fit">
+        <!-- RIGHT: Product Details -->
+        <div class="flex flex-col gap-5 p-4 md:p-6">
+            <span class="inline-block border text-gray-800 font-semibold text-xs tracking-wide px-2 py-1 uppercase w-fit">
                 NEW
             </span>
-            <h1 class="text-xl md:text-xl font-semibold leading-tight tracking-tight text-gray-900">
-                THE KINGSTON
+
+            <h1 id="productTitle" class="text-xl md:text-2xl font-semibold leading-tight tracking-tight text-gray-900">
+                Loading...
             </h1>
-            <div class="text-xl font-semibold text-gray-800 pb-3">
-                $199.00
-            </div>
-            <div class="inline-flex items-center">
-                <button
-                    class="text-base p-1 w-60 font-medium text-white bg-black rounded-2xl cursor-pointer">Men</button>
-                <button
-                    class="text-base p-1 w-60 font-medium bg-gray-50 rounded-2xl text-black cursor-pointer">Women</button>
-            </div>
-            <div class="gap-4">
-                <p class="text-lg font-medium text-gray-700">Color: Taupe</p>
-                <p class="text-[15px] mt-3">Limited Edition</p>
-                <div class="flex gap-2 mt-4">
-                    <a href=""><img src="./Home.img/shoe1.webp" alt="Image 1" class="h-12 w-12"></a>
-                    <a href=""><img src="./Home.img/shoe2.webp" alt="Image 2" class="h-12 w-12"></a>
-                    <a href=""><img src="./Home.img/shoe3.webp" alt="Image 3" class="h-12 w-12"></a>
-                    <a href="./productkingston.html"><img src="./Home.img/shoe4.webp" alt="Image 4"
-                            class="h-12 w-12"></a>
-                    <a href=""><img src="./Home.img/shoe5.webp" alt="Image 5" class="h-12 w-12"></a>
-                </div>
+
+            <div id="productPrice" class="text-xl font-semibold text-gray-800 pb-3">
+                $—
             </div>
 
+            <div class="inline-flex items-center">
+                <button class="text-base p-1 w-60 font-medium text-white bg-black rounded-2xl cursor-pointer">Men</button>
+                <button class="text-base p-1 w-60 font-medium bg-gray-50 rounded-2xl text-black cursor-pointer">Women</button>
+            </div>
+
+            <div class="gap-4">
+                <p id="productColor" class="text-lg font-medium text-gray-700">Color: —</p>
+                <p class="text-[15px] mt-3">Limited Edition</p>
+            </div>
+
+            <!-- Size selector -->
             <div class="bg-white">
-                <button
-                    class="flex items-center justify-center cursor-pointer gap-2 bg-black text-white font-semibold py-1 px-3 w-60 mb-6">
-                    <span class="text-xl"><img src="./Home.img/foot.png" alt=""></span> Find Your Shoe Size With A
-                    Quick Scan <img src="./Home.img/right.png" alt="">
-                </button>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center flex-wrap">
                         <span class="font-medium text-gray-900">Select size:</span>
                         <span class="text-sm italic px-3 py-1">This style runs true to size.</span>
@@ -219,150 +148,117 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-3 justify-items-center">
+            <div class="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-5 lg:grid-cols-7 gap-3 justify-items-center">
+                <!-- Size 7 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size7" name="size" value="7"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">7
-                    </div>
+                    <input type="radio" id="size7" name="size" value="7" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">7</div>
                 </div>
+                <!-- Size 8 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size8" name="size" value="8"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">8
-                    </div>
+                    <input type="radio" id="size8" name="size" value="8" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">8</div>
                 </div>
+                <!-- Size 8.5 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size8.5" name="size" value="8.5"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        8.5</div>
+                    <input type="radio" id="size8_5" name="size" value="8.5" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">8.5</div>
                 </div>
+                <!-- Size 9 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size9" name="size" value="9"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">9
-                    </div>
+                    <input type="radio" id="size9" name="size" value="9" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">9</div>
                 </div>
+                <!-- Size 9.5 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size9.5" name="size" value="9.5"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        9.5</div>
+                    <input type="radio" id="size9_5" name="size" value="9.5" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">9.5</div>
                 </div>
+                <!-- Size 10 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size10" name="size" value="10"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        10</div>
+                    <input type="radio" id="size10" name="size" value="10" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">10</div>
                 </div>
+                <!-- Size 10.5 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size10.5" name="size" value="10.5"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        10.5</div>
+                    <input type="radio" id="size10_5" name="size" value="10.5" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">10.5</div>
                 </div>
+                <!-- Size 11 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size11" name="size" value="11"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        11</div>
+                    <input type="radio" id="size11" name="size" value="11" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">11</div>
                 </div>
+                <!-- Size 11.5 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size11.5" name="size" value="11.5"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        11.5</div>
+                    <input type="radio" id="size11_5" name="size" value="11.5" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">11.5</div>
                 </div>
+                <!-- Size 12 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size12" name="size" value="12"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        12</div>
+                    <input type="radio" id="size12" name="size" value="12" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">12</div>
                 </div>
+                <!-- Size 13 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size13" name="size" value="13"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        13</div>
+                    <input type="radio" id="size13" name="size" value="13" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">13</div>
                 </div>
+                <!-- Size 14 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size14" name="size" value="14"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        14</div>
+                    <input type="radio" id="size14" name="size" value="14" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">14</div>
                 </div>
+                <!-- Size 15 -->
                 <div class="flex flex-col items-center">
-                    <input type="radio" id="size15" name="size" value="15"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        15</div>
-                </div>
-                <div class="flex flex-col items-center">
-                    <input type="radio" id="size16" name="size" value="16"
-                        class="w-4 h-4 text-black focus:ring-black mb-1">
-                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">
-                        16</div>
+                    <input type="radio" id="size15" name="size" value="15" class="w-4 h-4 text-black focus:ring-black mb-1">
+                    <div class="bg-gray-200 text-black font-medium text-sm w-11 h-11 flex items-center justify-center">15</div>
                 </div>
             </div>
 
-            <button id="add-to-cart-btn" class="w-full cursor-pointer bg-black text-white font-semibold py-3">
+            <button id="add-to-cart-btn"
+                class="w-full cursor-pointer bg-black text-white font-semibold py-3 transition">
                 ADD TO CART
             </button>
 
             <div class="text-sm text-gray-600 text-center space-y-1">
-                <p>4 interest-free installments, or from $17.96/mo with <span class="font-medium">shop Pay</span></p>
-                <a href="#" class="text-gray-800 underline underline-offset-2 hover:text-black inline-block">Check your
-                    purchasing power</a>
+                <p>4 interest-free installments, or from $17.96/mo with <span class="font-medium">Shop Pay</span></p>
+                <a href="#" class="text-gray-800 underline underline-offset-2 hover:text-black inline-block">Check your purchasing power</a>
             </div>
 
-            <button id="unlock-btn" class="w-full cursor-pointer bg-white border text-black font-semibold py-2">
+            <button class="w-full cursor-pointer bg-white border text-black font-semibold py-2">
                 Unlock 15% of your order*
             </button>
 
             <div class="gap-4">
-                <p class="text-sm mb-3">Based in <span class="text-bold">Brooklyn, NY</span></p>
-                <p class="text-sm mb-3">Handcrafted in <span class="text-bold">Portugal</span></p>
-                <p class="text-sm mb-3">Shipping from the <span class="text-bold">United States US</span></p>
+                <p class="text-sm mb-3">Based in <span class="font-bold">Brooklyn, NY</span></p>
+                <p class="text-sm mb-3">Handcrafted in <span class="font-bold">Portugal</span></p>
+                <p class="text-sm mb-3">Shipping from the <span class="font-bold">United States US</span></p>
             </div>
         </div>
     </div>
 
-    <div
-        class="grid grid-cols-1 md:grid-cols-2 bg-gray-100 mt-14 mb-6 rounded-[15px] max-w-6xl mx-auto px-6 md:px-18 py-8">
+    <!-- ===== PRESS BLOCK ===== -->
+    <div class="grid grid-cols-1 md:grid-cols-2 bg-gray-100 mt-14 mb-6 rounded-[15px] max-w-6xl mx-auto px-6 md:px-18 py-8">
         <div class="ml-0 md:ml-20 mb-6 md:mb-0">
             <img src="./Home.img/stars.png" alt="stars" class="w-20 h-20">
-            <p class="text-black font-bold text-[20px]">Over 11k </p>
-            <p class="text-black font-bold text-[20px]"> 5-star reviews </p>
+            <p class="text-black font-bold text-[20px]">Over 11k</p>
+            <p class="text-black font-bold text-[20px]">5-star reviews</p>
         </div>
         <div class="space-y-8 items-center">
             <p class="text-black text-center items-center italic text-lg leading-relaxed">
                 "If you want a sneaker you can be confident looks good at the office or on a date, these are it."
             </p>
             <div class="flex flex-wrap items-center gap-6">
-                <img src="Home.img/1.webp" alt="Equipe" class="h-8 w-auto object-contain">
-                <img src="Home.img/2.avif" alt="Word" class="h-8 object-contain">
-                <img src="Home.img/3.avif" alt="BUSINESS INSIDER" class="h-8 w-auto object-contain">
-                <img src="Home.img/4.webp" alt="BuzzFeed" class="h-8 w-auto object-contain">
+                <img src="Home.img/1.webp" alt="Press 1" class="h-8 w-auto object-contain">
+                <img src="Home.img/2.avif" alt="Press 2" class="h-8 object-contain">
+                <img src="Home.img/3.avif" alt="Press 3" class="h-8 w-auto object-contain">
+                <img src="Home.img/4.webp" alt="Press 4" class="h-8 w-auto object-contain">
             </div>
         </div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
-        <h2 class="text-2xl font-serif text-gray-900">YOU MIGHT ALSO LIKE</h2>
-        <div class="flex gap-3">
-            <a href="#" id="filterLink" class="inline-block">
-                <img src="./Home.img/222.png" alt="Filter" class="w-6 h-6 cursor-pointer">
-            </a>
-            <a href="#" id="gridToggleLink" class="inline-block">
-                <img src="./Home.img/right-arrow.png" alt="Grid" class="w-6 h-6 cursor-pointer">
-            </a>
-        </div>
-    </div>
-
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6"></div>
-
-    <!-- Overall Rating Block -->
+    <!-- ===== REVIEWS ===== -->
     <div class="flex flex-col sm:flex-row bg-gray-100 mt-12 gap-8 p-6 md:p-12 rounded-lg">
         <div class="flex items-start gap-4">
             <span class="text-4xl mt-5 font-semibold">4.9</span>
@@ -371,8 +267,7 @@
                 <p class="text-gray-600 text-left leading-tight">24 Reviews</p>
             </div>
         </div>
-        <div
-            class="border-t-2 sm:border-t-0 sm:border-l-2 border-gray-300 pt-6 sm:pt-0 sm:mt-10 sm:pl-8 flex flex-col gap-6">
+        <div class="border-t-2 sm:border-t-0 sm:border-l-2 border-gray-300 pt-6 sm:pt-0 sm:mt-10 sm:pl-8 flex flex-col gap-6">
             <div>
                 <h3 class="text-sm font-bold">Rating</h3>
                 <input type="range" min="0" max="100" value="100" disabled class="w-full max-w-[180px] my-2">
@@ -386,230 +281,8 @@
         </div>
     </div>
 
-    <div class="bg-gray-100 p-6 md:p-15">
-        <div class="border-t mb-20 border-gray-300"></div>
-        <div class="border-b border-gray-300 mt-2"></div>
-    </div>
-
-    <!-- Reviews -->
-    <div class="">
-        <!-- Jeff B. -->
-        <div class="flex flex-col sm:flex-row gap-4 border-b border-gray-300 bg-gray-100">
-            <div class="flex flex-col p-6 sm:p-20 gap-3 sm:mb-30">
-                <div class="font-semibold text-gray-900">Jeff B. US</div>
-                <div class="flex items-center gap-2">
-                    <img src="./Home.img/checkmark.png" alt="Verified" class="w-5 h-5">
-                    <span class="text-sm text-black px-2 py-0.5 rounded-full">Verified Buyer</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Age</span>
-                    <span>65+</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Your Size</span>
-                    <span>8.5</span>
-                </div>
-            </div>
-            <div class="flex-1 mt-4 sm:mt-12 px-6 pb-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="./Home.img/stars.png" alt="Quality" class="w-24 h-20">
-                        <span class="font-medium text-gray-800">Better than advertised</span>
-                    </div>
-                    <span class="text-gray-500 sm:p-6 text-sm">12/17/25</span>
-                </div>
-                <p class="text-gray-700 mb-6">
-                    Very soft and comfortable. Looking forward to enjoying the journey. Size was spot on for me
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
-                    <div>
-                        <h3 class="font-bold text-sm">Fit</h3>
-                        <input type="range" min="0" max="100" value="60" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm font-semibold text-center">True to Size</p>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-bold">Rating</h3>
-                        <input type="range" min="0" max="100" value="100" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm ml-14 font-semibold">Very Comfortable...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Rahul R. -->
-        <div class="flex flex-col sm:flex-row gap-4 border-b border-gray-300 bg-gray-100">
-            <div class="flex flex-col p-6 sm:p-20 gap-3">
-                <div class="font-semibold text-gray-900">Rahul R. US</div>
-                <div class="flex items-center gap-2">
-                    <img src="./Home.img/checkmark.png" alt="Verified" class="w-5 h-5">
-                    <span class="text-sm text-black px-2 py-0.5 rounded-full">Verified Buyer</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Age</span>
-                    <span>45-54</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Your Size</span>
-                    <span>9.5</span>
-                </div>
-            </div>
-            <div class="flex-1 mt-4 sm:mt-8 px-6 pb-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="./Home.img/stars.png" alt="Stars" class="w-24 h-20">
-                        <span class="font-medium text-gray-800">Great, no pun intended</span>
-                    </div>
-                    <span class="text-gray-500 sm:p-6 text-sm">12/04/25</span>
-                </div>
-                <p class="text-gray-700 mb-6">
-                    The colorway was really nice and a very comfortable sneaker.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
-                    <div>
-                        <h3 class="font-bold text-sm">Fit</h3>
-                        <input type="range" min="0" max="100" value="60" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm font-semibold text-center">True to Size</p>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-bold">Rating</h3>
-                        <input type="range" min="0" max="100" value="100" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm ml-14 font-semibold">Very Comfortable...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Edward K. -->
-        <div class="flex flex-col sm:flex-row gap-4 border-b border-gray-300 bg-gray-100">
-            <div class="flex flex-col p-6 sm:p-20 gap-3">
-                <div class="font-semibold text-gray-900">Edward K. US</div>
-                <div class="flex items-center gap-2">
-                    <img src="./Home.img/checkmark.png" alt="Verified" class="w-5 h-5">
-                    <span class="text-sm text-black px-2 py-0.5 rounded-full">Verified Buyer</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Age</span>
-                    <span>55-64</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Your Size</span>
-                    <span>11</span>
-                </div>
-            </div>
-            <div class="flex-1 mt-4 sm:mt-8 px-6 pb-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="./Home.img/stars.png" alt="Stars" class="w-24 h-20">
-                        <span class="font-medium text-gray-800">Nice kicks</span>
-                    </div>
-                    <span class="text-gray-500 sm:p-6 text-sm">12/04/25</span>
-                </div>
-                <p class="text-gray-700 mb-6">
-                    Enjoying them right out of the box. Opted for the black laces that came with them.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
-                    <div>
-                        <h3 class="font-bold text-sm">Fit</h3>
-                        <input type="range" min="0" max="100" value="60" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm font-semibold text-center">True to Size</p>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-bold">Rating</h3>
-                        <input type="range" min="0" max="100" value="80" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm ml-14 font-semibold">Comfortable</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Justin S. -->
-        <div class="flex flex-col sm:flex-row gap-4 border-b border-gray-300 bg-gray-100">
-            <div class="flex flex-col p-6 sm:p-20 gap-3">
-                <div class="font-semibold text-gray-900">Justin S. US</div>
-                <div class="flex items-center gap-2">
-                    <img src="./Home.img/checkmark.png" alt="Verified" class="w-5 h-5">
-                    <span class="text-sm text-black px-2 py-0.5 rounded-full">Verified Buyer</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Age</span>
-                    <span>35-44</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Your Size</span>
-                    <span>9</span>
-                </div>
-            </div>
-            <div class="flex-1 mt-4 sm:mt-8 px-6 pb-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="./Home.img/stars.png" alt="Stars" class="w-24 h-20">
-                        <span class="font-medium text-gray-800">Good looking shoe</span>
-                    </div>
-                    <span class="text-gray-500 sm:p-6 text-sm">12/17/25</span>
-                </div>
-                <p class="text-gray-700 mb-6">
-                    Love the style, but they run a little large, and squeak a lot when walking in them.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
-                    <div>
-                        <h3 class="font-bold text-sm">Fit</h3>
-                        <input type="range" min="0" max="100" value="30" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm font-semibold text-center">Too Large</p>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-bold">Rating</h3>
-                        <input type="range" min="0" max="100" value="100" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm ml-14 font-semibold">Very Comfortable...</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Patrick M. -->
-        <div class="flex flex-col sm:flex-row gap-4 border-b border-gray-300 bg-gray-100">
-            <div class="flex flex-col p-6 sm:p-20 gap-3">
-                <div class="font-semibold text-gray-900">Patrick M. US</div>
-                <div class="flex items-center gap-2">
-                    <img src="./Home.img/checkmark.png" alt="Verified" class="w-5 h-5">
-                    <span class="text-sm text-black px-2 py-0.5 rounded-full">Verified Buyer</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Age</span>
-                    <span>35-44</span>
-                </div>
-                <div class="flex justify-between gap-8 text-gray-700">
-                    <span class="font-medium text-gray-400">Your Size</span>
-                    <span>12</span>
-                </div>
-            </div>
-            <div class="flex-1 mt-4 sm:mt-8 px-6 pb-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
-                    <div class="flex items-center gap-2">
-                        <img src="./Home.img/stars.png" alt="Stars" class="w-24 h-20">
-                        <span class="font-medium text-gray-800">Quaity</span>
-                    </div>
-                    <span class="text-gray-500 sm:p-6 text-sm">12/17/25</span>
-                </div>
-                <p class="text-gray-700 mb-6">
-                    High quality shoes. Fit is very good, maybe slightly wider than standard but good. Very nice.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
-                    <div>
-                        <h3 class="font-bold text-sm">Fit</h3>
-                        <input type="range" min="0" max="100" value="60" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm font-semibold text-center">True to Size</p>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-bold">Rating</h3>
-                        <input type="range" min="0" max="100" value="80" disabled class="w-full max-w-[200px]">
-                        <p class="text-black text-sm ml-14 font-semibold">Comfortable</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
+    <!-- ===== RECENTLY VIEWED ===== -->
+    <div class="max-w-6xl mx-auto px-4 mb-2 mt-16 flex items-center justify-between">
         <h2 class="text-2xl font-serif text-gray-900">RECENTLY VIEWED</h2>
         <div class="flex gap-3">
             <a href="#" id="filterLink" class="inline-block">
@@ -621,16 +294,15 @@
         </div>
     </div>
 
-    <div id="recently-viewed-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-4 gap-4"></div>
+    <div id="recently-viewed-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-4 gap-4 mb-8"></div>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer class="bg-gray-100 border-t border-gray-200 pt-12 pb-6 mt-10 px-4 md:px-8 lg:px-16">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">
                 <div>
                     <h2 class="text-[50px] font-serif mb-3">Stay in the Know</h2>
-                    <p class="text-gray-600 mb-5">Be the first to know about new drops and get access to exclusive
-                        offers.</p>
+                    <p class="text-gray-600 mb-5">Be the first to know about new drops and get access to exclusive offers.</p>
                     <div id="newsletterForm" class="flex flex-col sm:flex-row gap-3">
                         <input type="email" id="emailInput" placeholder="Enter Email"
                             class="flex-grow px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
@@ -640,7 +312,7 @@
                         </button>
                     </div>
                     <div id="successMessage" class="hidden text-green-600 font-medium mt-4">
-                        <i class="fas fa-check-circle mr-2"></i>You are subscribed successfully!!
+                        You are subscribed successfully!!
                     </div>
                     <div id="errorMessage" class="hidden text-red-500 text-sm mt-2"></div>
                 </div>
@@ -682,14 +354,10 @@
                 </div>
             </div>
             <div class="flex space-x-3">
-                <a href="#" class="block"><img src="./Home.img/instagram.png" alt="Instagram"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
-                <a href="#" class="block"><img src="./Home.img/facebook-app-symbol.png" alt="Facebook"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
-                <a href="#" class="block"><img src="./Home.img/twitter.png" alt="Twitter"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
-                <a href="#" class="block"><img src="./Home.img/youtube.png" alt="YouTube"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/instagram.png" alt="Instagram" class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/facebook-app-symbol.png" alt="Facebook" class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/twitter.png" alt="Twitter" class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/youtube.png" alt="YouTube" class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
             </div>
             <div class="pt-6 flex flex-col md:flex-row items-start md:items-center text-sm text-gray-600">
                 <img src="./Home.img/GREATS_LOGO_RIBBON_1_resize.png" alt="GREATS" class="h-6 w-auto mb-4 md:mb-0">
@@ -704,8 +372,7 @@
         </div>
     </footer>
 
-
-    <!-- Right Side Drawer (No Overlay) -->
+    <!-- ===== CART MODAL ===== -->
     <div id="cartModal"
         class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 ease-in-out translate-x-full z-50 hidden">
         <div class="flex flex-col h-full">
@@ -719,85 +386,49 @@
                 <div class="w-100 mx-auto h-2 bg-black mb-6 rounded-full"></div>
             </div>
 
-            <div class="flex-1  overflow-y-auto ">
-<!-- 
-                <div class="flex gap-4 mb-6">
-                    <img id="modalProductImage" src="" alt="Product" class="w-25 h-25 p-3 object-cover ">
-                    <div class="flex-1">
-                        <h3 id="modalProductName" class="font-semibold text-gray-900"></h3>
-                        <p id="modalProductColor" class="text-sm text-gray-600"></p>
-                        <p class="text-sm text-gray-600 mt-1">
-                            <span class="font-medium">Taupe | Size:</span> <span id="modalSelectedSize"
-                                class="text-sm"></span>
-                        </p>
-                        <div class="flex items-center justify-between mt-2">
-                            <div class="flex items-center border ">
-                                <button id="decrementQty"
-                                    class="px-3 py-1 border-r text-gray-600 hover:bg-gray-100">-</button>
-                                <span id="modalQuantity" class="px-3 py-1 text-gray-900">1</span>
-                                <button id="incrementQty"
-                                    class="px-3 py-1 border-l text-gray-600 hover:bg-gray-100">+</button>
-                            </div>
-                            <span id="modalItemPrice" class="font-semibold text-gray-900"></span>
-                        </div>
-                    </div>
-                </div> -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Cart items -->
+                <div id="cartItemsContainer"></div>
 
-                <div class="flex-1 overflow-y-auto">
-                    <div id="cartItemsContainer"></div>
-                </div>
-
-                <!-- Build Your Bundle Section -->
-                <div class=" p-3 pt-4 mb-4">
+                <!-- Build Your Bundle -->
+                <div class="p-3 pt-4 mb-4">
                     <p class="text-xl font-medium text-gray-900 mb-3">BUILD YOUR BUNDLE</p>
                     <div class="space-y-3">
-                        <!-- Bundle Item 1 -->
                         <div class="flex items-center p-3 gap-3">
                             <img src="./Home.img/cart1.webp" alt="No Show Sock" class="w-18 h-18 object-cover rounded">
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-900">No Show Sock - Blanco</p>
                                 <p class="text-sm text-black">$12.00</p>
                             </div>
-                            <button
-                                class="px-3 py-1 text-xs font-medium text-black cursor-pointer border border-gray-300 ">
-                                ADD
-                            </button>
+                            <button class="px-3 py-1 text-xs font-medium text-black cursor-pointer border border-gray-300">ADD</button>
                         </div>
-                        <!-- Bundle Item 2 -->
                         <div class="flex items-center p-3 gap-3">
                             <img src="./Home.img/cart2.webp" alt="Suede Eraser" class="w-18 h-18 object-cover rounded">
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-900">Suede Eraser</p>
                                 <p class="text-sm text-black">$9.00</p>
                             </div>
-                            <button class="px-3 py-1 text-xs font-medium cursor-pointer border border-gray-300  ">
-                                ADD
-                            </button>
+                            <button class="px-3 py-1 text-xs font-medium cursor-pointer border border-gray-300">ADD</button>
                         </div>
-                        <!-- Bundle Item 3 -->
                         <div class="flex items-center p-3 gap-3">
-                            <img src="./Home.img/cart3.webp" alt="GREATS Premium Waxed Laces"
-                                class="w-18 h-18 object-cover rounded">
+                            <img src="./Home.img/cart3.webp" alt="GREATS Premium Waxed Laces" class="w-18 h-18 object-cover rounded">
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-900">GREATS Premium Waxed Laces - Blanco</p>
                                 <p class="text-sm text-black">$10.00</p>
                             </div>
-                            <button
-                                class="px-3 py-1 text-xs font-medium cursor-pointer text-black border border-gray-300 ">
-                                ADD
-                            </button>
+                            <button class="px-3 py-1 text-xs font-medium cursor-pointer text-black border border-gray-300">ADD</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Fixed Footer -->
-                <div class="border-t p-4 sticky bottom-0   bg-gray-100">
+                <!-- Footer totals -->
+                <div class="border-t p-4 sticky bottom-0 bg-gray-100">
                     <div class="flex justify-between items-center mb-4">
                         <span class="text-xl font-semibold">SUBTOTAL</span>
-                        <span id="modalSubtotal" class="text-lg font-bold">$199.00</span>
+                        <span id="modalSubtotal" class="text-lg font-bold">$0.00</span>
                     </div>
                     <p class="text-xs text-black ml-25 mb-3">
-                        or 4 interest-free installments of <span id="installmentAmount">$49.75</span> with Shop Pay
+                        or 4 interest-free installments of <span id="installmentAmount">$0.00</span> with Shop Pay
                     </p>
                     <button id="checkoutBtn"
                         class="w-full bg-black text-white py-3 rounded font-medium hover:bg-gray-800 transition">
@@ -810,8 +441,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <script src="./productkingston.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-<script src="./productkingston.js"></script>
 
 </html>

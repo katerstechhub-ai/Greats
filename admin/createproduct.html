@@ -29,7 +29,7 @@
             }
         }
 
-        /* Mobile menu toggle */
+        
         .sidebar-mobile {
             transition: transform 0.3s ease;
         }
@@ -44,7 +44,7 @@
 
 <body class="bg-gray-50">
     <div class="grid grid-cols-1 md:grid-cols-5 min-h-screen">
-        <!-- Sidebar - Responsive -->
+       
        <div class="col-span-1 bg-green-800 border-r border-gray-200 md:relative fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-30 w-64 md:w-auto sidebar-mobile"
             id="sidebar">
             <div class="p-4 md:p-6 border-b border-gray-200">
@@ -102,9 +102,9 @@
             </ul>
         </div>
 
-        <!-- Main Content - Responsive -->
+        
         <div class="col-span-1 md:col-span-4 p-4 md:p-6 min-h-screen">
-            <!-- Mobile Menu Button -->
+         
             <div class="md:hidden mb-4 flex justify-between items-center">
                 <button id="menuToggleBtn" class="text-gray-600 hover:text-gray-900">
                     <i class="fas fa-bars text-2xl"></i>
@@ -139,12 +139,12 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- Price -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Price (₦) *</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Price ($) *</label>
                             <input type="number" id="price" step="0.01" required
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="25930.67">
+                                placeholder="200.00">
                         </div>
-                        <!-- Quantity -->
+                      
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Quantity *</label>
                             <input type="number" id="quantity" required
@@ -153,7 +153,7 @@
                         </div>
                     </div>
 
-                    <!-- Images -->
+                   
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Images (URLs, one per line)</label>
                         <textarea id="images" rows="2"
@@ -162,7 +162,7 @@
                         <p class="text-xs text-gray-500 mt-1">Maximum 5 images. One URL per line.</p>
                     </div>
 
-                    <!-- Category Selection with Delete Button -->
+                   
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                         <div class="flex flex-col sm:flex-row gap-2">
@@ -184,35 +184,35 @@
                         <p class="text-xs text-gray-500 mt-1">Select a category for this product. Click "New" to create categories, "Delete" to manage existing ones.</p>
                     </div>
 
-                    <!-- Optional fields -->
+                   
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Brand (optional)</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
                             <input type="text" id="brand"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="e.g., Nike">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Min. Order Qty (optional)</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Min. Order Qty</label>
                             <input type="number" id="minQty"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="2">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Max. Order Qty (optional)</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Max. Order Qty</label>
                             <input type="number" id="maxQty"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="5">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount (%) (optional)</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Discount (%)</label>
                             <input type="number" id="discount" step="0.01"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="0">
                         </div>
                     </div>
 
-                    <!-- Submit Buttons -->
+                    
                     <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-4">
                         <button type="button" id="cancelBtn"
                             class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">Cancel</button>
@@ -222,7 +222,7 @@
                 </form>
             </div>
 
-            <!-- Sign Out Button - Below Form -->
+            
             <div class="mt-6 text-center">
                 <a href="#" id="signOutBtn" class="inline-block text-gray-600 hover:text-red-500 transition text-sm md:text-base">
                     <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
@@ -231,7 +231,7 @@
         </div>
     </div>
 
-    <!-- Category Management Modal (for deleting categories) -->
+    
     <div id="categoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
             <div class="flex justify-between items-center p-4 border-b">
@@ -258,15 +258,14 @@
         </div>
     </div>
 
-    <!-- Overlay for mobile sidebar -->
     <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-20 md:hidden"></div>
 
-    <!-- Toast Container -->
+   
     <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
 
     <script src="./createproduct.js"></script>
     <script>
-        // Mobile sidebar toggle
+        
         const menuToggle = document.getElementById('menuToggleBtn');
         const sidebar = document.getElementById('sidebar');
         const closeSidebar = document.getElementById('closeSidebarBtn');
