@@ -315,7 +315,7 @@
 
 
 const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
-const merchantId = localStorage.getItem('merchantId');
+const merchantId = '69c2565d1595cbe8104544cb';
 const authToken = localStorage.getItem('authToken');
 
 // ========== State ==========
@@ -643,3 +643,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+console.log(JSON.stringify(localStorage))
