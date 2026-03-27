@@ -1,10 +1,10 @@
-// ========== DOM Elements ==========
+// DOM Elements
 const totalProductsEl = document.getElementById('totalProducts');
 const totalUsersEl = document.getElementById('totalUsers');
 const totalCartItemsEl = document.getElementById('totalCartItems');
 const productTableBody = document.getElementById('productTableBody');
 
-// ========== API Configuration ==========
+//API Configuration 
 const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
 
 const merchantId = localStorage.getItem('merchantId');
@@ -17,7 +17,7 @@ if (!merchantId || !authToken) {
     }, 1500);
 }
 
-// ========== Toast Notification ==========
+//  Toast Notification
 function showToast(message, type = 'info') {
     let toastContainer = document.getElementById('toastContainer');
     if (!toastContainer) {
@@ -61,7 +61,7 @@ function showToast(message, type = 'info') {
     });
 }
 
-// ========== Helper: fetch with auth ==========
+//  Helper: fetch with auth 
 async function fetchAPI(url, errorContext = 'API call') {
     try {
         console.log(`Fetching: ${url}`);
@@ -81,7 +81,7 @@ async function fetchAPI(url, errorContext = 'API call') {
     }
 }
 
-// ========== Helper: extract array from API response ==========
+//  Helper: extract array from API response 
 // Also reads total count from common pagination fields
 function extractDataArray(response, defaultValue = []) {
     if (!response) return defaultValue;
@@ -109,7 +109,7 @@ function extractTotalCount(response, fallbackArray) {
     return fallbackArray.length;
 }
 
-// ========== Fetch all categories to create name lookup ==========
+//  Fetch all categories to create name lookup 
 async function fetchCategoryMap() {
     const categoriesResponse = await fetchAPI(
         `${API_BASE}/categories?merchant_id=${merchantId}`,
@@ -128,7 +128,7 @@ async function fetchCategoryMap() {
     return categoryMap;
 }
 
-// ========== Load card statistics ==========
+//  Load card statistics 
 async function loadStats() {
     try {
         // 1. Total products — use pagination total if available, not array length
@@ -173,7 +173,7 @@ async function loadStats() {
     }
 }
 
-// ========== Load product table with category names ==========
+//  Load product table with category names 
 async function loadProducts() {
     try {
         const [categoryMap, productsResponse] = await Promise.all([
@@ -206,7 +206,7 @@ async function loadProducts() {
             const catId = product.category_id;
             const categoryName = (catId !== undefined && catId !== null && categoryMap[catId])
                 ? categoryMap[catId]
-                : (product.category_name || 'Uncategorized');
+                : (product.category_name || 'N/A');
 
             return `
                 <tr class="hover:bg-gray-50 transition">
@@ -240,14 +240,14 @@ async function loadProducts() {
     }
 }
 
-// ========== Helper: format price ==========
+// Helper: format price
 function formatPrice(price) {
     if (price === undefined || price === null) return 'N/A';
     const num = parseFloat(price);
-    return isNaN(num) ? price : `₦${num.toFixed(2)}`;
+    return isNaN(num) ? price : `$${num.toFixed(2)}`;
 }
 
-// ========== Helper: escape HTML ==========
+//  Helper: escape HTML 
 function escapeHtml(str) {
     if (!str) return '';
     return str.replace(/[&<>]/g, function (m) {
@@ -258,7 +258,7 @@ function escapeHtml(str) {
     });
 }
 
-// ========== Sign Out ==========
+// Sign Out 
 const signOutBtn = document.getElementById('signOutBtn');
 if (signOutBtn) {
     signOutBtn.addEventListener('click', (e) => {
@@ -272,7 +272,7 @@ if (signOutBtn) {
     });
 }
 
-// ========== CSS Animations ==========
+//  CSS Animations
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
