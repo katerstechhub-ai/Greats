@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // API returns user directly — no nested wrapper
                 localStorage.setItem('customerId', data.id || '');
                 localStorage.setItem('customerName', (data.first_name || '') + ' ' + (data.last_name || ''));
                 localStorage.setItem('customerEmail', data.email || email);

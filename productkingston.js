@@ -692,3 +692,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     initSizeSelector();
     setupEventListeners();
 });
+
+
+
+
+
+
+
