@@ -1,17 +1,14 @@
-// ========== API Configuration ==========
 const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
-
-
-const merchantId = localStorage.getItem('merchantId') || localStorage.getItem('storeMerchantId');
+const merchantId = '69c2565d1595cbe8104544cb';
 const authToken = localStorage.getItem('authToken');
 
-// ========== State ==========
+
 let currentProduct = null;
 let productImages = [];
 let currentSlide = 0;
 let cart = [];
 
-// ========== Helper Functions ==========
+
 function escapeHtml(str) {
     if (!str) return '';
     return String(str)
@@ -58,11 +55,11 @@ function showToast(message, type = 'info') {
     });
 }
 
-// ========== Fetch Product from API ==========
+
 async function fetchProduct(productId) {
     try {
         let headers = authToken ? { 'Authorization': `Bearer ${authToken}` } : {};
-        const response = await fetch(`${API_BASE}/products/${productId}`, { headers });
+        const response = await fetch(`${API_BASE}/products/${productId}?merchant_id=${merchantId}`, { headers });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         let data = await response.json();
@@ -78,12 +75,12 @@ async function fetchProduct(productId) {
     }
 }
 
-// ========== Fetch Category Name ==========
+//Fetch Category Name
 async function fetchCategoryName(categoryId) {
     if (!categoryId) return '';
     try {
         let headers = authToken ? { 'Authorization': `Bearer ${authToken}` } : {};
-        const response = await fetch(`${API_BASE}/categories/${categoryId}`, { headers });
+        const response = await fetch(`${API_BASE}/categories/${categoryId}?merchant_id=${merchantId}`, { headers });
         if (!response.ok) return '';
 
         let data = await response.json();
@@ -151,13 +148,13 @@ function goToSlide(index) {
 function prevSlide() { goToSlide(currentSlide - 1); }
 function nextSlide() { goToSlide(currentSlide + 1); }
 
-// ========== Populate Page ==========
+// Populate Page 
 function populatePage(product, categoryName) {
     let titleEl = document.getElementById('productTitle');
     if (titleEl) titleEl.textContent = product.title || 'Product';
 
     let priceEl = document.getElementById('productPrice');
-    if (priceEl) priceEl.textContent = `₦${Number(product.price).toFixed(2)}`;
+    if (priceEl) priceEl.textContent = `$${Number(product.price).toFixed(2)}`;
 
     let colorEl = document.getElementById('productColor');
     if (colorEl) colorEl.textContent = `Color: ${categoryName || 'N/A'}`;
@@ -193,7 +190,7 @@ function addToRecentlyViewed(product, categoryName) {
             ? product.images
             : ['https://via.placeholder.com/300x200?text=Product'],
         currentIndex: 0,
-        productUrl: `./product-detail.html?id=${product.id}`,
+        productUrl: `./productkingston.html?id=${product.id}`,
         color: categoryName || ''
     };
 
@@ -242,7 +239,7 @@ function renderRecentlyViewed() {
             </a>
             <div class="flex justify-between items-start mt-2">
                 <h3 class="text-lg font-semibold text-gray-800">${escapeHtml(item.name)}</h3>
-                <p class="text-[15px] text-gray-900">₦${Number(item.price).toFixed(2)}</p>
+                <p class="text-[15px] text-gray-900">$${Number(item.price).toFixed(2)}</p>
             </div>
             <p class="text-sm text-gray-600 italic">${escapeHtml(item.color)}</p>
         `;
@@ -250,18 +247,69 @@ function renderRecentlyViewed() {
     }
 }
 
-// ========== Save Cart to API ==========
-// FIX 1: Always send the real merchant_id so the admin's
-//         GET /carts?merchant_id=<id> query finds this cart.
-// FIX 2: PUT to update an existing cart rather than POSTing a
-//         brand-new record every single time saveCart() is called.
+
+// async function saveCartToAPI() {
+//     if (cart.length === 0) return;
+
+//     const cartPayload = {
+//         merchant_id: merchantId,
+//         user_id: localStorage.getItem('customerId') || null,
+//         user_name: localStorage.getItem('customerName') || 'Guest',
+//         items: cart.map(item => ({
+//             product_id: String(item.id),
+//             name: item.name,
+//             size: item.size,
+//             color: item.color,
+//             quantity: item.quantity,
+//             price: Number(item.price),
+//             image: item.image || ''
+//         })),
+//         total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+//         updated_at: new Date().toISOString()
+//     };
+
+//     const headers = {
+//         'Content-Type': 'application/json'
+//     };
+
+//     try {
+//         let cartId = localStorage.getItem('cartSessionId');
+//         let response;
+
+//         if (cartId) {
+//             response = await fetch(`${API_BASE}/carts/${cartId}`, {
+//                 method: 'PUT',
+//                 headers,
+//                 body: JSON.stringify(cartPayload)
+//             });
+//             if (!response.ok) cartId = null;
+//         }
+
+//         if (!cartId) {
+//             response = await fetch(`${API_BASE}/carts`, {
+//                 method: 'POST',
+//                 headers,
+//                 body: JSON.stringify(cartPayload)
+//             });
+//         }
+
+//         if (response && response.ok) {
+//             const result = await response.json();
+//             console.log('Cart synced to API:', result);
+//             const serverId = result.id || result.data?.id || result.cart?.id;
+//             if (serverId) localStorage.setItem('cartSessionId', String(serverId));
+//         } else {
+//             console.warn('Cart sync returned non-OK status:', response?.status);
+//         }
+//     } catch (error) {
+//         console.warn('Cart sync error (non-fatal):', error.message);
+//     }
+// }
+
+// ========== Delete Cart from API ==========
+
 async function saveCartToAPI() {
     if (cart.length === 0) return;
-
-    if (!merchantId) {
-        console.warn('storeMerchantId not set — cart will not appear in admin dashboard.');
-        return;
-    }
 
     const cartPayload = {
         merchant_id: merchantId,
@@ -289,18 +337,15 @@ async function saveCartToAPI() {
         let cartId = localStorage.getItem('cartSessionId');
         let response;
 
-        // Try to update the existing server cart first
         if (cartId) {
             response = await fetch(`${API_BASE}/carts/${cartId}`, {
                 method: 'PUT',
                 headers,
                 body: JSON.stringify(cartPayload)
             });
-            // If the cart no longer exists on the server, fall through to POST
             if (!response.ok) cartId = null;
         }
 
-        // No existing cart — create a new one
         if (!cartId) {
             response = await fetch(`${API_BASE}/carts`, {
                 method: 'POST',
@@ -311,26 +356,26 @@ async function saveCartToAPI() {
 
         if (response && response.ok) {
             const result = await response.json();
-            console.log('Cart synced to API:', result);
-            // Save the server-assigned ID so future saves use PUT not POST
+            console.log('✅ Cart synced to API:', result);
             const serverId = result.id || result.data?.id || result.cart?.id;
             if (serverId) localStorage.setItem('cartSessionId', String(serverId));
         } else {
-            console.warn('Cart sync returned non-OK status:', response?.status);
+            console.warn('Cart sync failed:', response?.status);
         }
     } catch (error) {
-        console.warn('Cart sync error (non-fatal):', error.message);
+        console.warn('Cart sync error:', error.message);
     }
 }
 
-// Remove the server cart when the local cart becomes empty
+
+
 async function deleteCartFromAPI() {
     let cartId = localStorage.getItem('cartSessionId');
     if (!cartId) return;
     try {
         await fetch(`${API_BASE}/carts/${cartId}`, {
             method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${authToken}` }
+            headers: { 'Content-Type': 'application/json' }
         });
         localStorage.removeItem('cartSessionId');
         console.log('Empty cart removed from API');
@@ -339,7 +384,7 @@ async function deleteCartFromAPI() {
     }
 }
 
-// ========== Local Cart Functions ==========
+//  Local Cart Functions 
 function loadCart() {
     let saved = localStorage.getItem('shoppingCart');
     cart = saved ? JSON.parse(saved) : [];
@@ -351,7 +396,6 @@ function saveCart() {
     localStorage.setItem('shoppingCart', JSON.stringify(cart));
     updateCartCount();
     renderCartModal();
-    // Keep server in sync
     if (cart.length === 0) {
         deleteCartFromAPI();
     } else {
@@ -430,7 +474,7 @@ function renderCartModal() {
                             <span class="qty-value px-3 py-1 text-gray-900">${item.quantity}</span>
                             <button class="qty-increment px-3 py-1 border-l text-gray-600 hover:bg-gray-100">+</button>
                         </div>
-                        <span class="font-semibold text-gray-900">₦${Number(item.price).toFixed(2)}</span>
+                        <span class="font-semibold text-gray-900">$${Number(item.price).toFixed(2)}</span>
                     </div>
                 </div>
             </div>
@@ -444,8 +488,8 @@ function updateCartTotals() {
     let subtotal = calculateSubtotal();
     let subtotalSpan = document.getElementById('modalSubtotal');
     let installmentSpan = document.getElementById('installmentAmount');
-    if (subtotalSpan) subtotalSpan.innerText = `₦${subtotal.toFixed(2)}`;
-    if (installmentSpan) installmentSpan.innerText = `₦${(subtotal / 4).toFixed(2)}`;
+    if (subtotalSpan) subtotalSpan.innerText = `$${subtotal.toFixed(2)}`;
+    if (installmentSpan) installmentSpan.innerText = `$${(subtotal / 4).toFixed(2)}`;
 }
 
 function openCartModal() {
@@ -518,7 +562,7 @@ function initSizeSelector() {
     });
 }
 
-// ========== Event Listeners ==========
+// Event Listeners 
 function setupEventListeners() {
     let prevBtn = document.getElementById('sliderPrev');
     let nextBtn = document.getElementById('sliderNext');
@@ -605,7 +649,7 @@ function setupEventListeners() {
     }
 }
 
-// ========== CSS Animations ==========
+//  CSS Animations
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
@@ -619,7 +663,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ========== Main Initialization ==========
+// Main Initialization 
 document.addEventListener('DOMContentLoaded', async function () {
     let params = new URLSearchParams(window.location.search);
     let productId = params.get('id');
@@ -648,8 +692,3 @@ document.addEventListener('DOMContentLoaded', async function () {
     initSizeSelector();
     setupEventListeners();
 });
-
-
-
-
-
