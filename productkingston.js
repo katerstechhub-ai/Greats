@@ -1,4 +1,4 @@
-const API_BASE = 'https://cors-anywhere.herokuapp.com/http://ecommerce.reworkstaging.name.ng/v2';
+const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
 const merchantId = '69c2565d1595cbe8104544cb';
 const authToken = localStorage.getItem('authToken');
 
