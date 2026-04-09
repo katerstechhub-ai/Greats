@@ -1,5 +1,5 @@
 
-const API_BASE = '/api';
+const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
 const merchantId = '69c2565d1595cbe8104544cb';
 const authToken = localStorage.getItem('authToken');
 
