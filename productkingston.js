@@ -60,7 +60,7 @@ async function fetchProduct(productId) {
     try {
         let headers = authToken ? { 'Authorization': `Bearer ${authToken}` } : {};
         const response = await fetch(`${API_BASE}/products/${productId}?merchant_id=${merchantId}`, { headers });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) throw new Error(`HTTPS ${response.status}`);
 
         let data = await response.json();
         console.log('Product data:', data);
