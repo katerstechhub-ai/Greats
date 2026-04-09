@@ -11,6 +11,64 @@
         #mainProductImage {
             transition: opacity 0.2s ease;
         }
+        
+        /* Mobile navigation styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none !important;
+            }
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            .logo-center {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+            .mobile-nav {
+                display: none !important;
+            }
+            .logo-center {
+                position: static;
+                transform: none;
+            }
+        }
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        .mobile-nav.active {
+            left: 0;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .relative-header {
+            position: relative;
+        }
     </style>
 </head>
 
@@ -18,21 +76,33 @@
 
     <!-- ===== HEADER ===== -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-8 py-4">
-                <a href="./index.html">
-                    <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative-header">
+            <div class="flex items-center justify-between py-4">
+                <!-- Mobile Menu Button (left side) -->
+                <button class="mobile-menu-btn text-gray-600 hover:text-gray-900 p-2" id="mobileMenuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Logo - Centered -->
+                <a href="./index.html" class="logo-center">
+                    <div class="text-2xl font-bold text-gray-800 tracking-tight whitespace-nowrap">GREATS</div>
                 </a>
-                <nav>
-                    <ul class="flex items-center space-x-8">
-                        <li><a href="./shop.html" class="text-black text-sm">NEW</a></li>
-                        <li><a href="./product-detail.html" class="text-black text-sm">MEN</a></li>
-                        <li><a href="#" class="text-black text-sm">WOMEN</a></li>
-                        <li><a href="#" class="text-black text-sm">OUR STORY</a></li>
-                        <li><a href="./shop.html" class="text-red-500 text-sm">SALE</a></li>
+
+                <!-- Desktop Navigation (hidden on mobile) -->
+                <nav class="desktop-nav flex-1">
+                    <ul class="flex items-center justify-center space-x-8">
+                        <li><a href="./shop.html" class="text-black text-sm hover:text-gray-600 transition">NEW</a></li>
+                        <li><a href="./product-detail.html" class="text-black text-sm hover:text-gray-600 transition">MEN</a></li>
+                        <li><a href="#" class="text-black text-sm hover:text-gray-600 transition">WOMEN</a></li>
+                        <li><a href="#" class="text-black text-sm hover:text-gray-600 transition">OUR STORY</a></li>
+                        <li><a href="./shop.html" class="text-red-500 text-sm hover:text-red-600 transition">SALE</a></li>
                     </ul>
                 </nav>
-                <div class="flex items-center space-x-4 ml-auto">
+
+                <!-- Icons (right side) -->
+                <div class="flex items-center space-x-4">
                     <a href="#" class="text-gray-600 hidden sm:block hover:text-gray-900">
                         <img src="./Home.img/search-interface-symbol.png" alt="Search" class="w-5 h-5">
                     </a>
@@ -46,6 +116,27 @@
             </div>
         </div>
     </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="p-6">
+            <div class="flex justify-end mb-6">
+                <button id="closeMenuBtn" class="text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <ul class="space-y-4">
+                <li><a href="./shop.html" class="text-black text-lg block py-2 hover:text-gray-600 transition">NEW</a></li>
+                <li><a href="./product-detail.html" class="text-black text-lg block py-2 hover:text-gray-600 transition">MEN</a></li>
+                <li><a href="#" class="text-black text-lg block py-2 hover:text-gray-600 transition">WOMEN</a></li>
+                <li><a href="#" class="text-black text-lg block py-2 hover:text-gray-600 transition">OUR STORY</a></li>
+                <li><a href="./shop.html" class="text-red-500 text-lg block py-2 hover:text-red-600 transition">SALE</a></li>
+            </ul>
+        </div>
+    </div>
 
     <!-- ===== PRODUCT SECTION ===== -->
     <div class="grid grid-cols-1 w-full md:grid-cols-2 gap-2">
@@ -443,6 +534,29 @@
         </div>
     </div>
 
+    <script>
+        // Mobile navigation functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+
+        function openMobileNav() {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileNav);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileNav);
+        if (overlay) overlay.addEventListener('click', closeMobileNav);
+    </script>
     <script src="./productkingston.js"></script>
 </body>
 

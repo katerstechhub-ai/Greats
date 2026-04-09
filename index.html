@@ -7,38 +7,115 @@
     <title>Greats</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+    <style>
+        /* Mobile navigation styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: block !important;
+            }
+
+            .logo-center {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+
+            .mobile-nav {
+                display: none !important;
+            }
+
+            .logo-center {
+                position: static;
+                transform: none;
+            }
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .relative-header {
+            position: relative;
+        }
+    </style>
 </head>
+
 <body>
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-8 py-4">
-                <!-- Logo -->
-                 <a href="./index.html">
-                <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative-header">
+            <div class="flex items-center justify-between py-4">
+                <!-- Mobile Menu Button (left side) -->
+                <button class="mobile-menu-btn text-gray-600 hover:text-gray-900 p-2" id="mobileMenuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Logo - Centered -->
+                <a href="./index.html" class="logo-center">
+                    <div class="text-2xl font-bold text-gray-800 tracking-tight whitespace-nowrap">GREATS</div>
                 </a>
 
-                <!-- Navigation -->
-                <nav>
-                    <ul class="flex  items-center space-x-8">
-                        <li><a href="./shop.html" class="text-black text-sm ">NEW</a></li>
-                        <li><a href="./productkingston.html" class="text-black text-sm ">MEN</a></li>
-                        <li><a href="#" class="text-black text-sm ">WOMEN</a></li>
-                        <li><a href="#" class="text-black text-sm ">OUR STORY</a></li>
-                        <li><a href="./shop.html" class="text-red-500 text-sm ">SALE</a></li>
+                <!-- Desktop Navigation (hidden on mobile) -->
+                <nav class="desktop-nav flex-1">
+                    <ul class="flex items-center justify-center space-x-8">
+                        <li><a href="./shop.html" class="text-black text-sm hover:text-gray-600 transition">NEW</a></li>
+                        <li><a href="./productkingston.html"
+                                class="text-black text-sm hover:text-gray-600 transition">MEN</a></li>
+                        <li><a href="#" class="text-black text-sm hover:text-gray-600 transition">WOMEN</a></li>
+                        <li><a href="#" class="text-black text-sm hover:text-gray-600 transition">OUR STORY</a></li>
+                        <li><a href="./shop.html" class="text-red-500 text-sm hover:text-red-600 transition">SALE</a>
+                        </li>
                     </ul>
                 </nav>
 
-                <!-- Icons -->
-                <div class="flex items-center space-x-4 ml-auto">
-                    <!-- Search icon -->
+                <!-- Icons (right side) -->
+                <div class="flex items-center space-x-4">
                     <a href="#" class="text-gray-600 hidden sm:block hover:text-gray-900">
                         <img src="./Home.img/search-interface-symbol.png" alt="Search" class="w-5 h-5">
                     </a>
-                    <!-- User icon -->
                     <a href="./login.html" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/user.png" alt="User" class="w-5 h-5">
                     </a>
-
                     <a href="./shop.html" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/market.png" alt="Shopping bag" class="w-5 h-5">
                     </a>
@@ -46,35 +123,55 @@
             </div>
         </div>
     </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="p-6">
+            <div class="flex justify-end mb-6">
+                <button id="closeMenuBtn" class="text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <ul class="space-y-4">
+                <li><a href="./shop.html" class="text-black text-lg block py-2 hover:text-gray-600 transition">NEW</a>
+                </li>
+                <li><a href="./productkingston.html"
+                        class="text-black text-lg block py-2 hover:text-gray-600 transition">MEN</a></li>
+                <li><a href="#" class="text-black text-lg block py-2 hover:text-gray-600 transition">WOMEN</a></li>
+                <li><a href="#" class="text-black text-lg block py-2 hover:text-gray-600 transition">OUR STORY</a></li>
+                <li><a href="./shop.html" class="text-red-500 text-lg block py-2 hover:text-red-600 transition">SALE</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <div id="productcontainer" class="grid grid-cols-1 text-center md:grid-cols-2 lg:grid-cols-2 ">
         <!-- Cards will appear here -->
     </div>
 
-
-    <div class="grid grid-cols-1 md:grid-cols-2  bg-gray-100 mt-8 mb-6 rounded-[15px] max-w-6xl mx-auto px-18 py-8">
-        <!-- Left column: stars + review count -->
-        <div class=" ml-20">
-            <img src="./Home.img/stars.png" alt="stars" class="w-20  h-20">
-            <p class="text-black font-bold text-[20px]">Over 11k </p>
-            <p class="text-black font-bold text-[20px]"> 5-star reviews </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 bg-gray-100 mt-8 mb-6 rounded-[15px] max-w-6xl mx-auto px-18 py-8">
+        <div class="ml-20">
+            <img src="./Home.img/stars.png" alt="stars" class="w-20 h-20">
+            <p class="text-black font-bold text-[20px]">Over 11k</p>
+            <p class="text-black font-bold text-[20px]">5-star reviews</p>
         </div>
-
-        <!-- Right column: quote + logos -->
         <div class="space-y-8 items-center">
             <p class="text-black text-center items-center italic text-lg leading-relaxed">
                 "If you want a sneaker you can be confident looks good at the office or on a date, these are it."
             </p>
-            <!-- Logos in a flex row -->
             <div class="flex flex-wrap items-center gap-6">
-                <img src="Home.img/1.webp" alt="Equipe" class="h-8  w-auto object-contain">
-                <img src="Home.img/2.avif" alt="Word" class="h-8  object-contain">
+                <img src="Home.img/1.webp" alt="Equipe" class="h-8 w-auto object-contain">
+                <img src="Home.img/2.avif" alt="Word" class="h-8 object-contain">
                 <img src="Home.img/3.avif" alt="BUSINESS INSIDER" class="h-8 w-auto object-contain">
                 <img src="Home.img/4.webp" alt="BuzzFeed" class="h-8 w-auto object-contain">
             </div>
         </div>
     </div>
 
-    <!-- best sellers men -->
     <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
         <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR MEN</h2>
         <div class="flex gap-3">
@@ -86,14 +183,8 @@
             </a>
         </div>
     </div>
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6 "></div>
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6"></div>
 
-    
-
-
-
-
-    <!-- Best Sellers for Women section -->
     <div class="max-w-6xl mx-auto px-4 mb-2 mt-25 flex items-center justify-between">
         <h2 class="text-2xl font-serif text-gray-900">BEST SELLERS FOR WOMEN</h2>
         <div class="flex gap-3">
@@ -105,41 +196,25 @@
             </a>
         </div>
     </div>
-
-    <!-- Women's product grid container -->
     <div id="product-grid2" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6"></div>
 
+    <div id="restock-offer-container" class="container mx-auto w-full grid grid-cols-1 md:grid-cols-1"></div>
+    <div id="category-container" class="grid grid-cols-1 text-center md:grid-cols-2 lg:grid-cols-2"></div>
 
-    <!-- Product grid container -->
-    <div id="product-grid2" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-6 "></div>
-
-    <div id="restock-offer-container" class="container mx-auto  w-full  grid grid-cols-1 md:grid-cols-1"></div>
-
-    <div id="category-container" class="grid grid-cols-1 text-center md:grid-cols-2 lg:grid-cols-2 "></div>
-
-    <!-- featured products -->
-    <div class="flex max-w-7xl mx-auto px-4  justify-between items-center mt-18">
+    <div class="flex max-w-7xl mx-auto px-4 justify-between items-center mt-18">
         <h2 class="text-3xl font-serif">Featured Collections</h2>
         <div class="flex gap-2">
-            <button id="featuredMenBtn" class="px-4 py-2 hover:text-black  text-gray-400 cursor-pointer transition">For
+            <button id="featuredMenBtn" class="px-4 py-2 hover:text-black text-gray-400 cursor-pointer transition">For
                 Men</button>
-            <button id="featuredWomenBtn"
-                class="px-4 py-2 hover:text-black  text-gray-400 cursor-pointer transition">For Women</button>
+            <button id="featuredWomenBtn" class="px-4 py-2 hover:text-black text-gray-400 cursor-pointer transition">For
+                Women</button>
         </div>
     </div>
-
     <div id="featured-section-container" class="grid grid-cols-1 p-6 md:grid-cols-1 lg:grid-cols-1"></div>
 
-
-
-
-    <div class="max-w-7xl w-full bg-white  p-6 md:p-8">
-        <!-- Header-->
+    <div class="max-w-7xl w-full bg-white p-6 md:p-8">
         <div class="flex justify-between items-center mb-3">
-            <!-- left: @greats -->
-            <div class="text-xl  tracking-tight">@greats</div>
-
-            <!-- center: arrow buttons (transparent images) with mx-auto -->
+            <div class="text-xl tracking-tight">@greats</div>
             <div class="flex gap-3 mx-auto">
                 <a href="#" id="prevArrow"
                     class="block w-12 h-12 rounded-full hover:bg-gray-100/50 transition flex items-center justify-center">
@@ -150,51 +225,32 @@
                     <img src="./Home.img/next.png" alt="Next" class="w-4 h-4 opacity-80 hover:opacity-100">
                 </a>
             </div>
-
-            <!-- right: #BEGREAT -->
-            <div class="text-xl  tracking-tight text-gray-400">#BEGREAT</div>
+            <div class="text-xl tracking-tight text-gray-400">#BEGREAT</div>
         </div>
-
-        <!-- 6‑column product grid  -->
         <div id="productGrid" class="grid grid-cols-1 mb-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2"></div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-100 border-t border-gray-200 pt-12 pb-6 px-4 md:px-8 lg:px-16">
         <div class="max-w-7xl mx-auto">
-
-            <!-- Main grid: left (newsletter) + right (link columns) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">
-
-                <!-- LEFT COLUMN: Stay in the Know -->
                 <div>
                     <h2 class="text-[50px] font-serif mb-3">Stay in the Know</h2>
                     <p class="text-gray-600 mb-5">Be the first to know about new drops and get access to exclusive
                         offers.</p>
-
-                    <!-- Email signup form -->
                     <div id="newsletterForm" class="flex flex-col sm:flex-row gap-3">
                         <input type="email" id="emailInput" placeholder="Enter Email"
                             class="flex-grow px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
                         <button id="signupBtn"
-                            class="bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition">
-                            SIGN UP
-                        </button>
+                            class="bg-black text-white px-6 py-3 rounded-md font-medium hover:bg-gray-800 transition">SIGN
+                            UP</button>
                     </div>
-
-                    <!-- Success message (hidden initially) -->
                     <div id="successMessage" class="hidden text-green-600 font-medium mt-4">
                         <i class="fas fa-check-circle mr-2"></i>You are subscribed successfully!!
                     </div>
-
-                    <!-- Error message (hidden initially) -->
                     <div id="errorMessage" class="hidden text-red-500 text-sm mt-2"></div>
                 </div>
-
-                <!-- RIGHT COLUMN: Link lists (4 columns) -->
                 <div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <!-- About Us -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">About Us</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -202,7 +258,6 @@
                                 <li><a href="#" class="hover:text-black">Reviews</a></li>
                             </ul>
                         </div>
-                        <!-- Customer Service -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Customer Service</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -211,7 +266,6 @@
                                 <li><a href="#" class="hover:text-black">Accessibility</a></li>
                             </ul>
                         </div>
-                        <!-- Popular (with extended list from image) -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Popular</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -223,7 +277,6 @@
                                 <li><a href="#" class="hover:text-black">Casual Sneakers</a></li>
                             </ul>
                         </div>
-                        <!-- Returns -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Returns</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -233,10 +286,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Social Icons (left aligned) -->
-            <!-- Social Icons (left aligned) -->
-            <div class="flex space-x-3 ">
+            <div class="flex space-x-3">
                 <a href="#" class="block">
                     <img src="./Home.img/instagram.png" alt="Instagram"
                         class="w-5 h-5 opacity-80 hover:opacity-100 transition">
@@ -254,11 +304,9 @@
                         class="w-5 h-5 opacity-80 hover:opacity-100 transition">
                 </a>
             </div>
-
-            <!-- Bottom: Logo + copyright + legal links -->
-            <div class=" pt-6 flex flex-col md:flex-row  items-start md:items-center text-sm text-gray-600">
+            <div class="pt-6 flex flex-col md:flex-row items-start md:items-center text-sm text-gray-600">
                 <img src="./Home.img/GREATS_LOGO_RIBBON_1_resize.png" alt="GREATS" class="h-6 w-auto mb-4 md:mb-0">
-                <div class="flex flex-col md:flex-row md:space-x-6  md:space-y-0">
+                <div class="flex flex-col md:flex-row md:space-x-6 md:space-y-0">
                     <span>© 2026 All Rights Reserved.</span>
                     <a href="#" class="hover:text-black">Privacy Policy</a>
                     <a href="#" class="hover:text-black">Terms & Conditions</a>
@@ -268,7 +316,32 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile navigation functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+
+        function openMobileNav() {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileNav);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileNav);
+        if (overlay) overlay.addEventListener('click', closeMobileNav);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="./Home.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-<script src="./Home.js"></script>
+
 </html>
