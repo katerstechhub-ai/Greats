@@ -4,42 +4,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | GREATS</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Mobile navigation styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: block !important;
+            }
+
+            .logo-center {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+
+            .mobile-nav {
+                display: none !important;
+            }
+
+            .logo-center {
+                position: static;
+                transform: none;
+            }
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .relative-header {
+            position: relative;
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- ===== HEADER ===== -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-8 py-4">
-                <!-- Logo -->
-                <a href="./index.html">
-                    <div class="text-2xl hidden sm:block font-bold text-gray-800 tracking-tight">GREATS</div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative-header">
+            <div class="flex items-center justify-between py-4">
+                <!-- Mobile Menu Button (left side) -->
+                <button class="mobile-menu-btn text-gray-600 hover:text-gray-900 p-2" id="mobileMenuBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Logo - Centered -->
+                <a href="./index.html" class="logo-center">
+                    <div class="text-2xl font-bold text-gray-800 tracking-tight whitespace-nowrap">GREATS</div>
                 </a>
 
-                <!-- Navigation -->
-                <nav>
-                    <ul class="flex  items-center space-x-8">
-                        <li><a href="./shop.html" class="text-black text-sm ">NEW</a></li>
-                        <li><a href="./productkingston.html" class="text-black text-sm ">MEN</a></li>
-                        <li><a href="#" class="text-black text-sm ">WOMEN</a></li>
-                        <li><a href="#" class="text-black text-sm ">OUR STORY</a></li>
-                        <li><a href="./shop.html" class="text-red-500 text-sm ">SALE</a></li>
+                <!-- Desktop Navigation (hidden on mobile) -->
+                <nav class="desktop-nav flex-1">
+                    <ul class="flex items-center justify-center space-x-8">
+                        <li><a href="./shop.html" class="text-black text-sm hover:text-gray-600 transition">NEW</a></li>
+                        <li><a href="./productkingston.html"
+                                class="text-black text-sm hover:text-gray-600 transition">MEN</a></li>
+                        <li><a href="#" class="text-black text-sm hover:text-gray-600 transition">WOMEN</a></li>
+                        <li><a href="#" class="text-black text-sm hover:text-gray-600 transition">OUR STORY</a></li>
+                        <li><a href="./shop.html" class="text-red-500 text-sm hover:text-red-600 transition">SALE</a>
+                        </li>
                     </ul>
                 </nav>
 
-                <!-- Icons -->
-                <div class="flex items-center space-x-4 ml-auto">
-                    <!-- Search icon -->
+                <!-- Icons (right side) -->
+                <div class="flex items-center space-x-4">
                     <a href="#" class="text-gray-600 hidden sm:block hover:text-gray-900">
                         <img src="./Home.img/search-interface-symbol.png" alt="Search" class="w-5 h-5">
                     </a>
-                    <!-- User icon -->
                     <a href="./login.html" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/user.png" alt="User" class="w-5 h-5">
                     </a>
-
-                    <a href="./shop.html" class="text-gray-600 hover:text-gray-900">
+                    <a href="./shop.html" id="cart" class="text-gray-600 hover:text-gray-900">
                         <img src="./Home.img/market.png" alt="Shopping bag" class="w-5 h-5">
                     </a>
                 </div>
@@ -47,29 +126,52 @@
         </div>
     </header>
 
+    <!-- Mobile Navigation Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div class="p-6">
+            <div class="flex justify-end mb-6">
+                <button id="closeMenuBtn" class="text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <ul class="space-y-4">
+                <li><a href="./shop.html" class="text-black text-lg block py-2 hover:text-gray-600 transition">NEW</a>
+                </li>
+                <li><a href="./productkingston.html"
+                        class="text-black text-lg block py-2 hover:text-gray-600 transition">MEN</a></li>
+                <li><a href="#" class="text-black text-lg block py-2 hover:text-gray-600 transition">WOMEN</a></li>
+                <li><a href="#" class="text-black text-lg block py-2 hover:text-gray-600 transition">OUR STORY</a></li>
+                <li><a href="./shop.html" class="text-red-500 text-lg block py-2 hover:text-red-600 transition">SALE</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-
+    <!-- ===== LOGIN FORM ===== -->
     <div class="flex items-center justify-center min-h-screen p-4">
-        <div class="max-w-md w-full bg-white   p-8 md:p-10">
+        <div class="w-full max-w-sm sm:max-w-md bg-white p-6 sm:p-8 md:p-10">
             <h1 class="text-xl text-center text-gray-800 mb-2">WELCOME BACK</h1>
 
-            <!-- Error div (hidden by default, shown on validation failure) -->
             <div id="errorMessage"
-                class="hidden mt-4 mb-4 bg-red-800 text-center text-white text-sm font-medium w-fullpx-2 p-2.5 ">
+                class="hidden mt-4 mb-4 bg-red-800 text-center text-white text-sm font-medium w-full px-2 p-2.5">
                 Incorrect email or password.
             </div>
 
             <div class="mb-5">
                 <label for="email" class="block text-gray-700 text-sm font-semibold mb-1.5">Email</label>
                 <input type="email" id="email"
-                    class="w-full px-2 p-2.5 border border-gray-300  bg-gray-50 bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
+                    class="w-full px-2 p-2.5 border border-gray-300 bg-gray-50 focus:bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
                     placeholder="email">
             </div>
 
             <div class="mb-6">
                 <label for="password" class="block text-gray-700 text-sm font-semibold mb-1.5">Password</label>
                 <input type="password" id="password"
-                    class="w-full px-2  p-2.5 border border-gray-300  focus:bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
+                    class="w-full px-2 p-2.5 border border-gray-300 focus:bg-white focus:border-blue-500 outline-none focus:ring-2 focus:ring-blue-200"
                     placeholder="password">
             </div>
 
@@ -80,15 +182,15 @@
                 <a href="#" class="text-black hover:underline">Privacy Policy</a>.
             </div>
 
-
             <button id="loginBtn"
-                class="w-full bg-black hover:bg-gray-900 cursor-pointer text-white font-semibold p-2.5 shadow-md transition">LOG
-                IN</button>
-            <div class="border-b w-full border-gray-400 mt-8 ">
-            </div>
+                class="w-full bg-black hover:bg-gray-900 cursor-pointer text-white font-semibold p-2.5 shadow-md transition">
+                LOG IN
+            </button>
 
-            <div class=" mt-6 text-center text-[15px]">
-                <a href="./passwordreset.html" class="text-black  hover:underline">Forgot your password?</a>
+            <div class="border-b w-full border-gray-400 mt-8"></div>
+
+            <div class="mt-6 text-center text-[15px]">
+                <a href="./passwordreset.html" class="text-black hover:underline">Forgot your password?</a>
             </div>
             <div class="text-center mt-4">
                 <span class="text-black text-[15px]">Don't have an account?</span>
@@ -97,21 +199,14 @@
         </div>
     </div>
 
-
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer class="bg-gray-100 border-t border-gray-200 pt-12 pb-6 px-4 mt-6 md:px-8 lg:px-16">
         <div class="max-w-7xl mx-auto">
-
-            <!-- Main grid: left (newsletter) + right (link columns) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-10">
-
-                <!-- LEFT COLUMN: Stay in the Know -->
                 <div>
-                    <h2 class="text-[50px] font-serif mb-3">Stay in the Know</h2>
+                    <h2 class="text-3xl sm:text-[50px] font-serif mb-3">Stay in the Know</h2>
                     <p class="text-gray-600 mb-5">Be the first to know about new drops and get access to exclusive
                         offers.</p>
-
-                    <!-- Email signup form -->
                     <div id="newsletterForm" class="flex flex-col sm:flex-row gap-3">
                         <input type="email" id="emailInput" placeholder="Enter Email"
                             class="flex-grow px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
@@ -120,20 +215,12 @@
                             SIGN UP
                         </button>
                     </div>
-
-                    <!-- Success message (hidden initially) -->
-                    <div id="successMessage" class="hidden text-green-600 font-medium mt-4">
-                        <i class="fas fa-check-circle mr-2"></i>You are subscribed successfully!!
-                    </div>
-
-                    <!-- Error message (hidden initially) -->
+                    <div id="successMessage" class="hidden text-green-600 font-medium mt-4">You are subscribed
+                        successfully!!</div>
                     <div id="errorMessage2" class="hidden text-red-500 text-sm mt-2"></div>
                 </div>
-
-                <!-- RIGHT COLUMN: Link lists (4 columns) -->
                 <div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <!-- About Us -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">About Us</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -141,7 +228,6 @@
                                 <li><a href="#" class="hover:text-black">Reviews</a></li>
                             </ul>
                         </div>
-                        <!-- Customer Service -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Customer Service</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -150,7 +236,6 @@
                                 <li><a href="#" class="hover:text-black">Accessibility</a></li>
                             </ul>
                         </div>
-                        <!-- Popular (with extended list from image) -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Popular</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -162,7 +247,6 @@
                                 <li><a href="#" class="hover:text-black">Casual Sneakers</a></li>
                             </ul>
                         </div>
-                        <!-- Returns -->
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-3">Returns</h3>
                             <ul class="space-y-2 text-sm text-gray-600">
@@ -172,32 +256,20 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Social Icons (left aligned) -->
-            <!-- Social Icons (left aligned) -->
-            <div class="flex space-x-3 ">
-                <a href="#" class="block">
-                    <img src="./Home.img/instagram.png" alt="Instagram"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
-                <a href="#" class="block">
-                    <img src="./Home.img/facebook-app-symbol.png" alt="Facebook"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
-                <a href="#" class="block">
-                    <img src="./Home.img/twitter.png" alt="Twitter"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
-                <a href="#" class="block">
-                    <img src="./Home.img/youtube.png" alt="YouTube"
-                        class="w-5 h-5 opacity-80 hover:opacity-100 transition">
-                </a>
+            <div class="flex space-x-3 mb-6">
+                <a href="#" class="block"><img src="./Home.img/instagram.png" alt="Instagram"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/facebook-app-symbol.png" alt="Facebook"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/twitter.png" alt="Twitter"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
+                <a href="#" class="block"><img src="./Home.img/youtube.png" alt="YouTube"
+                        class="w-5 h-5 opacity-80 hover:opacity-100 transition"></a>
             </div>
-
-            <!-- Bottom: Logo + copyright + legal links -->
-            <div class=" pt-6 flex flex-col md:flex-row  items-start md:items-center text-sm text-gray-600">
-                <img src="./Home.img/GREATS_LOGO_RIBBON_1_resize.png" alt="GREATS" class="h-6 w-auto mb-4 md:mb-0">
-                <div class="flex flex-col md:flex-row md:space-x-6  md:space-y-0">
+            <div class="pt-6 flex flex-col md:flex-row items-start md:items-center text-sm text-gray-600 gap-2">
+                <img src="./Home.img/GREATS_LOGO_RIBBON_1_resize.png" alt="GREATS"
+                    class="h-6 w-auto mb-4 md:mb-0 md:mr-6">
+                <div class="flex flex-wrap gap-x-4 gap-y-2">
                     <span>© 2026 All Rights Reserved.</span>
                     <a href="#" class="hover:text-black">Privacy Policy</a>
                     <a href="#" class="hover:text-black">Terms & Conditions</a>
@@ -207,7 +279,37 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile navigation functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+
+        function openMobileNav() {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileNav);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileNav);
+        if (overlay) overlay.addEventListener('click', closeMobileNav);
+
+        // Close mobile nav when clicking on a link
+        const mobileLinks = mobileNav.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileNav);
+        });
+    </script>
+    <script src="./login.js"></script>
 </body>
-<script src="./login.js"></script>
 
 </html>

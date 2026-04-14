@@ -117,7 +117,7 @@
 
 
 
-const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
+const API_BASE = '/api';
 const merchantId = '69c2565d1595cbe8104544cb';
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,4 +1,4 @@
-const API_BASE = 'http://ecommerce.reworkstaging.name.ng/v2';
+const API_BASE = '/api';
 
 document.addEventListener('DOMContentLoaded', () => {
 
