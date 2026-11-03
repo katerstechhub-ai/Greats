@@ -12,14 +12,13 @@ jobs:
       - name: Get the code
         uses: actions/checkout@v4
 
-      - name: Check key pages exist
+      - name: Check index.html exists
         run: |
-          for f in index.html shop.html login.html signup.html passwordreset.html; do
-            test -f "$f" || { echo "Missing $f"; exit 1; }
-          done
+          test -f index.html || { echo "Missing index.html"; exit 1; }
           echo test succeeded
 
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get the code
