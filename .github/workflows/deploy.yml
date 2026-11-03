@@ -1,0 +1,32 @@
+name: Staging Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Check key pages exist
+        run: |
+          for f in index.html shop.html login.html signup.html passwordreset.html; do
+            test -f "$f" || { echo "Missing $f"; exit 1; }
+          done
+          echo test succeeded
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: List the files
+        run: ls -la
+
+      - name: Display msg
+        run: echo All is well that ends well
