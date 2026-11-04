@@ -1,42 +1,28 @@
-name: Staging Deployment
+name: Test service
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-
-env:
-  APP: ${{ vars.APP_WORKFLOW }}
 
 jobs:
-  test:
-    env:
-      APP: ${{ vars.APP_JOB }}
-    runs-on: ubuntu-latest
-    outputs:
-      name: "${{ steps.generate_data.outputs.name }}"
-      date: "${{ steps.get.outputs.date_info }}"
-    steps:
-      - name: Display msg
-        id: generate_data
-        env:
-          APP: ${{ vars.APP_TEST }}
-          MONGO_URL: ${{ secrets.MONGO_TEST_URL }}
-        run: |
-          echo "APP in this step is: $APP"
-          echo "name=anestin" >> "$GITHUB_OUTPUT"
-
-      - name: Get info
-        id: get
-        run: echo "date_info=$(date)" >> "$GITHUB_OUTPUT"
-
   build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Display msg
-        if: (github.actor == 'anestin' || github.actor == 'katerstechhub-ai') && github.ref == 'refs/heads/main'
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Create a node script
         run: |
-          echo "Output is from step ${{ needs.test.outputs.name }} ${{ needs.test.outputs.date }}"
-          echo "run this and that"
-          echo "all is well that ends well"
+          echo "about to execute nodejs script"
+          cat << 'EOF' > index.js
+          console.log('Running my index.js')
+          EOF
+
+      - name: Run node script
+        run: |
+          node index.js
+          echo "script is running"
