@@ -1,43 +1,42 @@
-name: Staging deployment
+name: Staging Deployment
 
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
 
 env:
-  APP: v1
+  APP: ${{ vars.APP_WORKFLOW }}
 
 jobs:
   test:
     env:
-      APP: v2
+      APP: ${{ vars.APP_JOB }}
     runs-on: ubuntu-latest
     outputs:
-      shared_data: ${{ steps.generate_data.outputs.my_value }}
-      about_me: "This is a test job"
-      just_us: "${{ steps.get.outputs.get_us }}"
+      name: "${{ steps.generate_data.outputs.name }}"
+      date: "${{ steps.get.outputs.date_info }}"
     steps:
-      - name: Display Message
+      - name: Display msg
         id: generate_data
         env:
-          APP: ${{ vars.APP_test }}
+          APP: ${{ vars.APP_TEST }}
           MONGO_URL: ${{ secrets.MONGO_TEST_URL }}
         run: |
           echo "APP in this step is: $APP"
-          echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
+          echo "name=anestin" >> "$GITHUB_OUTPUT"
 
       - name: Get info
         id: get
-        run: echo "get_us=$(date)" >> "$GITHUB_OUTPUT"
+        run: echo "date_info=$(date)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Display Message
+      - name: Display msg
+        if: (github.actor == 'anestin' || github.actor == 'katerstechhub-ai') && github.ref == 'refs/heads/main'
         run: |
-          echo "output from step ${{ needs.test.outputs.shared_data }}"
-          echo "about me: ${{ needs.test.outputs.about_me }}"
-          echo "date: ${{ needs.test.outputs.just_us }}"
+          echo "Output is from step ${{ needs.test.outputs.name }} ${{ needs.test.outputs.date }}"
+          echo "run this and that"
+          echo "all is well that ends well"
