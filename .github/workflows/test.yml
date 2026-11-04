@@ -1,0 +1,28 @@
+name: Test service
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Create a node script
+        run: |
+          echo "about to execute nodejs script"
+          cat << 'EOF' > index.js
+          console.log('Running my index.js')
+          EOF
+
+      - name: Run node script
+        run: |
+          node index.js
+          echo "script is running"
