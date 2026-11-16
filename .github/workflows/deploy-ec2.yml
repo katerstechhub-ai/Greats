@@ -46,7 +46,7 @@ jobs:
           HOST: ${{ steps.ip.outputs.ip }}
         run: |
           for i in $(seq 1 30); do
-            if ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no -o ConnectTimeout=5 ec2-user@$HOST "command -v pm2"; then
+            if ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no -o ConnectTimeout=5 ubuntu@$HOST "command -v pm2"; then
               exit 0
             fi
             echo "Server not ready, retrying ($i/30)..."
@@ -59,12 +59,12 @@ jobs:
         env:
           HOST: ${{ steps.ip.outputs.ip }}
         run: |
-          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ec2-user@$HOST "mkdir -p ~/app"
-          scp -i ~/.ssh/key.pem -o StrictHostKeyChecking=no index.js package.json ec2-user@$HOST:~/app/
+          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "mkdir -p ~/app"
+          scp -i ~/.ssh/key.pem -o StrictHostKeyChecking=no index.js package.json ubuntu@$HOST:~/app/
 
       - name: Install and start app
         env:
           HOST: ${{ steps.ip.outputs.ip }}
         run: |
-          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ec2-user@$HOST "cd ~/app && npm install --omit=dev && (pm2 restart app || pm2 start index.js --name app)"
+          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "cd ~/app && npm install --omit=dev && (pm2 restart app || pm2 start index.js --name app)"
           echo "App running at http://$HOST:5000"

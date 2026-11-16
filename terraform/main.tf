@@ -17,13 +17,13 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_ami" "amazon_linux" {
+data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["al2023-ami-2023*-x86_64"]
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
   }
 }
 
@@ -54,15 +54,18 @@ resource "aws_security_group" "node_sg" {
 }
 
 resource "aws_instance" "node_server" {
-  ami                    = data.aws_ami.amazon_linux.id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.node_sg.id]
 
   user_data = <<-EOF
     #!/bin/bash
-    curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
-    dnf install -y nodejs
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update -y
+    apt-get install -y curl
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    apt-get install -y nodejs
     npm install -g pm2
   EOF
 
