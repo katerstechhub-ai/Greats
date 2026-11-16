@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "kateradmin"
+    bucket = "kateradmin-anestin-2026"
     key    = "prod/terraform.tfstate"
     region = "eu-north-1"
   }
