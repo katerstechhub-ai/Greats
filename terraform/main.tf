@@ -5,6 +5,12 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  backend "s3" {
+    bucket = "kateradmin"
+    key    = "prod/terraform.tfstate"
+    region = "eu-north-1"
+  }
 }
 
 provider "aws" {
