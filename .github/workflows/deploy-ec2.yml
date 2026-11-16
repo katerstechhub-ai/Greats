@@ -42,43 +42,33 @@ jobs:
           terraform init
           terraform apply -auto-approve -var="key_name=${{ secrets.EC2_KEY_NAME }}"
 
-      - name: Get Server IP
-        id: ip
+      - name: Extract EC2 IP Address
         working-directory: ./terraform
-        run: echo "ip=$(terraform output -raw ec2_public_ip)" >> "$GITHUB_OUTPUT"
-
-      - name: Setup SSH Key
-        env:
-          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
         run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/key.pem
-          chmod 600 ~/.ssh/key.pem
+          DYNAMIC_IP=$(terraform output -raw ec2_public_ip)
+          echo "EC2_HOST=$DYNAMIC_IP" >> $GITHUB_ENV
+          echo "Provisioned IP: $DYNAMIC_IP"
 
-      - name: Wait for Server
-        env:
-          HOST: ${{ steps.ip.outputs.ip }}
-        run: |
-          for i in $(seq 1 30); do
-            if ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no -o ConnectTimeout=5 ubuntu@$HOST "command -v pm2"; then
-              exit 0
-            fi
-            echo "Server not ready, retrying ($i/30)..."
-            sleep 10
-          done
-          echo "Server never became ready"
-          exit 1
+      - name: Wait for SSH Daemon to Boot
+        run: sleep 45
 
-      - name: Copy App Files
-        env:
-          HOST: ${{ steps.ip.outputs.ip }}
-        run: |
-          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "mkdir -p ~/app"
-          scp -i ~/.ssh/key.pem -o StrictHostKeyChecking=no index.js package.json package-lock.json ubuntu@$HOST:~/app/
+      - name: Copy Files to EC2 Target
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: ".,!node_modules,!.git,!terraform"
+          target: "/home/ubuntu/app"
 
-      - name: Install and Start App
-        env:
-          HOST: ${{ steps.ip.outputs.ip }}
-        run: |
-          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "cd ~/app && npm ci --omit=dev && (pm2 restart app || pm2 start index.js --name app)"
-          echo "App running at http://$HOST:5000"
+      - name: Restart PM2 Application
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cloud-init status --wait
+            cd /home/ubuntu/app
+            npm install --omit=dev
+            pm2 restart app --update-env || pm2 start index.js --name app
