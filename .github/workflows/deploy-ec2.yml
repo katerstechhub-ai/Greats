@@ -1,0 +1,70 @@
+name: Provision and Deploy to EC2
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform init and apply
+        working-directory: terraform
+        run: |
+          terraform init
+          terraform apply -auto-approve -var="key_name=${{ secrets.EC2_KEY_NAME }}"
+
+      - name: Get server IP
+        id: ip
+        working-directory: terraform
+        run: echo "ip=$(terraform output -raw public_ip)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup SSH key
+        env:
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/key.pem
+          chmod 600 ~/.ssh/key.pem
+
+      - name: Wait for server to be ready
+        env:
+          HOST: ${{ steps.ip.outputs.ip }}
+        run: |
+          for i in $(seq 1 30); do
+            if ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no -o ConnectTimeout=5 ec2-user@$HOST "command -v pm2"; then
+              exit 0
+            fi
+            echo "Server not ready, retrying ($i/30)..."
+            sleep 10
+          done
+          echo "Server never became ready"
+          exit 1
+
+      - name: Copy app files
+        env:
+          HOST: ${{ steps.ip.outputs.ip }}
+        run: |
+          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ec2-user@$HOST "mkdir -p ~/app"
+          scp -i ~/.ssh/key.pem -o StrictHostKeyChecking=no index.js package.json ec2-user@$HOST:~/app/
+
+      - name: Install and start app
+        env:
+          HOST: ${{ steps.ip.outputs.ip }}
+        run: |
+          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ec2-user@$HOST "cd ~/app && npm install --omit=dev && (pm2 restart app || pm2 start index.js --name app)"
+          echo "App running at http://$HOST:5000"
