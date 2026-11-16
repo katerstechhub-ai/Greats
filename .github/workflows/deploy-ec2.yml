@@ -8,7 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: Configure Secret access key
+    environment: Secret access key
 
     steps:
       - name: Checkout Code
