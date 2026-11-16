@@ -1,6 +1,7 @@
-variable "region" {
-  type    = string
-  default = "eu-north-1"
+variable "aws_region" {
+  description = "The AWS region to deploy to"
+  type        = string
+  default     = "eu-north-1"
 }
 
 variable "instance_type" {
