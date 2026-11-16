@@ -1,39 +1,53 @@
 name: Provision and Deploy to EC2
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies & Build
+        run: |
+          npm ci
+          npm run build --if-present
+
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_wrapper: false
 
-      - name: Terraform init and apply
-        working-directory: terraform
+      - name: Terraform Init & Apply
+        working-directory: ./terraform
         run: |
           terraform init
           terraform apply -auto-approve -var="key_name=${{ secrets.EC2_KEY_NAME }}"
 
-      - name: Get server IP
+      - name: Get Server IP
         id: ip
-        working-directory: terraform
+        working-directory: ./terraform
         run: echo "ip=$(terraform output -raw ec2_public_ip)" >> "$GITHUB_OUTPUT"
 
-      - name: Setup SSH key
+      - name: Setup SSH Key
         env:
           SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
         run: |
@@ -41,7 +55,7 @@ jobs:
           printf '%s\n' "$SSH_KEY" > ~/.ssh/key.pem
           chmod 600 ~/.ssh/key.pem
 
-      - name: Wait for server to be ready
+      - name: Wait for Server
         env:
           HOST: ${{ steps.ip.outputs.ip }}
         run: |
@@ -55,16 +69,16 @@ jobs:
           echo "Server never became ready"
           exit 1
 
-      - name: Copy app files
+      - name: Copy App Files
         env:
           HOST: ${{ steps.ip.outputs.ip }}
         run: |
           ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "mkdir -p ~/app"
-          scp -i ~/.ssh/key.pem -o StrictHostKeyChecking=no index.js package.json ubuntu@$HOST:~/app/
+          scp -i ~/.ssh/key.pem -o StrictHostKeyChecking=no index.js package.json package-lock.json ubuntu@$HOST:~/app/
 
-      - name: Install and start app
+      - name: Install and Start App
         env:
           HOST: ${{ steps.ip.outputs.ip }}
         run: |
-          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "cd ~/app && npm install --omit=dev && (pm2 restart app || pm2 start index.js --name app)"
+          ssh -i ~/.ssh/key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "cd ~/app && npm ci --omit=dev && (pm2 restart app || pm2 start index.js --name app)"
           echo "App running at http://$HOST:5000"
