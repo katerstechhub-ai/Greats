@@ -1,3 +1,3 @@
-output "public_ip" {
+output "ec2_public_ip" {
   value = aws_instance.node_server.public_ip
 }
