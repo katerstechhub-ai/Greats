@@ -12,6 +12,9 @@ app.use(cors())
 app.get('/', (req, res) => {
   res.json({ msg: "Index is running" })
 })
+app.get('/about', (req, res) => {
+    res.json({ msg: "About is Running"})
+})
 
 app.listen(PORT, () => {
   console.log(`Backend running on port:${PORT}`)
